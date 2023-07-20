@@ -23,7 +23,7 @@
 		6445BD092A697A3A00833E65 /* LaunchScreenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenManager.swift; sourceTree = "<group>"; };
 		64B832322A696C3D00079C83 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		64B832352A696E1800079C83 /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
-		64D955F22A682548003D679E /* fitness-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "fitness-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		64D955F22A682548003D679E /* Dawn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dawn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		64D955F52A682548003D679E /* fitness_appApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fitness_appApp.swift; sourceTree = "<group>"; };
 		64D955F72A682548003D679E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		64D955F92A682548003D679E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -56,7 +56,7 @@
 		64D955F32A682548003D679E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				64D955F22A682548003D679E /* fitness-app.app */,
+				64D955F22A682548003D679E /* Dawn.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -112,7 +112,7 @@
 			);
 			name = "fitness-app";
 			productName = "fitness-app";
-			productReference = 64D955F22A682548003D679E /* fitness-app.app */;
+			productReference = 64D955F22A682548003D679E /* Dawn.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -314,7 +314,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "elias.fitness-app";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Dawn;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -342,7 +342,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "elias.fitness-app";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Dawn;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
