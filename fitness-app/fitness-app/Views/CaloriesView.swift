@@ -23,13 +23,15 @@ struct CaloriesView: View {
                 }
                
             }
-         
+          
             .navigationTitle("Calories Tracker")
             .toolbarBackground(.white, for: .navigationBar)
-//            .toolbarBackground(.visible, for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
         }
+      
     }
 }
+   
 
 struct CaloriesView_Previews: PreviewProvider {
     static var previews: some View {

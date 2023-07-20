@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var launchScreenManager: LaunchScreenManager
+    
     var body: some View {
         TabView {
             Group {
@@ -30,6 +32,14 @@ struct ContentView: View {
             }
                     .toolbarBackground(.visible, for: .tabBar)
                     .toolbarColorScheme(.dark, for: .tabBar)
+                  
+        }
+        .onAppear {
+            DispatchQueue
+                .main
+                .asyncAfter(deadline: .now() + 5) {
+                    launchScreenManager.dismiss()
+                }
         }
     }
 }
@@ -37,6 +47,7 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(LaunchScreenManager())
     }
 }
 
