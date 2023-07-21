@@ -9,20 +9,17 @@ import SwiftUI
 
 struct ExercisesView: View {
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 Section {
                     Text("Test")
                 }
-               
             }
             .navigationTitle("Exercises")
-            .toolbarBackground(.white, for: .navigationBar)
-          
+            .toolbarBackground(.mint, for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
         }
-           
     }
-
 }
 
 struct ExercisesView_Previews: PreviewProvider {

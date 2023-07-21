@@ -8,21 +8,41 @@
 import SwiftUI
 
 struct SettingsView: View {
+    private static let formatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        return formatter
+    }()
+    
+//    @Binding var proteinAmount: Int
+    
     var body: some View {
-        NavigationView {
-            Form {
+        NavigationStack {
+            List {
                 Section {
-                    Text("Test")
+//                    TextField("Protein", value: $proteinAmount, formatter: Self.formatter)
+                } header : {
+                    Text("Goals")
                 }
-               
             }
             .navigationTitle("Settings")
-            .toolbarBackground(.white, for: .navigationBar)
-          
+            .toolbarBackground(.teal, for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
         }
-           
     }
 }
+
+extension Binding {
+    public static func variable(_ proteinAmount: Int) -> Binding<Int> {
+        var state = proteinAmount
+        return Binding<Int> {
+            state
+        } set: {
+            state = $0
+        }
+    }
+}
+
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
