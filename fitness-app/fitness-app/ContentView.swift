@@ -43,7 +43,7 @@ struct ContentView: View {
             }
                     .toolbarBackground(.visible, for: .tabBar)
 //                  .toolbarBackground(.brown, for: .tabBar)
-                    .toolbarColorScheme(.light, for: .tabBar)
+                    .toolbarColorScheme(.dark, for: .tabBar)
                   
         }
         .onAppear {
