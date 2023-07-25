@@ -14,14 +14,15 @@ struct HomeView: View {
     var body: some View {
         VStack {
             // Displaying the selected date
-            FormattedDate(selectedDate: selectedDate, omitTime: true)
             // Passing the selectedDate as Binding
-            CalendarViewRepresentable(selectedDate: $selectedDate)
-        }            .navigationTitle("Health")
+            FormattedDate(selectedDate: selectedDate, omitTime: true)
 
+            CalendarViewRepresentable(selectedDate: $selectedDate)
+        }
+
+      
     }
 }
-
 
 
 struct CalendarViewRepresentable: UIViewRepresentable {
@@ -55,9 +56,9 @@ struct CalendarViewRepresentable: UIViewRepresentable {
                                                           blue: 0, alpha: 0)
         calendar.appearance.headerTitleColor = .darkGray
         calendar.appearance.headerTitleFont = .systemFont(
-                                                        ofSize: 20,
+                                                        ofSize: 24,
                                                         weight: .black)
-        calendar.appearance.titleFont = .boldSystemFont(ofSize: 18)
+        calendar.appearance.titleFont = .boldSystemFont(ofSize: 20)
         
         calendar.appearance.headerDateFormat = "MMMM"
         calendar.firstWeekday = 2
@@ -65,6 +66,8 @@ struct CalendarViewRepresentable: UIViewRepresentable {
         calendar.clipsToBounds = false
         calendar.scope = .week
         calendar.appearance.headerMinimumDissolvedAlpha = 0.12
+        calendar.appearance.borderRadius = 0
+
 
         // returning the intialized calendar
         return calendar
@@ -78,8 +81,6 @@ struct CalendarViewRepresentable: UIViewRepresentable {
         // var to this new date when this is triggered
         var parent: CalendarViewRepresentable
         
-        
-        
         init(_ parent: CalendarViewRepresentable) {
             self.parent = parent
         }
@@ -89,8 +90,8 @@ struct CalendarViewRepresentable: UIViewRepresentable {
                       didSelect date: Date,
                       at monthPosition: FSCalendarMonthPosition) {
             parent.selectedDate = date
+//            print("Hello from \(date+3600*2)")            
         }
-       
     }
 }
 struct HomeView_Previews: PreviewProvider {

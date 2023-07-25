@@ -13,6 +13,8 @@ struct CaloriesView: View {
     @State private var carbsAmount = 5
     @State private var fatAmount = 6
     @State private var sugarAmount = 5
+    @State private var caloriesAmount = 0
+
     
     private static let formatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -36,16 +38,45 @@ struct CaloriesView: View {
         
         NavigationStack {
             Form {
+                LabeledContent {
+                    TextField("", value: $caloriesAmount, formatter: Self.formatter)
+                } label: {
+                  Text("Calories")
+                }
                 Section {
-                        TextField("Protein", value: $proteinAmount, formatter: Self.formatter)
+                    LabeledContent {
+                        TextField("", value: $proteinAmount, formatter: Self.formatter)
                             .keyboardType(.numberPad)
-                        TextField("Carbs", value: $carbsAmount, formatter: Self.formatter)
+                        Text("grams")
+                    } label: {
+                      Text("Protein")
+                    }
+                 
+                    
+                    LabeledContent {
+                        TextField("", value: $carbsAmount, formatter: Self.formatter)
                             .keyboardType(.numberPad)
-                        TextField("Fat", value: $fatAmount, formatter: Self.formatter)
+                        Text("grams")
+                    } label: {
+                      Text("Carbs")
+                    }
+                    
+                    LabeledContent {
+                        TextField("", value: $fatAmount, formatter: Self.formatter)
                             .keyboardType(.numberPad)
-                        TextField("Sugar", value: $sugarAmount, formatter: Self.formatter)
+                        Text("grams")
+                    } label: {
+                      Text("Fat")
+                    }
+                    
+                    LabeledContent {
+                        TextField("", value: $sugarAmount, formatter: Self.formatter)
                             .keyboardType(.numberPad)
-                                    }
+                        Text("grams")
+                    } label: {
+                      Text("Sugar")
+                    }
+            }
                 
                 Chart(data) { dataPoint in
                     
