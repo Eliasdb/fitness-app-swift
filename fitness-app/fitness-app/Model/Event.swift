@@ -20,9 +20,9 @@ struct Meal: Identifiable {
 }
 
 var sampleMeals: [Meal] = [
-    .init(title: "Chicken", calories: 500, carbs: 30, sugar: 40, protein: 40, fat: 0, creationDate: .updateHour(-5), tint: .black),
-    .init(title: "Rice", calories: 700, carbs: 30, sugar: 440, protein: 50, fat: 30, creationDate: .updateHour(-3), tint: .black),
-    .init(title: "Potato", calories: 600, carbs: 300, sugar: 40, protein: 60, fat: 40, creationDate: .updateHour(1), tint: .black)
+    .init(title: "Chicken", calories: 500, carbs: 30, sugar: 40, protein: 40, fat: 0, creationDate: .updateHour(-5), tint: .white),
+    .init(title: "Rice", calories: 700, carbs: 30, sugar: 440, protein: 50, fat: 30, creationDate: .updateHour(-3), tint: .blue),
+    .init(title: "Potato", calories: 600, carbs: 300, sugar: 40, protein: 60, fat: 40, creationDate: .updateHour(1), tint: .green)
 
 ]
 

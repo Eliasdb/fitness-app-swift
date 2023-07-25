@@ -11,13 +11,25 @@ struct HomeViewv2: View {
     // Task Manager Properties
     @State private var currentDate: Date = .init()
     @State private var weekSlider: [[Date.WeekDay]] = []
-    @State private var currentWeekIndex: Int = 0
+    @State private var currentWeekIndex: Int = 1
+    @State private var createWeek: Bool = false
+    @State private var meals: [Meal] = sampleMeals.sorted(by: {$1.creationDate > $0.creationDate})
+
     @Namespace var animation
 
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0, content: {
             HeaderView()
+            ScrollView(.vertical) {
+                VStack {
+                    // Meal view
+                    MealView()
+                }
+                .hSpacing(.center)
+                .vSpacing(.center)
+            }
+            .scrollIndicators(.hidden)
         })
         .vSpacing(.top)
         .background(.gray)
@@ -80,6 +92,11 @@ struct HomeViewv2: View {
         })
         .padding(15)
         .background(.white)
+        .onChange(of: currentWeekIndex) { newValue in
+                if newValue == 0 || newValue == (weekSlider.count - 1) {
+                    createWeek = true
+                }
+            }
     }
     
     @ViewBuilder
@@ -111,20 +128,69 @@ struct HomeViewv2: View {
                                     .offset(y: 12)
                             }
                         })
-                        .background(.white.shadow(.drop(radius: 1)), in: Circle())
+                        .background(.white.shadow(.drop(radius: 1)), in: .circle)
 
                 }
                 .hSpacing(.center)
-                .contentShape(Rectangle())
+                .contentShape(.rect)
                 .onTapGesture {
-                    withAnimation(.spring()) {
+                    withAnimation(.snappy) {
                         currentDate = day.date
                     }
                 }
             }
         }
+        .background {
+            GeometryReader {
+                let minX = $0.frame(in: .global).minX
+                
+                Color.clear
+                    .preference(key: OffsetKey.self, value: minX)
+                    .onPreferenceChange(OffsetKey.self) { value in
+                        // when offset reaches 15 and if createweek is toggled then generate next set of week
+                        if value.rounded() == 14 && createWeek {
+                            print("Generate")
+                            paginateWeek()
+                            createWeek = false
+                        }
+                    }
+            }
+        }
+    }
+    
+    @ViewBuilder
+    func MealView() -> some View {
+        VStack(alignment: .leading, spacing: 35) {
+            ForEach($meals) { $meal in
+                MealRowView(meal: $meal)
+                
+            }
+        }
+        .padding([.vertical, .leading], 15)
+        .padding(.top, 15)
+    }
+    
+    func paginateWeek() {
+        if weekSlider.indices.contains(currentWeekIndex) {
+            if let firstDate = weekSlider[currentWeekIndex].first?.date, currentWeekIndex == 0 {
+                // inserting new week at 0th index and removing last array item
+                weekSlider.insert(firstDate.createPreviousWeek(), at: 0)
+                weekSlider.removeLast()
+                currentWeekIndex = 1
+            }
+            
+            if let lastDate = weekSlider[currentWeekIndex].last?.date, currentWeekIndex == (weekSlider.count - 1) {
+                // appending new week at last index and removing first array item
+                weekSlider.append(lastDate.createNextWeek())
+                weekSlider.removeFirst()
+                currentWeekIndex = weekSlider.count - 2
+
+            }
+        }
     }
 }
+
+
 
 struct HomeViewv2_Previews: PreviewProvider {
     static var previews: some View {
