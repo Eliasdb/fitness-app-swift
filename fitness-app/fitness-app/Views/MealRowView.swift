@@ -16,14 +16,14 @@ struct MealRowView: View {
                 .frame(width: 10, height: 10)
                 .padding(5)
                 .background(.white.shadow(.drop(color: .black.opacity(0.1), radius: 3)), in: .circle)
-                .offset(y: -5)
+                .offset(y: 25)
           
             VStack(alignment: .leading, spacing: 8, content: {
                 Text(meal.title)
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     .foregroundStyle(.black)
-                Label(meal.creationDate.format("hh:mm a"), systemImage: "clock")
-                    .font(.caption)
+                Label("\(meal.calories) calories", systemImage: "fork.knife.circle")
+                    .font(.subheadline)
                     .foregroundStyle(.black)
                 
             })
