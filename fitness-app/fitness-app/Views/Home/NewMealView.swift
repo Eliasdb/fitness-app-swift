@@ -7,11 +7,15 @@
 
 import SwiftUI
 
+@available(iOS 17.0, *)
 struct NewMealView: View {
     @Environment(\.dismiss) private var dismiss
+    
+    // model context to save data
+    @Environment(\.modelContext) private var context
     @State private var mealTitle: String = ""
     @State private var mealDate: Date = .init()
-    @State private var mealColor: Color = .blue
+    @State private var mealColor: String = "color 1"
 
     var body: some View {
         VStack(alignment: .leading, spacing: 15, content: {
@@ -53,12 +57,16 @@ struct NewMealView: View {
                         .font(.caption)
                         .foregroundStyle(.gray)
                     
-                    let colours: [Color] = [.blue, .green, .red]
+                    let colours: [String] = (1...3).compactMap { index -> String in
+                        return "Color \(index)"
+                    }
+                    
+
                     
                     HStack(spacing: 0) {
                         ForEach(colours, id:\.self) { colour in
                             Circle()
-                                .fill(colour)
+                                .fill(Color(colour))
                                 .frame(width: 20, height: 20)
                                 .background(content: {
                                     Circle()
@@ -83,7 +91,19 @@ struct NewMealView: View {
             
             Spacer(minLength: 0)
             
-            Button(action: {}, label: {
+            Button(action: {
+                //                saving meal
+                let meal = Meal(title: mealTitle, creationDate: mealDate, tint: mealColor)
+                do {
+                    context.insert(meal)
+                    try context.save()
+                    dismiss()
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }, label: {
+               
+                
                 Text("Create Entry")
                     .font(.title3)
                     .fontWeight(.semibold)
@@ -91,7 +111,7 @@ struct NewMealView: View {
                     .foregroundStyle(.black)
                     .hSpacing(.center)
                     .padding(.vertical, 12)
-                    .background(mealColor, in: .rect(cornerRadius: 10))
+                    .background(Color(mealColor), in: .rect(cornerRadius: 10))
             })
             .disabled(mealTitle == "")
             .opacity(mealTitle == "" ? 0.5 : 1)
@@ -100,7 +120,7 @@ struct NewMealView: View {
     }
 }
 
+@available(iOS 17.0, *)
 #Preview {
-    NewMealView()
-        .vSpacing(.bottom)
+   ContentView()
 }

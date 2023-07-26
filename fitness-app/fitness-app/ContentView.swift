@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@available(iOS 17.0, *)
 struct ContentView: View {
     @EnvironmentObject var launchScreenManager: LaunchScreenManager
     @State private var selection = 3
@@ -57,10 +58,12 @@ struct ContentView: View {
 }    }
 }
 
+@available(iOS 17.0, *)
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
             .environmentObject(LaunchScreenManager())
+            
     }
 }
 

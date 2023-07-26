@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@available(iOS 17.0, *)
 struct HomeViewv2: View {
     // Task Manager Properties
     @State private var currentDate: Date = .init()
@@ -14,10 +15,9 @@ struct HomeViewv2: View {
     @State private var currentWeekIndex: Int = 1
     @State private var createWeek: Bool = false
     @State private var createNewMeal: Bool = false
-    @State private var meals: [Meal] = sampleMeals.sorted(by: {$1.creationDate > $0.creationDate})
+//    @State private var meals: [Meal] = sampleMeals.sorted(by: {$1.creationDate > $0.creationDate})
 
     @Namespace var animation
-
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0, content: {
@@ -25,7 +25,7 @@ struct HomeViewv2: View {
             ScrollView(.vertical) {
                 VStack {
                     // Meal view
-                    MealView()
+                    MealsView(currentDate: $currentDate)
                 }
                 .hSpacing(.center)
                 .vSpacing(.center)
@@ -179,18 +179,7 @@ struct HomeViewv2: View {
         }
     }
     
-    @ViewBuilder
-    func MealView() -> some View {
-        VStack(alignment: .leading, spacing: 35) {
-            ForEach($meals) { $meal in
-                MealRowView(meal: $meal)
-                
-            }
-        }
-        .padding([.vertical, .leading], 15)
-        .padding(.top, 15)
-    }
-    
+
     func paginateWeek() {
         if weekSlider.indices.contains(currentWeekIndex) {
             if let firstDate = weekSlider[currentWeekIndex].first?.date, currentWeekIndex == 0 {
@@ -212,7 +201,7 @@ struct HomeViewv2: View {
 }
 
 
-
+@available(iOS 17.0, *)
 struct HomeViewv2_Previews: PreviewProvider {
     static var previews: some View {
         HomeViewv2()

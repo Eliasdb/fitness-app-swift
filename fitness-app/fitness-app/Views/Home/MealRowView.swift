@@ -7,8 +7,11 @@
 
 import SwiftUI
 
+@available(iOS 17.0, *)
 struct MealRowView: View {
-    @Binding var meal: Meal
+    @Environment(\.modelContext) private var context
+
+    @Bindable var meal: Meal
     var body: some View {
         HStack(alignment: .top, spacing: 15) {
             Circle()
@@ -22,20 +25,29 @@ struct MealRowView: View {
                 Text(meal.title)
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     .foregroundStyle(.black)
-                Label("\(meal.calories) calories", systemImage: "fork.knife.circle")
-                    .font(.subheadline)
-                    .foregroundStyle(.black)
+//                Label("\(meal.calories) calories", systemImage: "fork.knife.circle")
+//                    .font(.subheadline)
+//                    .foregroundStyle(.black)
                 
             })
             .padding(15)
             .hSpacing(.leading)
-            .background(meal.tint, in: .rect(topLeadingRadius: 15, bottomLeadingRadius: 15))
+            .background(meal.tintColor, in: .rect(topLeadingRadius: 15, bottomLeadingRadius: 15))
+            .contentShape(.contextMenuPreview,.rect(cornerRadius: 15) )
+            .contextMenu {
+                Button("Delete meal", role: .destructive) {
+                    context.delete(object: meal)
+                    try? context.save()
+                }
+            }
+            .offset(y: -8)
             
         }
         
     }
 }
 
+@available(iOS 17.0, *)
 #Preview {
-    HomeViewv2()
+   ContentView()
 }

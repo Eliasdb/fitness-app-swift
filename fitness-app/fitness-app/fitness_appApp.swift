@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@available(iOS 17.0, *)
 @main
 struct fitness_appApp: App {
     @StateObject var launchScreenManager = LaunchScreenManager()
@@ -22,5 +23,6 @@ struct fitness_appApp: App {
             .environmentObject(launchScreenManager)
            
         }
+        .modelContainer(for: Meal.self)
     }
 }
