@@ -15,8 +15,17 @@ struct NewMealView: View {
     @Environment(\.modelContext) private var context
     @State private var mealTitle: String = ""
     @State private var mealDate: Date = .init()
+    @State private var mealCalories: Double = 0
+    @State private var count: Int = 0
+
     @State private var mealColor: String = "color 1"
 
+    private static let formatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        return formatter
+    }()
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 15, content: {
             Button(action: {
@@ -38,6 +47,18 @@ struct NewMealView: View {
                     .padding(.horizontal, 15)
                     .background(.white.shadow(.drop(color: .black.opacity(0.25), radius: 2)), in: .rect(cornerRadius: 10))
             })
+            
+            VStack(alignment: .leading, spacing: 8, content: {
+                Text("Calories")
+                    .font(.caption)
+                    .foregroundStyle(.gray)
+                
+                VStack {
+                          Slider(value: $mealCalories, in: 0...2000)
+                          Text("\(Int(mealCalories))")
+                      }
+            })
+            
             .padding(.top, 5)
             
             HStack(spacing: 12) {
@@ -93,8 +114,11 @@ struct NewMealView: View {
             
             Button(action: {
                 //                saving meal
-                let meal = Meal(title: mealTitle, creationDate: mealDate, tint: mealColor)
+                let meal = Meal(title: mealTitle, calories: Int(mealCalories), creationDate: mealDate, tint: mealColor)
+                count += count + Int(mealCalories)
+
                 do {
+                    print("\(count)")
                     context.insert(meal)
                     try context.save()
                     dismiss()
@@ -102,8 +126,6 @@ struct NewMealView: View {
                     print(error.localizedDescription)
                 }
             }, label: {
-               
-                
                 Text("Create Entry")
                     .font(.title3)
                     .fontWeight(.semibold)
@@ -122,5 +144,5 @@ struct NewMealView: View {
 
 @available(iOS 17.0, *)
 #Preview {
-   ContentView()
+   NewMealView()
 }

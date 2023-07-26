@@ -25,7 +25,7 @@ struct ContentView: View {
                     .tabItem {
                         Label("Exercises", systemImage: "dumbbell")
                     }
-                HomeViewv2()
+                HomeView()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .background(.green)
                     .tag(3)

@@ -12,6 +12,7 @@ struct MealRowView: View {
     @Environment(\.modelContext) private var context
 
     @Bindable var meal: Meal
+    
     var body: some View {
         HStack(alignment: .top, spacing: 15) {
             Circle()
@@ -25,9 +26,9 @@ struct MealRowView: View {
                 Text(meal.title)
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     .foregroundStyle(.black)
-//                Label("\(meal.calories) calories", systemImage: "fork.knife.circle")
-//                    .font(.subheadline)
-//                    .foregroundStyle(.black)
+                Label("\(meal.calories) calories", systemImage: "fork.knife.circle")
+                    .font(.subheadline)
+                    .foregroundStyle(.black)
                 
             })
             .padding(15)

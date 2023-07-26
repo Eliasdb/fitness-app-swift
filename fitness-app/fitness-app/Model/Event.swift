@@ -37,14 +37,14 @@ import SwiftData
     class Meal: Identifiable {
         var id: UUID
         var title: String
-//        var calories: Int
+        var calories: Int
         var creationDate: Date
         var tint: String
         
-        init(id: UUID = .init(), title: String, creationDate: Date = .init(), tint: String) {
+        init(id: UUID = .init(), title: String, calories: Int, creationDate: Date = .init(), tint: String) {
             self.id = id
             self.title = title
-//            self.calories = calories
+            self.calories = calories
             self.creationDate = creationDate
             self.tint = tint
         }
@@ -52,7 +52,6 @@ import SwiftData
         var tintColor: Color {
             switch tint {
             case "Color 1": return Color("Color 1")
-
             case "Color 2": return Color("Color 2")
             case "Color 3": return Color("Color 3")
             default: return .white

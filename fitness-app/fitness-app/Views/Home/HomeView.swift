@@ -8,7 +8,7 @@
 import SwiftUI
 
 @available(iOS 17.0, *)
-struct HomeViewv2: View {
+struct HomeView: View {
     // Task Manager Properties
     @State private var currentDate: Date = .init()
     @State private var weekSlider: [[Date.WeekDay]] = []
@@ -63,11 +63,10 @@ struct HomeViewv2: View {
         })
         .sheet(isPresented: $createNewMeal, content: {
             NewMealView()
-                .presentationDetents([.height(300)])
+                .presentationDetents([.height(400)])
                 .interactiveDismissDisabled()
                 .presentationCornerRadius(30)
                 .presentationBackground(.white)
-
         })
     }
        
@@ -202,8 +201,8 @@ struct HomeViewv2: View {
 
 
 @available(iOS 17.0, *)
-struct HomeViewv2_Previews: PreviewProvider {
+struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeViewv2()
+        HomeView()
     }
 }
