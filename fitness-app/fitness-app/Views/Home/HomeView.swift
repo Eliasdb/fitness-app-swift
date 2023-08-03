@@ -9,6 +9,10 @@ import SwiftUI
 
 @available(iOS 17.0, *)
 struct HomeView: View {
+    
+    @State private var total2: [Int] = []
+    @State private var mealCalories: Double = 0
+
     // Task Manager Properties
     @State private var currentDate: Date = .init()
     @State private var weekSlider: [[Date.WeekDay]] = []
@@ -16,15 +20,21 @@ struct HomeView: View {
     @State private var createWeek: Bool = false
     @State private var createNewMeal: Bool = false
 //    @State private var meals: [Meal] = sampleMeals.sorted(by: {$1.creationDate > $0.creationDate})
-
     @Namespace var animation
     
     var body: some View {
+        
         VStack(alignment: .leading, spacing: 0, content: {
             HeaderView()
+//            Text("\(total2.reduce(0, +))")
+//                .hSpacing(.center)
+
+
             ScrollView(.vertical) {
                 VStack {
-                    // Meal view
+                    // daily calorie counter
+                    CalorieCounterView(currentDate: $currentDate)
+//                     Meal view
                     MealsView(currentDate: $currentDate)
                 }
                 .hSpacing(.center)
@@ -62,7 +72,7 @@ struct HomeView: View {
             }
         })
         .sheet(isPresented: $createNewMeal, content: {
-            NewMealView()
+            NewMealView(total2: $total2, mealCalories: $mealCalories)
                 .presentationDetents([.height(400)])
                 .interactiveDismissDisabled()
                 .presentationCornerRadius(30)

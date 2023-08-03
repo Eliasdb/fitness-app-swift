@@ -94,8 +94,8 @@ struct DataView: View {
         }
 }
 
-struct DataView_Previews: PreviewProvider {
-    static var previews: some View {
-        DataView()
-    }
-}
+//struct DataView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        DataView()
+//    }
+//}

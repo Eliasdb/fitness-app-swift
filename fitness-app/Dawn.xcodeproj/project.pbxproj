@@ -7,18 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		641B65EA2A7A6A9A00482967 /* CalorieCounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641B65E92A7A6A9A00482967 /* CalorieCounterView.swift */; };
 		642C59992A703A9200A88029 /* OffsetKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642C59982A703A9200A88029 /* OffsetKey.swift */; };
 		642C599B2A7046F000A88029 /* MealRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642C599A2A7046F000A88029 /* MealRowView.swift */; };
 		642C599D2A713AAD00A88029 /* NewMealView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642C599C2A713AAD00A88029 /* NewMealView.swift */; };
 		6445BD0A2A697A3A00833E65 /* LaunchScreenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6445BD092A697A3A00833E65 /* LaunchScreenManager.swift */; };
-		6445BD0C2A69A75C00833E65 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6445BD0B2A69A75C00833E65 /* HomeView.swift */; };
+		645866202A71537A00D88176 /* MealsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6458661F2A71537A00D88176 /* MealsView.swift */; };
 		6467CA542A6EA49A003F6387 /* DataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6467CA532A6EA49A003F6387 /* DataView.swift */; };
 		6467CA592A6FEFB5003F6387 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6467CA582A6FEFB5003F6387 /* Event.swift */; };
 		6467CA5C2A6FF52F003F6387 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6467CA5B2A6FF52F003F6387 /* View+Extensions.swift */; };
 		6467CA5E2A6FF53E003F6387 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6467CA5D2A6FF53E003F6387 /* Date+Extensions.swift */; };
-		6467CA602A6FF9AF003F6387 /* HomeViewv2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6467CA5F2A6FF9AF003F6387 /* HomeViewv2.swift */; };
 		64B832362A696E1800079C83 /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B832352A696E1800079C83 /* LaunchScreenView.swift */; };
-		64C78A202A6D44E500436687 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 64C78A1F2A6D44E500436687 /* FSCalendar */; };
 		64C78A222A6D492B00436687 /* FormattedDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C78A212A6D492B00436687 /* FormattedDate.swift */; };
 		64D955F62A682548003D679E /* fitness_appApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D955F52A682548003D679E /* fitness_appApp.swift */; };
 		64D955F82A682548003D679E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D955F72A682548003D679E /* ContentView.swift */; };
@@ -28,19 +27,20 @@
 		64D956062A6825C1003D679E /* ExercisesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D956052A6825C1003D679E /* ExercisesView.swift */; };
 		64D956082A6825D7003D679E /* CaloriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D956072A6825D7003D679E /* CaloriesView.swift */; };
 		64D9560A2A682689003D679E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D956092A682689003D679E /* SettingsView.swift */; };
+		64FB08012A71891C0060571A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FB08002A71891C0060571A /* HomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		641B65E92A7A6A9A00482967 /* CalorieCounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalorieCounterView.swift; sourceTree = "<group>"; };
 		642C59982A703A9200A88029 /* OffsetKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetKey.swift; sourceTree = "<group>"; };
 		642C599A2A7046F000A88029 /* MealRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealRowView.swift; sourceTree = "<group>"; };
 		642C599C2A713AAD00A88029 /* NewMealView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMealView.swift; sourceTree = "<group>"; };
 		6445BD092A697A3A00833E65 /* LaunchScreenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenManager.swift; sourceTree = "<group>"; };
-		6445BD0B2A69A75C00833E65 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		6458661F2A71537A00D88176 /* MealsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealsView.swift; sourceTree = "<group>"; };
 		6467CA532A6EA49A003F6387 /* DataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataView.swift; sourceTree = "<group>"; };
 		6467CA582A6FEFB5003F6387 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		6467CA5B2A6FF52F003F6387 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		6467CA5D2A6FF53E003F6387 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
-		6467CA5F2A6FF9AF003F6387 /* HomeViewv2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewv2.swift; sourceTree = "<group>"; };
 		64B832322A696C3D00079C83 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		64B832352A696E1800079C83 /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
 		64C78A212A6D492B00436687 /* FormattedDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormattedDate.swift; sourceTree = "<group>"; };
@@ -53,6 +53,7 @@
 		64D956052A6825C1003D679E /* ExercisesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesView.swift; sourceTree = "<group>"; };
 		64D956072A6825D7003D679E /* CaloriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaloriesView.swift; sourceTree = "<group>"; };
 		64D956092A682689003D679E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		64FB08002A71891C0060571A /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,7 +61,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				64C78A202A6D44E500436687 /* FSCalendar in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				6467CA5B2A6FF52F003F6387 /* View+Extensions.swift */,
+				64C78A212A6D492B00436687 /* FormattedDate.swift */,
 				6467CA5D2A6FF53E003F6387 /* Date+Extensions.swift */,
 				642C59982A703A9200A88029 /* OffsetKey.swift */,
 			);
@@ -109,8 +110,6 @@
 				64B832322A696C3D00079C83 /* Info.plist */,
 				64D9560B2A68276A003D679E /* Views */,
 				64D955F52A682548003D679E /* fitness_appApp.swift */,
-				6445BD092A697A3A00833E65 /* LaunchScreenManager.swift */,
-				64D955F72A682548003D679E /* ContentView.swift */,
 				64D955F92A682548003D679E /* Assets.xcassets */,
 				64D955FB2A682548003D679E /* Preview Content */,
 			);
@@ -128,19 +127,37 @@
 		64D9560B2A68276A003D679E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				64FB07FF2A71738B0060571A /* Launch Screen */,
+				64FB07FE2A7173590060571A /* Home */,
 				64D956072A6825D7003D679E /* CaloriesView.swift */,
 				64D956052A6825C1003D679E /* ExercisesView.swift */,
-				64C78A212A6D492B00436687 /* FormattedDate.swift */,
 				6467CA532A6EA49A003F6387 /* DataView.swift */,
+				64D955F72A682548003D679E /* ContentView.swift */,
 				64D956032A68259F003D679E /* HealthView.swift */,
-				6445BD0B2A69A75C00833E65 /* HomeView.swift */,
-				642C599C2A713AAD00A88029 /* NewMealView.swift */,
 				64D956092A682689003D679E /* SettingsView.swift */,
-				64B832352A696E1800079C83 /* LaunchScreenView.swift */,
-				6467CA5F2A6FF9AF003F6387 /* HomeViewv2.swift */,
-				642C599A2A7046F000A88029 /* MealRowView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		64FB07FE2A7173590060571A /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				6458661F2A71537A00D88176 /* MealsView.swift */,
+				641B65E92A7A6A9A00482967 /* CalorieCounterView.swift */,
+				642C599C2A713AAD00A88029 /* NewMealView.swift */,
+				642C599A2A7046F000A88029 /* MealRowView.swift */,
+				64FB08002A71891C0060571A /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		64FB07FF2A71738B0060571A /* Launch Screen */ = {
+			isa = PBXGroup;
+			children = (
+				6445BD092A697A3A00833E65 /* LaunchScreenManager.swift */,
+				64B832352A696E1800079C83 /* LaunchScreenView.swift */,
+			);
+			path = "Launch Screen";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -160,7 +177,6 @@
 			);
 			name = Dawn;
 			packageProductDependencies = (
-				64C78A1F2A6D44E500436687 /* FSCalendar */,
 			);
 			productName = "fitness-app";
 			productReference = 64D955F22A682548003D679E /* Dawn.app */;
@@ -174,7 +190,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					64D955F12A682548003D679E = {
 						CreatedOnToolsVersion = 14.3.1;
@@ -191,7 +207,6 @@
 			);
 			mainGroup = 64D955E92A682548003D679E;
 			packageReferences = (
-				64C78A1E2A6D44E500436687 /* XCRemoteSwiftPackageReference "FSCalendar" */,
 			);
 			productRefGroup = 64D955F32A682548003D679E /* Products */;
 			projectDirPath = "";
@@ -219,7 +234,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6445BD0C2A69A75C00833E65 /* HomeView.swift in Sources */,
 				64D956082A6825D7003D679E /* CaloriesView.swift in Sources */,
 				64D956062A6825C1003D679E /* ExercisesView.swift in Sources */,
 				6445BD0A2A697A3A00833E65 /* LaunchScreenManager.swift in Sources */,
@@ -234,9 +248,11 @@
 				64D955F82A682548003D679E /* ContentView.swift in Sources */,
 				642C599B2A7046F000A88029 /* MealRowView.swift in Sources */,
 				64D955F62A682548003D679E /* fitness_appApp.swift in Sources */,
-				6467CA602A6FF9AF003F6387 /* HomeViewv2.swift in Sources */,
+				645866202A71537A00D88176 /* MealsView.swift in Sources */,
 				642C599D2A713AAD00A88029 /* NewMealView.swift in Sources */,
+				641B65EA2A7A6A9A00482967 /* CalorieCounterView.swift in Sources */,
 				6467CA592A6FEFB5003F6387 /* Event.swift in Sources */,
+				64FB08012A71891C0060571A /* HomeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,6 +295,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -339,6 +356,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -437,25 +455,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		64C78A1E2A6D44E500436687 /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/WenchaoD/FSCalendar";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		64C78A1F2A6D44E500436687 /* FSCalendar */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 64C78A1E2A6D44E500436687 /* XCRemoteSwiftPackageReference "FSCalendar" */;
-			productName = FSCalendar;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 64D955EA2A682548003D679E /* Project object */;
 }

@@ -20,6 +20,7 @@ import SwiftData
 //    var tint: Color
 //}
 //
+//@available(iOS 17.0, *)
 //var sampleMeals: [Meal] = [
 //    .init(title: "Chicken", calories: 500, carbs: 30, sugar: 40, protein: 40, fat: 0, creationDate: .updateHour(-5), tint: .white),
 //    .init(title: "Rice", calories: 700, carbs: 30, sugar: 440, protein: 50, fat: 30, creationDate: .updateHour(-3), tint: .blue),
@@ -32,14 +33,14 @@ import SwiftData
 @available(iOS 16.4, *)
 @available(iOS 17.0, *)
 @Model
-
-
-    class Meal: Identifiable {
+    class Meal {
         var id: UUID
         var title: String
         var calories: Int
         var creationDate: Date
         var tint: String
+        
+//        var count: Int
         
         init(id: UUID = .init(), title: String, calories: Int, creationDate: Date = .init(), tint: String) {
             self.id = id
@@ -47,6 +48,7 @@ import SwiftData
             self.calories = calories
             self.creationDate = creationDate
             self.tint = tint
+        
         }
         
         var tintColor: Color {
@@ -58,6 +60,22 @@ import SwiftData
             }
         }
     }
+
+@available(iOS 16.4, *)
+@available(iOS 17.0, *)
+@Model
+class Count {
+    var id: UUID
+    var number: Int
+    var creationDate: Date
+
+    
+    init(id: UUID = .init(), number: Int = 0, creationDate: Date = .init()) {
+        self.id = id
+        self.number = number
+        self.creationDate = creationDate
+    }
+}
 
 
 extension Date {

@@ -12,6 +12,8 @@ struct MealRowView: View {
     @Environment(\.modelContext) private var context
 
     @Bindable var meal: Meal
+    @Bindable var count: Count
+
     
     var body: some View {
         HStack(alignment: .top, spacing: 15) {
@@ -37,18 +39,19 @@ struct MealRowView: View {
             .contentShape(.contextMenuPreview,.rect(cornerRadius: 15) )
             .contextMenu {
                 Button("Delete meal", role: .destructive) {
-                    context.delete(object: meal)
+                    context.delete(count)
+                    context.delete(meal)
                     try? context.save()
                 }
             }
             .offset(y: -8)
-            
         }
-        
     }
 }
 
-@available(iOS 17.0, *)
-#Preview {
-   ContentView()
-}
+//@available(iOS 17.0, *)
+//struct MealRowView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        HomeView()
+//    }
+//}

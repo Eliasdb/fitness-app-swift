@@ -9,9 +9,9 @@ import SwiftUI
 
 @available(iOS 17.0, *)
 struct ContentView: View {
+    
     @EnvironmentObject var launchScreenManager: LaunchScreenManager
     @State private var selection = 3
-
     var body: some View {
         TabView(selection: $selection) {
             Group {
@@ -32,7 +32,7 @@ struct ContentView: View {
                     .tabItem {
                         Image("house")
                         Label("", systemImage: "sunrise.circle")
-                    }
+                    } 
                 HealthView()
                     .tag(4)
                     .tabItem {
@@ -44,18 +44,19 @@ struct ContentView: View {
                         Label("Settings", systemImage: "gearshape")
                     }
             }
-                    .toolbarBackground(.visible, for: .tabBar)
-//                  .toolbarBackground(.brown, for: .tabBar)
-                    .toolbarColorScheme(.dark, for: .tabBar)
-                  
+            .toolbarBackground(.visible, for: .tabBar)
+            //                  .toolbarBackground(.brown, for: .tabBar)
+            .toolbarColorScheme(.dark, for: .tabBar)
+            
         }
         .onAppear {
             DispatchQueue
-        .main
-        .asyncAfter(deadline: .now() + 5) {
-            launchScreenManager.dismiss()
+                .main
+                .asyncAfter(deadline: .now() + 5) {
+                                launchScreenManager.dismiss()
+                }
         }
-}    }
+    }
 }
 
 @available(iOS 17.0, *)

@@ -12,7 +12,11 @@ import SwiftData
 struct MealsView: View {
     @Binding var currentDate: Date
     // swiftdata dynamic query
+
     @Query private var meals: [Meal]
+    @State private var counts: Count
+    
+    
     init(currentDate: Binding<Date>) {
         self._currentDate = currentDate
         // predicate
@@ -29,10 +33,12 @@ struct MealsView: View {
         ]
         self._meals = Query(filter: predicate, sort: sortDescriptor, animation: .snappy)
     }
+    
+    
     var body: some View {
                 VStack(alignment: .leading, spacing: 35) {
                     ForEach(meals) { meal in
-                        MealRowView(meal: meal)
+                        MealRowView(meal: meal, count: counts)
                     }
                 }
                 .padding([.vertical, .leading], 15)
@@ -47,8 +53,8 @@ struct MealsView: View {
                 }
     }
 }
-
-@available(iOS 17.0, *)
-#Preview {
-        ContentView()
-}
+//
+//@available(iOS 17.0, *)
+//#Preview {
+//MealsView()
+//}

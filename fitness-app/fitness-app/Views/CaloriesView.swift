@@ -9,11 +9,11 @@ import SwiftUI
 import Charts
 
 struct CaloriesView: View {
-    @State private var proteinAmount = 3
-    @State private var carbsAmount = 5
-    @State private var fatAmount = 6
-    @State private var sugarAmount = 5
-    @State private var caloriesAmount = 0
+    @State private var proteinAmount: Int = 3
+    @State private var carbsAmount: Int = 5
+    @State private var fatAmount: Int = 6
+    @State private var sugarAmount: Int = 5
+    @State private var caloriesAmount: Int = 0
 
     
     private static let formatter: NumberFormatter = {

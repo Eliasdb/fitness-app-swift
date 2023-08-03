@@ -10,15 +10,12 @@ import SwiftUI
 @available(iOS 17.0, *)
 struct NewMealView: View {
     @Environment(\.dismiss) private var dismiss
-    
     // model context to save data
     @Environment(\.modelContext) private var context
+
     @State private var mealTitle: String = ""
     @State private var mealDate: Date = .init()
-    @State private var mealCalories: Double = 0
-    @State private var count: Int = 0
-
-    @State private var mealColor: String = "color 1"
+    @State private var mealColor: String = "Color 1"
 
     private static let formatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -26,7 +23,13 @@ struct NewMealView: View {
         return formatter
     }()
     
+    @Binding var total2:[Int]
+    @Binding var mealCalories: Double
+
+//    @Binding var amount:Int
+
     var body: some View {
+        
         VStack(alignment: .leading, spacing: 15, content: {
             Button(action: {
                 dismiss()
@@ -56,6 +59,7 @@ struct NewMealView: View {
                 VStack {
                           Slider(value: $mealCalories, in: 0...2000)
                           Text("\(Int(mealCalories))")
+                    
                       }
             })
             
@@ -113,18 +117,26 @@ struct NewMealView: View {
             Spacer(minLength: 0)
             
             Button(action: {
-                //                saving meal
-                let meal = Meal(title: mealTitle, calories: Int(mealCalories), creationDate: mealDate, tint: mealColor)
-                count += count + Int(mealCalories)
+            // saving meal
+            let meal = Meal(title: mealTitle, calories: Int(mealCalories), creationDate: mealDate, tint: mealColor)
+                print("\(Int(mealCalories))")
+                total2.append(Int(mealCalories))
 
+                let counter = Count(number: total2 , creationDate: mealDate)
+//               counter.number = total2.reduce(0, +)
+
+                
                 do {
-                    print("\(count)")
+                    print("\(total2)")
+//                    print("\(counter.count)")
                     context.insert(meal)
+                    context.insert(counter)
                     try context.save()
                     dismiss()
                 } catch {
                     print(error.localizedDescription)
                 }
+            
             }, label: {
                 Text("Create Entry")
                     .font(.title3)
@@ -142,7 +154,7 @@ struct NewMealView: View {
     }
 }
 
-@available(iOS 17.0, *)
-#Preview {
-   NewMealView()
-}
+//@available(iOS 17.0, *)
+//#Preview {
+//   NewMealView()
+//}
