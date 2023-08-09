@@ -120,10 +120,8 @@ struct NewMealView: View {
             // saving meal
             let meal = Meal(title: mealTitle, calories: Int(mealCalories), creationDate: mealDate, tint: mealColor)
                 print("\(Int(mealCalories))")
-                total2.append(Int(mealCalories))
 
-                let counter = Count(number: total2 , creationDate: mealDate)
-//               counter.number = total2.reduce(0, +)
+                let counter = Count(number: Int(mealCalories) , creationDate: mealDate)
 
                 
                 do {

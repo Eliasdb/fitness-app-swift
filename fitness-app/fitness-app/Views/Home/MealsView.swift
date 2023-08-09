@@ -13,9 +13,7 @@ struct MealsView: View {
     @Binding var currentDate: Date
     // swiftdata dynamic query
 
-    @Query private var meals: [Meal]
-    @State private var counts: Count
-    
+    @Query private var meals: [Meal]    
     
     init(currentDate: Binding<Date>) {
         self._currentDate = currentDate
@@ -38,7 +36,7 @@ struct MealsView: View {
     var body: some View {
                 VStack(alignment: .leading, spacing: 35) {
                     ForEach(meals) { meal in
-                        MealRowView(meal: meal, count: counts)
+                        MealRowView(meal: meal)
                     }
                 }
                 .padding([.vertical, .leading], 15)

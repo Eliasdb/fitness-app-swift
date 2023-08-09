@@ -12,7 +12,7 @@ struct MealRowView: View {
     @Environment(\.modelContext) private var context
 
     @Bindable var meal: Meal
-    @Bindable var count: Count
+    @Bindable var count: Meal
 
     
     var body: some View {

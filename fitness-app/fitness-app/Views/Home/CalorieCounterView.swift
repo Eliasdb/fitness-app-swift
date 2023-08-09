@@ -11,7 +11,7 @@ import SwiftData
 @available(iOS 17.0, *)
 struct CalorieCounterView: View {
     @Binding var currentDate: Date
-
+    
     @Query private var calorieCounter: [Count]
     init(currentDate: Binding<Date>) {
         self._currentDate = currentDate
@@ -24,32 +24,35 @@ struct CalorieCounterView: View {
         }
         
         // sorting
-//        let sortDescriptor = [
-//            SortDescriptor(\Count.creationDate, order: .reverse)
-//        ]
+        //        let sortDescriptor = [
+        //            SortDescriptor(\Count.creationDate, order: .reverse)
+        //        ]
         self._calorieCounter = Query(filter: predicate, animation: .snappy)
-
+        
+        
     }
     
     
-//    mutating func nop(number: Int) -> Void {
-//        ForEach(calorieCounter) { item in
-//            counter.append(number)
-//
-// //           Text("\(item.number)")
-// //           counter.append(item.number)
-//
-//        }
-//        
-//    }
-//
-
-
+    //    mutating func nop(number: Int) -> Void {
+    //
+    // //           Text("\(item.number)")
+    // //           counter.append(item.number)
+    //
+    //        }
+    //        
+    //    }
+    //
+    
+    
     var body: some View {
         
         if (calorieCounter.last?.number) != nil {
-            Text("\(String(describing: calorieCounter.last!.number))/3000 calories")
+             let numberArray = calorieCounter.map { $0.number }
+            //            Text("\(String(describing: calorieCounter.last!.number))/3000 calories")
+            Text("\(String(describing: numberArray.reduce(0, +)))/3000 calories")
+            
                 .padding(15)
+            
         }
     }
 }
