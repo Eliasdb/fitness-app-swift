@@ -121,14 +121,14 @@ struct NewMealView: View {
             let meal = Meal(title: mealTitle, calories: Int(mealCalories), creationDate: mealDate, tint: mealColor)
                 print("\(Int(mealCalories))")
 
-                let counter = Count(number: Int(mealCalories) , creationDate: mealDate)
+//                let counter = Count(number: Int(mealCalories) , creationDate: mealDate)
 
                 
                 do {
                     print("\(total2)")
 //                    print("\(counter.count)")
                     context.insert(meal)
-                    context.insert(counter)
+//                    context.insert(counter)
                     try context.save()
                     dismiss()
                 } catch {
