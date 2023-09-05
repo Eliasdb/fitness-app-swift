@@ -87,6 +87,8 @@ struct CalorieCounterView: View {
                   }
                 }
                 .padding(15)
+            
+            
          
         }
         
@@ -94,6 +96,10 @@ struct CalorieCounterView: View {
     }
 }
 
-//#Preview {
-//    CalorieCounterView()
-//}
+@available(iOS 17.0, *)
+#Preview {
+    HomeView()
+        .modelContainer(for: [Meal.self, Count.self], inMemory: true)
+
+}
+

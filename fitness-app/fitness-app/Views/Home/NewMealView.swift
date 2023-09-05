@@ -5,6 +5,7 @@
 //  Created by Elias on 26/07/2023.
 //
 
+
 import SwiftUI
 
 @available(iOS 17.0, *)
@@ -14,8 +15,22 @@ struct NewMealView: View {
     @Environment(\.modelContext) private var context
 
     @State private var mealTitle: String = ""
+
+    @State var sugar:Int = 0
+    @State var fat:Int = 0
+    @State var carbs:Int = 0
+    @State var protein:Int = 0
+
+
+
     @State private var mealDate: Date = .init()
     @State private var mealColor: String = "Color 1"
+    @Binding var mealCalories: Double
+    @Binding var mealCarbs: Double
+    @Binding var mealFat: Double
+    @Binding var mealSugar: Double
+    @Binding var mealProtein: Double
+
 
     private static let formatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -23,7 +38,6 @@ struct NewMealView: View {
         return formatter
     }()
     
-    @Binding var mealCalories: Double
 
 //    @Binding var amount:Int
 
@@ -48,6 +62,9 @@ struct NewMealView: View {
                     .padding(.vertical, 12)
                     .padding(.horizontal, 15)
                     .background(.white.shadow(.drop(color: .black.opacity(0.25), radius: 2)), in: .rect(cornerRadius: 10))
+                
+                
+                   
             })
             
             VStack(alignment: .leading, spacing: 8, content: {
@@ -56,13 +73,77 @@ struct NewMealView: View {
                     .foregroundStyle(.gray)
                 
                 VStack {
+                    Text("\(Int(mealCalories))")
                           Slider(value: $mealCalories, in: 0...2000)
-                          Text("\(Int(mealCalories))")
-                    
                       }
             })
             
             .padding(.top, 5)
+            
+                   Section{
+                       GeometryReader { geometry in
+                           VStack(alignment: .leading, content: {
+                               Text("Macros")
+                                   .font(.caption)
+                                   .foregroundStyle(.gray)
+                               HStack{
+                                   Picker("min", selection: $protein){
+                                       ForEach(1..<150) { i in
+                                           Text("\(i) grams protein")
+                                               .font(.caption)
+                                               .tag(i)
+                                                   }
+                                       
+                                   }
+                                   .pickerStyle(.wheel)
+                                   .frame(width: geometry.size.width / 2, height: 40)
+                                  
+                                   .clipped()
+                                   
+                                   Text("carb")
+                                       .font(.caption)
+                                       .foregroundStyle(.gray)
+                                   Picker("sec", selection: $carbs){
+                                       ForEach(1..<150) { i in
+                                           Text("\(i) grams carbs")
+                                               .font(.caption)
+                                               .tag(i)
+                                                   }
+                                       
+                                   }
+                                   .pickerStyle(.wheel)
+                                   .frame(width: geometry.size.width / 2, height:40)
+                                 
+                                   .clipped()
+                                   
+                               }
+                               .frame(height:40)
+                               
+                             
+                               
+                               HStack(alignment: .center, content: {
+                                   Picker("min", selection: $fat){
+                                       ForEach(1..<150) { i in
+                                           Text("\(i) grams fat")
+                                               .font(.caption)
+                                               .tag(i)
+                                                   }
+                                       
+                                   }
+                                   .pickerStyle(.wheel)
+//                                   .padding(.top, 5)
+
+                                   .frame(width: geometry.size.width / 2, height: 40)
+                                   .clipped()
+                               })
+                               .frame(height:40)
+                           })
+                       }
+                       .frame(height:120)
+                       
+                    }
+
+                        
             
             HStack(spacing: 12) {
                 VStack(alignment: .leading, spacing: 8, content: {
@@ -117,7 +198,7 @@ struct NewMealView: View {
             
             Button(action: {
             // saving meal
-            let meal = Meal(title: mealTitle, calories: Int(mealCalories), creationDate: mealDate, tint: mealColor)
+                let meal = Meal(title: mealTitle, calories: Int(mealCalories), carbs: mealCarbs, fat: mealFat, protein: mealProtein, sugar: mealSugar, creationDate: mealDate, tint: mealColor)
                 print("\(Int(mealCalories))")
                 
                 do {
@@ -145,7 +226,9 @@ struct NewMealView: View {
     }
 }
 
-//@available(iOS 17.0, *)
-//#Preview {
-//   NewMealView()
-//}
+@available(iOS 17.0, *)
+#Preview {
+    HomeView()
+        .modelContainer(for: [Meal.self, Count.self], inMemory: true)
+
+}

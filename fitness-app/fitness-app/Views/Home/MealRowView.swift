@@ -47,9 +47,11 @@ struct MealRowView: View {
     }
 }
 
-//@available(iOS 17.0, *)
-//struct MealRowView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        HomeView()
-//    }
-//}
+@available(iOS 17.0, *)
+struct MealRowView_Previews: PreviewProvider {
+    static var previews: some View {
+        HomeView()
+            .modelContainer(for: [Meal.self, Count.self], inMemory: true)
+
+    }
+}

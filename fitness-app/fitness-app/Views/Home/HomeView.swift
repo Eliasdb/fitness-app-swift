@@ -12,6 +12,10 @@ struct HomeView: View {
     
     @State private var total2: [Int] = []
     @State private var mealCalories: Double = 0
+    @State private var mealFat: Double = 0
+    @State private var mealSugar: Double = 0
+    @State private var mealProtein: Double = 0
+    @State private var mealCarbs: Double = 0
 
     // Task Manager Properties
     @State private var currentDate: Date = .init()
@@ -26,7 +30,6 @@ struct HomeView: View {
         
         VStack(alignment: .leading, spacing: 0, content: {
             HeaderView()
-
 
             ScrollView(.vertical) {
                 VStack {
@@ -70,8 +73,8 @@ struct HomeView: View {
             }
         })
         .sheet(isPresented: $createNewMeal, content: {
-            NewMealView(mealCalories: $mealCalories)
-                .presentationDetents([.height(400)])
+            NewMealView(mealCalories: $mealCalories,  mealCarbs: $mealCarbs, mealFat: $mealFat, mealSugar: $mealSugar, mealProtein: $mealProtein)
+                .presentationDetents([.height(600)])
                 .interactiveDismissDisabled()
                 .presentationCornerRadius(30)
                 .presentationBackground(.white)
@@ -212,5 +215,6 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
+            .modelContainer(for: [Meal.self, Count.self], inMemory: true)
     }
 }

@@ -51,8 +51,10 @@ struct MealsView: View {
                 }
     }
 }
-//
-//@available(iOS 17.0, *)
-//#Preview {
-//MealsView()
-//}
+
+@available(iOS 17.0, *)
+#Preview {
+    HomeView()
+        .modelContainer(for: [Meal.self, Count.self], inMemory: true)
+
+}
