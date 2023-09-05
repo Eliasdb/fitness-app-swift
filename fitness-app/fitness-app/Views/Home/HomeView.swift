@@ -26,8 +26,6 @@ struct HomeView: View {
         
         VStack(alignment: .leading, spacing: 0, content: {
             HeaderView()
-//            Text("\(total2.reduce(0, +))")
-//                .hSpacing(.center)
 
 
             ScrollView(.vertical) {
@@ -72,7 +70,7 @@ struct HomeView: View {
             }
         })
         .sheet(isPresented: $createNewMeal, content: {
-            NewMealView(total2: $total2, mealCalories: $mealCalories)
+            NewMealView(mealCalories: $mealCalories)
                 .presentationDetents([.height(400)])
                 .interactiveDismissDisabled()
                 .presentationCornerRadius(30)
