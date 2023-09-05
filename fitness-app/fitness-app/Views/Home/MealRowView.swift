@@ -27,7 +27,7 @@ struct MealRowView: View {
                 Text(meal.title)
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     .foregroundStyle(.black)
-                Label("\(meal.calories) calories", systemImage: "fork.knife.circle")
+                Label("\(meal.calories) kcal", systemImage: "fork.knife.circle")
                     .font(.subheadline)
                     .foregroundStyle(.black)
                 

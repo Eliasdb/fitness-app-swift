@@ -16,20 +16,12 @@ struct NewMealView: View {
 
     @State private var mealTitle: String = ""
 
-    @State var sugar:Int = 0
-    @State var fat:Int = 0
-    @State var carbs:Int = 0
-    @State var protein:Int = 0
-
-
-
     @State private var mealDate: Date = .init()
     @State private var mealColor: String = "Color 1"
     @Binding var mealCalories: Double
-    @Binding var mealCarbs: Double
-    @Binding var mealFat: Double
-    @Binding var mealSugar: Double
-    @Binding var mealProtein: Double
+    @Binding var mealCarbs: Int
+    @Binding var mealFat: Int
+    @Binding var mealProtein: Int
 
 
     private static let formatter: NumberFormatter = {
@@ -86,8 +78,8 @@ struct NewMealView: View {
                                Text("Macros")
                                    .font(.caption)
                                    .foregroundStyle(.gray)
-                               HStack{
-                                   Picker("min", selection: $protein){
+                               HStack(alignment: .center, content: {
+                                   Picker("protein", selection: $mealProtein){
                                        ForEach(1..<150) { i in
                                            Text("\(i) grams protein")
                                                .font(.caption)
@@ -97,13 +89,9 @@ struct NewMealView: View {
                                    }
                                    .pickerStyle(.wheel)
                                    .frame(width: geometry.size.width / 2, height: 40)
-                                  
                                    .clipped()
                                    
-                                   Text("carb")
-                                       .font(.caption)
-                                       .foregroundStyle(.gray)
-                                   Picker("sec", selection: $carbs){
+                                   Picker("carbs", selection: $mealCarbs){
                                        ForEach(1..<150) { i in
                                            Text("\(i) grams carbs")
                                                .font(.caption)
@@ -113,16 +101,14 @@ struct NewMealView: View {
                                    }
                                    .pickerStyle(.wheel)
                                    .frame(width: geometry.size.width / 2, height:40)
-                                 
                                    .clipped()
-                                   
-                               }
+                               })
                                .frame(height:40)
                                
                              
                                
                                HStack(alignment: .center, content: {
-                                   Picker("min", selection: $fat){
+                                   Picker("fat", selection: $mealFat){
                                        ForEach(1..<150) { i in
                                            Text("\(i) grams fat")
                                                .font(.caption)
@@ -159,6 +145,7 @@ struct NewMealView: View {
                 
                 VStack(alignment: .leading, spacing: 8, content: {
                     Text("Meal Color")
+//                        .padding(.bottom, 15)
                         .font(.caption)
                         .foregroundStyle(.gray)
                     
@@ -179,6 +166,8 @@ struct NewMealView: View {
                                         .opacity(mealColor == colour ? 1 : 0)
                                 })
                                 .hSpacing(.center)
+                                .padding(.top, 5)
+                                .padding(.bottom, 10)
                                 .contentShape(.rect)
                                 .onTapGesture {
                                     withAnimation(.snappy) {
@@ -198,7 +187,7 @@ struct NewMealView: View {
             
             Button(action: {
             // saving meal
-                let meal = Meal(title: mealTitle, calories: Int(mealCalories), carbs: mealCarbs, fat: mealFat, protein: mealProtein, sugar: mealSugar, creationDate: mealDate, tint: mealColor)
+                let meal = Meal(title: mealTitle, calories: Int(mealCalories), carbs: mealCarbs, fat: mealFat, protein: mealProtein, creationDate: mealDate, tint: mealColor)
                 print("\(Int(mealCalories))")
                 
                 do {

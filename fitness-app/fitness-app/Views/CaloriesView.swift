@@ -78,22 +78,7 @@ struct CaloriesView: View {
                     }
             }
                 
-                Chart(data) { dataPoint in
-                    
-                    BarMark(x: .value("Population", dataPoint.count),
-                            y: .value("Type", dataPoint.type))
-                    
-                    .foregroundStyle(by: .value("Type", dataPoint.type))
-                    .annotation(position: .overlay) {
-                        Text("\(dataPoint.count)/200 grams")
-                            .foregroundColor(.white)
-                    }
-                }
-                .chartLegend(.hidden)
-                .chartXAxis(.hidden)
-
-                .aspectRatio(1, contentMode: .fit)
-                .padding()
+             
                   }
                   .navigationTitle("Calories Tracker")
                   .toolbarBackground(.orange, for: .navigationBar)

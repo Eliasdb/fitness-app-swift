@@ -46,11 +46,24 @@ struct CalorieCounterView: View {
         [(type: "Calories eaten", amount: meals.map {$0.calories}.reduce(0, +)),
          (type: "Calories not eaten yet", amount: 3000 - meals.map {$0.calories}.reduce(0, +))
           ]
-        
     }
     
-   
+//    struct ChartData: Identifiable, Equatable {
+//        var id: String { return type }
+//        
+//        let type: String
+//        let count: Int
+//    }
 
+    
+   
+    var datarr: [(type: String, amount: Int)] {
+        [(type: "Protein", amount: meals.map {$0.protein}.reduce(0, +)),
+         (type: "Carbs", amount: meals.map {$0.carbs}.reduce(0, +)),
+         (type: "Fat", amount: meals.map {$0.fat}.reduce(0, +)),
+          ]
+    }
+    
     
     var body: some View {
         
@@ -60,10 +73,9 @@ struct CalorieCounterView: View {
 //
 //        }
         if (meals.isEmpty != true) {
-            let numArray = meals.map {$0.calories}
-//            Text("\(String(describing: numArray.reduce(0, +)))/3000")
-//                .padding(15)
+            let numArray = meals.map {$0.protein}
             
+            HStack{
                 Chart(data, id: \.type) { dataItem in
                     SectorMark(angle: .value("Type", dataItem.amount), innerRadius: .ratio(0.618), angularInset: 1.5)
                         .cornerRadius(5)
@@ -78,7 +90,7 @@ struct CalorieCounterView: View {
                   GeometryReader { geometry in
                       let frame = geometry[chartProxy.plotFrame!]
                     VStack {
-                        Text("\(String(describing: 3000 - numArray.reduce(0, +))) kcal")
+                        Text("\(String(describing: 3000 - meals.map {$0.calories}.reduce(0, +))) kcal")
                         .font(.callout
                             .bold())
 //                        .foregroundStyle(.secondary)
@@ -89,6 +101,29 @@ struct CalorieCounterView: View {
                 .padding(15)
             
             
+                Chart(datarr, id: \.type) { dataPoint in
+                
+                BarMark(x: .value("Type", dataPoint.type),
+                        y: .value("Population", dataPoint.amount), width: 40)
+                .foregroundStyle(by: .value("Type", dataPoint.type))
+                
+                .annotation(position: .overlay) {
+                    Text("\(dataPoint.amount)")
+                        .foregroundColor(.white)
+                }
+            }
+                .frame(width: 150, height: 150)
+//            .chartLegend(.hidden)
+            .chartXAxis(.hidden)
+            .chartYAxis(.hidden)
+
+                
+
+            .aspectRatio(1, contentMode: .fit)
+            .padding()
+            }
+            
+             
          
         }
         

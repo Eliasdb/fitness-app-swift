@@ -37,23 +37,21 @@ import SwiftData
         var id: UUID
         var title: String
         var calories: Int
-        var carbs: Double
-        var fat: Double
-        var protein: Double
-        var sugar: Double
+        var carbs: Int
+        var fat: Int
+        var protein: Int
         var creationDate: Date
         var tint: String
         
 //        var count: Int
         
-        init(id: UUID = .init(), title: String, calories: Int, carbs: Double, fat: Double, protein: Double, sugar: Double, creationDate: Date = .init(), tint: String) {
+        init(id: UUID = .init(), title: String, calories: Int, carbs: Int, fat: Int, protein: Int, creationDate: Date = .init(), tint: String) {
             self.id = id
             self.title = title
             self.calories = calories
             self.carbs = carbs
             self.fat = fat
             self.protein = protein
-            self.sugar = sugar
             self.creationDate = creationDate
             self.tint = tint
         

@@ -12,10 +12,9 @@ struct HomeView: View {
     
     @State private var total2: [Int] = []
     @State private var mealCalories: Double = 0
-    @State private var mealFat: Double = 0
-    @State private var mealSugar: Double = 0
-    @State private var mealProtein: Double = 0
-    @State private var mealCarbs: Double = 0
+    @State private var mealFat: Int = 100
+    @State private var mealProtein: Int = 55
+    @State private var mealCarbs: Int = 55
 
     // Task Manager Properties
     @State private var currentDate: Date = .init()
@@ -73,7 +72,7 @@ struct HomeView: View {
             }
         })
         .sheet(isPresented: $createNewMeal, content: {
-            NewMealView(mealCalories: $mealCalories,  mealCarbs: $mealCarbs, mealFat: $mealFat, mealSugar: $mealSugar, mealProtein: $mealProtein)
+            NewMealView(mealCalories: $mealCalories,  mealCarbs: $mealCarbs, mealFat: $mealFat, mealProtein: $mealProtein)
                 .presentationDetents([.height(600)])
                 .interactiveDismissDisabled()
                 .presentationCornerRadius(30)
