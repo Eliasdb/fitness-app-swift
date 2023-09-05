@@ -79,7 +79,7 @@ struct CalorieCounterView: View {
                 Chart(data, id: \.type) { dataItem in
                     SectorMark(angle: .value("Type", dataItem.amount), innerRadius: .ratio(0.618), angularInset: 1.5)
                         .cornerRadius(5)
-//                        .foregroundStyle(by: .value("Name", dataItem.amount))
+                        .foregroundStyle(by: .value("Name", dataItem.amount))
                         .opacity(dataItem.type == "Calories eaten" ? 1 : 0.5 )
                 }
                 .frame(height:150)
@@ -91,6 +91,7 @@ struct CalorieCounterView: View {
                       let frame = geometry[chartProxy.plotFrame!]
                     VStack {
                         Text("\(String(describing: 3000 - meals.map {$0.calories}.reduce(0, +))) kcal")
+                            .foregroundColor(.white)
                         .font(.callout
                             .bold())
 //                        .foregroundStyle(.secondary)
@@ -116,6 +117,7 @@ struct CalorieCounterView: View {
 //            .chartLegend(.hidden)
             .chartXAxis(.hidden)
             .chartYAxis(.hidden)
+            .foregroundColor(.white)
 
                 
 
