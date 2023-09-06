@@ -9,20 +9,18 @@
 import SwiftUI
 
 @available(iOS 17.0, *)
-struct NewMealView: View {
+struct AddMealView: View {
     @Environment(\.dismiss) private var dismiss
     // model context to save data
     @Environment(\.modelContext) private var context
 
     @State private var mealTitle: String = ""
-
     @State private var mealDate: Date = .init()
     @State private var mealColor: String = "Color 1"
     @Binding var mealCalories: Double
     @Binding var mealCarbs: Int
     @Binding var mealFat: Int
     @Binding var mealProtein: Int
-
 
     private static let formatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -116,7 +114,6 @@ struct NewMealView: View {
                    })
                }
                .frame(height:120)
-                
             }
 
             HStack(spacing: 12) {

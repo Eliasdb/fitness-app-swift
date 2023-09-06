@@ -30,7 +30,6 @@ import SwiftData
             self.protein = protein
             self.creationDate = creationDate
             self.tint = tint
-        
         }
         
         var tintColor: Color {

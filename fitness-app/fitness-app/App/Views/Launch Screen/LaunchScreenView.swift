@@ -54,7 +54,6 @@ private extension LaunchScreenView {
     }
 }
 
-
 //struct LaunchScreenView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        LaunchScreenView()

@@ -10,9 +10,8 @@ import SwiftData
 import Charts
 
 @available(iOS 17.0, *)
-struct CalorieCounterView: View {
+struct CaloriesAndMacrosCounterView: View {
     @Binding var currentDate: Date
-    
     @Query private var meals: [Meal]    
     @State var progressValue: Float = 0.0
     

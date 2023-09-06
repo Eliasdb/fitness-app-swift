@@ -12,7 +12,6 @@ struct HealthView: View {
         NavigationStack {
             Form {
                 Section {
-                   
                 }
             }
             .navigationTitle("Health")

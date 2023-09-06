@@ -13,8 +13,6 @@ struct ContentView: View {
     @EnvironmentObject var launchScreenManager: LaunchScreenManager
     @State private var selection = 3
     
-//    @Binding var currentDate: Date
-
     var body: some View {
         TabView(selection: $selection) {
             Group {
@@ -48,15 +46,14 @@ struct ContentView: View {
                     }
             }
             .toolbarBackground(.visible, for: .tabBar)
-            //                  .toolbarBackground(.brown, for: .tabBar)
+//          .toolbarBackground(.brown, for: .tabBar)
             .toolbarColorScheme(.dark, for: .tabBar)
-            
         }
         .onAppear {
             DispatchQueue
                 .main
                 .asyncAfter(deadline: .now() + 5) {
-                                launchScreenManager.dismiss()
+                    launchScreenManager.dismiss()
                 }
         }
     }
@@ -67,7 +64,5 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
             .environmentObject(LaunchScreenManager())
-            
     }
 }
-

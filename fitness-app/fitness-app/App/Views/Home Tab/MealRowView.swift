@@ -10,10 +10,8 @@ import SwiftUI
 @available(iOS 17.0, *)
 struct MealRowView: View {
     @Environment(\.modelContext) private var context
-
     @Bindable var meal: Meal
 
-    
     var body: some View {
         HStack(alignment: .top, spacing: 15) {
             Circle()

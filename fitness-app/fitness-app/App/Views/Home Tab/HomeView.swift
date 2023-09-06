@@ -10,30 +10,26 @@ import SwiftUI
 @available(iOS 17.0, *)
 struct HomeView: View {
     
-    @State private var total2: [Int] = []
     @State private var mealCalories: Double = 0
     @State private var mealFat: Int = 100
     @State private var mealProtein: Int = 55
     @State private var mealCarbs: Int = 55
-
-    // Task Manager Properties
+    
     @State private var currentDate: Date = .init()
     @State private var weekSlider: [[Date.WeekDay]] = []
     @State private var currentWeekIndex: Int = 1
     @State private var createWeek: Bool = false
     @State private var createNewMeal: Bool = false
-//    @State private var meals: [Meal] = sampleMeals.sorted(by: {$1.creationDate > $0.creationDate})
+    
     @Namespace var animation
     
     var body: some View {
-        
         VStack(alignment: .leading, spacing: 0, content: {
             HeaderView()
-
             ScrollView(.vertical) {
                 VStack {
 // Daily calories counter and macro bar charts
-                    CalorieCounterView(currentDate: $currentDate)
+                    CaloriesAndMacrosCounterView(currentDate: $currentDate)
 // Meal view
                     MealsView(currentDate: $currentDate)
                 }
@@ -72,7 +68,7 @@ struct HomeView: View {
             }
         })
         .sheet(isPresented: $createNewMeal, content: {
-            NewMealView(mealCalories: $mealCalories,  mealCarbs: $mealCarbs, mealFat: $mealFat, mealProtein: $mealProtein)
+            AddMealView(mealCalories: $mealCalories,  mealCarbs: $mealCarbs, mealFat: $mealFat, mealProtein: $mealProtein)
                 .presentationDetents([.height(600)])
                 .interactiveDismissDisabled()
                 .presentationCornerRadius(30)
@@ -125,7 +121,7 @@ struct HomeView: View {
                 if newValue == 0 || newValue == (weekSlider.count - 1) {
                     createWeek = true
                 }
-            }
+        }
     }
     
     @ViewBuilder
