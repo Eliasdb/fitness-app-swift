@@ -12,6 +12,9 @@ struct ContentView: View {
     
     @EnvironmentObject var launchScreenManager: LaunchScreenManager
     @State private var selection = 3
+    
+//    @Binding var currentDate: Date
+
     var body: some View {
         TabView(selection: $selection) {
             Group {

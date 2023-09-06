@@ -30,9 +30,6 @@ struct NewMealView: View {
         return formatter
     }()
     
-
-//    @Binding var amount:Int
-
     var body: some View {
         
         VStack(alignment: .leading, spacing: 15, content: {
@@ -54,9 +51,6 @@ struct NewMealView: View {
                     .padding(.vertical, 12)
                     .padding(.horizontal, 15)
                     .background(.white.shadow(.drop(color: .black.opacity(0.25), radius: 2)), in: .rect(cornerRadius: 10))
-                
-                
-                   
             })
             
             VStack(alignment: .leading, spacing: 8, content: {
@@ -72,65 +66,59 @@ struct NewMealView: View {
             
             .padding(.top, 5)
             
-                   Section{
-                       GeometryReader { geometry in
-                           VStack(alignment: .leading, content: {
-                               Text("Macros")
-                                   .font(.caption)
-                                   .foregroundStyle(.gray)
-                               HStack(alignment: .center, content: {
-                                   Picker("protein", selection: $mealProtein){
-                                       ForEach(1..<150) { i in
-                                           Text("\(i) grams protein")
-                                               .font(.caption)
-                                               .tag(i)
-                                                   }
-                                       
-                                   }
-                                   .pickerStyle(.wheel)
-                                   .frame(width: geometry.size.width / 2, height: 40)
-                                   .clipped()
-                                   
-                                   Picker("carbs", selection: $mealCarbs){
-                                       ForEach(1..<150) { i in
-                                           Text("\(i) grams carbs")
-                                               .font(.caption)
-                                               .tag(i)
-                                                   }
-                                       
-                                   }
-                                   .pickerStyle(.wheel)
-                                   .frame(width: geometry.size.width / 2, height:40)
-                                   .clipped()
-                               })
-                               .frame(height:40)
-                               
-                             
-                               
-                               HStack(alignment: .center, content: {
-                                   Picker("fat", selection: $mealFat){
-                                       ForEach(1..<150) { i in
-                                           Text("\(i) grams fat")
-                                               .font(.caption)
-                                               .tag(i)
-                                                   }
-                                       
-                                   }
-                                   .pickerStyle(.wheel)
+            
+            Section{
+               GeometryReader { geometry in
+                   VStack(alignment: .leading, content: {
+                       Text("Macros")
+                           .font(.caption)
+                           .foregroundStyle(.gray)
+                       HStack(alignment: .center, content: {
+                           Picker("protein", selection: $mealProtein){
+                               ForEach(1..<150) { i in
+                                   Text("\(i) grams protein")
+                                       .font(.caption)
+                                       .tag(i)
+                               }
+                           }
+                           .pickerStyle(.wheel)
+                           .frame(width: geometry.size.width / 2, height: 40)
+                           .clipped()
+                           
+                           Picker("carbs", selection: $mealCarbs){
+                               ForEach(1..<150) { i in
+                                   Text("\(i) grams carbs")
+                                       .font(.caption)
+                                       .tag(i)
+                               }
+                           }
+                           .pickerStyle(.wheel)
+                           .frame(width: geometry.size.width / 2, height:40)
+                           .clipped()
+                       })
+                       .frame(height:40)
+                       
+                       HStack(alignment: .center, content: {
+                           Picker("fat", selection: $mealFat){
+                               ForEach(1..<150) { i in
+                                   Text("\(i) grams fat")
+                                       .font(.caption)
+                                       .tag(i)
+                               }
+                           }
+                           .pickerStyle(.wheel)
 //                                   .padding(.top, 5)
 
-                                   .frame(width: geometry.size.width / 2, height: 40)
-                                   .clipped()
-                               })
-                               .frame(height:40)
-                           })
-                       }
-                       .frame(height:120)
-                       
-                    }
+                           .frame(width: geometry.size.width / 2, height: 40)
+                           .clipped()
+                       })
+                       .frame(height:40)
+                   })
+               }
+               .frame(height:120)
+                
+            }
 
-                        
-            
             HStack(spacing: 12) {
                 VStack(alignment: .leading, spacing: 8, content: {
                     Text("Meal Date")
@@ -152,8 +140,6 @@ struct NewMealView: View {
                     let colours: [String] = (1...3).compactMap { index -> String in
                         return "Color \(index)"
                     }
-                    
-
                     
                     HStack(spacing: 0) {
                         ForEach(colours, id:\.self) { colour in
@@ -177,9 +163,6 @@ struct NewMealView: View {
                         }
                     }
                 })
-               
-                
-               
             }
             .padding(.top, 5)
             
@@ -218,6 +201,6 @@ struct NewMealView: View {
 @available(iOS 17.0, *)
 #Preview {
     HomeView()
-        .modelContainer(for: [Meal.self, Count.self], inMemory: true)
+        .modelContainer(for: [Meal.self], inMemory: true)
 
 }

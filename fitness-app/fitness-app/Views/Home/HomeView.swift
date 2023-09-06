@@ -32,9 +32,9 @@ struct HomeView: View {
 
             ScrollView(.vertical) {
                 VStack {
-                    // daily calorie counter
+// Daily calories counter and macro bar charts
                     CalorieCounterView(currentDate: $currentDate)
-//                     Meal view
+// Meal view
                     MealsView(currentDate: $currentDate)
                 }
                 .hSpacing(.center)
@@ -80,7 +80,6 @@ struct HomeView: View {
         })
     }
        
-    
     @ViewBuilder
     func HeaderView() -> some View {
         VStack(alignment: .leading, spacing: 6) {
@@ -187,7 +186,6 @@ struct HomeView: View {
             }
         }
     }
-    
 
     func paginateWeek() {
         if weekSlider.indices.contains(currentWeekIndex) {
@@ -203,17 +201,15 @@ struct HomeView: View {
                 weekSlider.append(lastDate.createNextWeek())
                 weekSlider.removeFirst()
                 currentWeekIndex = weekSlider.count - 2
-
             }
         }
     }
 }
 
-
 @available(iOS 17.0, *)
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
-            .modelContainer(for: [Meal.self, Count.self], inMemory: true)
+            .modelContainer(for: [Meal.self], inMemory: true)
     }
 }

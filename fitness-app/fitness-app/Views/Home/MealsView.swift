@@ -10,11 +10,10 @@ import SwiftData
 
 @available(iOS 17.0, *)
 struct MealsView: View {
-    @Binding var currentDate: Date
-    // swiftdata dynamic query
 
+    // swiftdata dynamic query
     @Query private var meals: [Meal]    
-    
+    @Binding var currentDate: Date
     init(currentDate: Binding<Date>) {
         self._currentDate = currentDate
         // predicate
@@ -24,14 +23,12 @@ struct MealsView: View {
         let predicate = #Predicate<Meal> {
             return $0.creationDate >= startOfDate && $0.creationDate < endOfDate
         }
-        
         // sorting
         let sortDescriptor = [
             SortDescriptor(\Meal.creationDate, order: .reverse)
         ]
         self._meals = Query(filter: predicate, sort: sortDescriptor, animation: .snappy)
     }
-    
     
     var body: some View {
                 VStack(alignment: .leading, spacing: 35) {
@@ -55,6 +52,5 @@ struct MealsView: View {
 @available(iOS 17.0, *)
 #Preview {
     HomeView()
-        .modelContainer(for: [Meal.self, Count.self], inMemory: true)
-
+        .modelContainer(for: [Meal.self], inMemory: true)
 }

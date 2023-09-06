@@ -7,90 +7,78 @@
 
 import SwiftUI
 import Charts
+import _SwiftData_SwiftUI
+import Foundation
 
+
+@available(iOS 17.0, *)
 struct CaloriesView: View {
-    @State private var proteinAmount: Int = 3
-    @State private var carbsAmount: Int = 5
-    @State private var fatAmount: Int = 6
-    @State private var sugarAmount: Int = 5
-    @State private var caloriesAmount: Int = 0
+//    private static let formatter: NumberFormatter = {
+//        let formatter = NumberFormatter()
+//        formatter.numberStyle = .decimal
+//        return formatter
+//    }()
+    
+//    struct ChartData: Identifiable, Equatable {
+//        var id: String { return day }
+//        let day: Date
+//        let amount: Int
+//    }
+    
+//    @Binding var currentDate: Date
+    // swiftdata dynamic query
 
+    @Query private var meals: [Meal]
     
-    private static let formatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        return formatter
-    }()
-    
-    struct ChartData: Identifiable, Equatable {
-        var id: String { return type }
+    init() {
+//        self._currentDate = currentDate
+//        // predicate
+//        let calendar = Calendar.current
+//        let startOfDate = calendar.startOfDay(for: currentDate.wrappedValue)
+//        let endOfDate = calendar.date(byAdding: .day, value: 1, to: startOfDate)!
+//        let predicate = #Predicate<Meal> {
+//            return $0.creationDate >= startOfDate && $0.creationDate < endOfDate
+//        }
         
-        let type: String
-        let count: Int
+        // sorting
+        let sortDescriptor = [
+            SortDescriptor(\Meal.creationDate, order: .forward)
+        ]
+        self._meals = Query(sort: sortDescriptor, animation: .snappy)
+    }
+    
+    var data: [(day: Date?, amount: Int?)] {
+        [(day: meals.first?.creationDate, amount: meals.first?.calories),
+         (day: meals.last?.creationDate, amount: meals.last?.calories)
+          ]
+    }
+    
+    func dateFormatter (date: Date) -> String {
+            let dateFormatter = DateFormatter();
+            dateFormatter.dateFormat = "EEEE";
+            let monthString = dateFormatter.string(from: date);
+        return monthString
     }
 
     var body: some View {
-        
-        let data = [ChartData(type:"Protein", count: proteinAmount),
-                        ChartData(type:"Carbs", count: carbsAmount),
-                        ChartData(type:"Fat", count: fatAmount),
-                        ChartData(type:"Sugar", count: sugarAmount)]
-        
         NavigationStack {
-            Form {
-                LabeledContent {
-                    TextField("", value: $caloriesAmount, formatter: Self.formatter)
-                } label: {
-                  Text("Calories")
+            Section {
+                Chart(meals, id: \.id) { dataPoint in
+                    LineMark(x: .value("month", dateFormatter(date: dataPoint.creationDate)), y: .value("amount", dataPoint.calories))
                 }
-                Section {
-                    LabeledContent {
-                        TextField("", value: $proteinAmount, formatter: Self.formatter)
-                            .keyboardType(.numberPad)
-                        Text("grams")
-                    } label: {
-                      Text("Protein")
-                    }
-                 
-                    
-                    LabeledContent {
-                        TextField("", value: $carbsAmount, formatter: Self.formatter)
-                            .keyboardType(.numberPad)
-                        Text("grams")
-                    } label: {
-                      Text("Carbs")
-                    }
-                    
-                    LabeledContent {
-                        TextField("", value: $fatAmount, formatter: Self.formatter)
-                            .keyboardType(.numberPad)
-                        Text("grams")
-                    } label: {
-                      Text("Fat")
-                    }
-                    
-                    LabeledContent {
-                        TextField("", value: $sugarAmount, formatter: Self.formatter)
-                            .keyboardType(.numberPad)
-                        Text("grams")
-                    } label: {
-                      Text("Sugar")
-                    }
             }
-                
-             
-                  }
-                  .navigationTitle("Calories Tracker")
-                  .toolbarBackground(.orange, for: .navigationBar)
-                  .toolbarBackground(.visible, for: .navigationBar)
-              }
-            
+            .padding(20)
+        }
     }
 }
    
 
 struct CaloriesView_Previews: PreviewProvider {
     static var previews: some View {
-        CaloriesView()
+        if #available(iOS 17.0, *) {
+            HomeView()
+        } else {
+            // Fallback on earlier versions
+        }
     }
 }

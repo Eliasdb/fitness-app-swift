@@ -51,7 +51,7 @@ struct MealRowView: View {
 struct MealRowView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
-            .modelContainer(for: [Meal.self, Count.self], inMemory: true)
+            .modelContainer(for: [Meal.self], inMemory: true)
 
     }
 }
