@@ -12,6 +12,7 @@ struct ContentView: View {
     
     @EnvironmentObject var launchScreenManager: LaunchScreenManager
     @State private var selection = 3
+
     
     var body: some View {
         TabView(selection: $selection) {

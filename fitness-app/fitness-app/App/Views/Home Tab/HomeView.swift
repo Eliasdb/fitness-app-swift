@@ -14,8 +14,9 @@ struct HomeView: View {
     @State private var mealFat: Int = 100
     @State private var mealProtein: Int = 55
     @State private var mealCarbs: Int = 55
-    
+  
     @State private var currentDate: Date = .init()
+
     @State private var weekSlider: [[Date.WeekDay]] = []
     @State private var currentWeekIndex: Int = 1
     @State private var createWeek: Bool = false
@@ -202,10 +203,10 @@ struct HomeView: View {
     }
 }
 
-@available(iOS 17.0, *)
-struct HomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeView()
-            .modelContainer(for: [Meal.self], inMemory: true)
-    }
-}
+//@available(iOS 17.0, *)
+//struct HomeView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        HomeView(currentDate: $currentDate)
+//            .modelContainer(for: [Meal.self], inMemory: true)
+//    }
+//}
