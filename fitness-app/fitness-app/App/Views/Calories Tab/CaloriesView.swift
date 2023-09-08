@@ -9,76 +9,60 @@ import SwiftUI
 import Charts
 import _SwiftData_SwiftUI
 import Foundation
+import Collections
 
 
 @available(iOS 17.0, *)
 struct CaloriesView: View {
-//    private static let formatter: NumberFormatter = {
-//        let formatter = NumberFormatter()
-//        formatter.numberStyle = .decimal
-//        return formatter
-//    }()
     
-//    struct ChartData: Identifiable, Equatable {
-//        var id: String { return day }
-//        let day: Date
-//        let amount: Int
-//    }
-    
-//    @Binding var currentDate: Date
-    // swiftdata dynamic query
-
     @Query private var meals: [Meal]
-    
     init() {
-//        self._currentDate = currentDate
-//        // predicate
-//        let calendar = Calendar.current
-//        let startOfDate = calendar.startOfDay(for: currentDate.wrappedValue)
-//        let endOfDate = calendar.date(byAdding: .day, value: 1, to: startOfDate)!
-//        let predicate = #Predicate<Meal> {
-//            return $0.creationDate >= startOfDate && $0.creationDate < endOfDate
-//        }
-        
-        // sorting
+//         sorting
         let sortDescriptor = [
             SortDescriptor(\Meal.creationDate, order: .forward)
         ]
+        
         self._meals = Query(sort: sortDescriptor, animation: .snappy)
     }
     
-    var data: [(day: Date?, amount: Int?)] {
-        [(day: meals.first?.creationDate, amount: meals.first?.calories),
-         (day: meals.last?.creationDate, amount: meals.last?.calories)
-          ]
+    
+    func mealChartData () -> Array<(key: String, value: Int)>  {
+        //formats date of meal
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM"
+        
+        // groups by date in dictionary and pulls out keys and values
+        let groupedMeals = Dictionary(grouping: meals, by: { dateFormatter.string(from: $0.creationDate) })
+        let groupedMealsKeys =  groupedMeals.map { $0.key }
+        let groupedMealsValues =  groupedMeals.map { $0.value.map { $0.calories }.reduce(0, +)}
+        
+        let mealsDictionary = Dictionary(uniqueKeysWithValues: zip(groupedMealsKeys, groupedMealsValues));
+        let sortedMealsDictionary = mealsDictionary.sorted( by: { $0.0 < $1.0 })
+        
+//        let orderedDict =  OrderedDictionary(uniqueKeys: mealsDictionary.keys, values: mealsDictionary.values)
+
+        return sortedMealsDictionary
+        
+        }
+    
+        var body: some View {
+            NavigationStack {
+                Section {
+                    Chart(mealChartData(), id: \.key) { dataPoint in
+                        LineMark(x: .value("month", dataPoint.key), y: .value("amount", dataPoint.value))
+                    }
+                }
+                .padding(20)
+//                .frame(width: 200)
+            }
+        }
     }
     
-    func dateFormatter (date: Date) -> String {
-            let dateFormatter = DateFormatter();
-            dateFormatter.dateFormat = "EEEE";
-            let monthString = dateFormatter.string(from: date);
-        return monthString
-    }
-
-    var body: some View {
-        NavigationStack {
-            Section {
-                Chart(meals, id: \.id) { dataPoint in
-                    LineMark(x: .value("month", dateFormatter(date: dataPoint.creationDate)), y: .value("amount", dataPoint.calories))
-                }
-            }
-            .padding(20)
-        }
-    }
-}
-   
-
+    
+@available(iOS 17.0, *)
 struct CaloriesView_Previews: PreviewProvider {
-    static var previews: some View {
-        if #available(iOS 17.0, *) {
-            HomeView()
-        } else {
-            // Fallback on earlier versions
+        static var previews: some View {
+            CaloriesView()
         }
     }
-}
+

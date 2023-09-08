@@ -47,7 +47,7 @@ struct CaloriesAndMacrosCounterView: View {
     var body: some View {
 //        if (calorieCounter.last?.number) != nil {
 //             let numberArray = calorieCounter.map { $0.number }
-//            Text("\(String(describing: numberArray.reduce(0, +)))/3000 calories")
+//          
 //
 //        }
         
