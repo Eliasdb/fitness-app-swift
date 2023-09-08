@@ -174,7 +174,7 @@ struct HomeView: View {
                     .preference(key: OffsetKey.self, value: minX)
                     .onPreferenceChange(OffsetKey.self) { value in
                         // when offset reaches 15 and if createweek is toggled then generate next set of week
-                        if value.rounded() == 14 && createWeek {
+                        if value.rounded() == 15 && createWeek {
                             print("Generate")
                             paginateWeek()
                             createWeek = false
