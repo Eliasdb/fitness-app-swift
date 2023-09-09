@@ -11,9 +11,9 @@ import SwiftUI
 struct HomeView: View {
     
     @State private var mealCalories: Double = 0
-    @State private var mealFat: Int = 100
-    @State private var mealProtein: Int = 55
-    @State private var mealCarbs: Int = 55
+    @State private var mealFat: Int = 0
+    @State private var mealProtein: Int = 0
+    @State private var mealCarbs: Int = 0
   
     @State private var currentDate: Date = .init()
 

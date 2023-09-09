@@ -66,7 +66,9 @@ struct CaloriesAndMacrosCounterView: View {
                   GeometryReader { geometry in
                       let frame = geometry[chartProxy.plotFrame!]
                     VStack {
-                        Text("\(String(describing: 3000 - meals.map {$0.calories}.reduce(0, +))) kcal")
+                        Text("\(String(describing: max(3000 - meals.map {$0.calories}.reduce(0, +), 0))) kcal")
+
+//                        Text("\(String(describing: " kcal")
                             .foregroundColor(.white)
                         .font(.callout
                             .bold())

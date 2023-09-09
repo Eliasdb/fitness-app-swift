@@ -73,6 +73,7 @@ struct AddMealView: View {
                            .foregroundStyle(.gray)
                        HStack(alignment: .center, content: {
                            Picker("protein", selection: $mealProtein){
+                             
                                ForEach(1..<150) { i in
                                    Text("\(i) grams protein")
                                        .font(.caption)
@@ -80,9 +81,14 @@ struct AddMealView: View {
                                }
                            }
                            .pickerStyle(.wheel)
-                           .frame(width: geometry.size.width / 2, height: 40)
+                           .frame(width: 170, height: 40)
                            .clipped()
-                           
+                           Image(systemName: "arrowtriangle.left.fill.and.line.vertical.and.arrowtriangle.right.fill")
+                               .resizable()
+                               .rotationEffect(.degrees(-90))
+                               .frame(width: 10, height:10)
+                               .position(x: -28, y: 19)
+                              
                            Picker("carbs", selection: $mealCarbs){
                                ForEach(1..<150) { i in
                                    Text("\(i) grams carbs")
@@ -91,12 +97,19 @@ struct AddMealView: View {
                                }
                            }
                            .pickerStyle(.wheel)
-                           .frame(width: geometry.size.width / 2, height:40)
+                           .frame(width: 170, height:40)
                            .clipped()
+                           Image(systemName: "arrowtriangle.left.fill.and.line.vertical.and.arrowtriangle.right.fill")
+                               .resizable()
+                               .rotationEffect(.degrees(-90))
+                               .frame(width: 10, height:10)
+                               .position(x: -28, y: 20)
                        })
                        .frame(height:40)
+                       .cornerRadius(30)
                        
                        HStack(alignment: .center, content: {
+                           
                            Picker("fat", selection: $mealFat){
                                ForEach(1..<150) { i in
                                    Text("\(i) grams fat")
@@ -107,8 +120,13 @@ struct AddMealView: View {
                            .pickerStyle(.wheel)
 //                                   .padding(.top, 5)
 
-                           .frame(width: geometry.size.width / 2, height: 40)
+                           .frame(width: 170, height: 40)
                            .clipped()
+                           Image(systemName: "arrowtriangle.left.fill.and.line.vertical.and.arrowtriangle.right.fill")
+                               .resizable()
+                               .rotationEffect(.degrees(-90))
+                               .frame(width: 10, height:10)
+                               .position(x: -28, y: 20)
                        })
                        .frame(height:40)
                    })
@@ -173,13 +191,14 @@ struct AddMealView: View {
                 do {
                     context.insert(meal)
                     try context.save()
+                    mealCalories = 0
                     dismiss()
                 } catch {
                     print(error.localizedDescription)
                 }
             
             }, label: {
-                Text("Create Entry")
+                Text("Add Meal")
                     .font(.title3)
                     .fontWeight(.semibold)
 //                    .textScale(.secondary)
