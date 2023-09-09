@@ -44,6 +44,8 @@ struct CaloriesPastWeekView: View {
         
         // groups by date in dictionary and pulls out keys and values
         let groupedMeals = Dictionary(grouping: mealsPastWeek, by: { dateFormatter.string(from: $0.creationDate) })
+        print(groupedMeals)
+
         let groupedMealsKeys =  groupedMeals.map { $0.key }
         let groupedMealsValues =  groupedMeals.map { $0.value.map { $0.calories }.reduce(0, +)}
         
@@ -51,14 +53,15 @@ struct CaloriesPastWeekView: View {
         let sortedMealsDictionary = mealsDictionary.sorted( by: { $0.0 < $1.0 })
         
 //        let orderedDict =  OrderedDictionary(uniqueKeys: mealsDictionary.keys, values: mealsDictionary.values)
-print(sortedMealsDictionary)
+//print(sortedMealsDictionary)
         return sortedMealsDictionary
         }
     
-    func getAverage () -> Int {
+    func getAverage (meals: [Meal]) -> Int {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MM"
-        let groupedMeals = Dictionary(grouping: mealsPastWeek, by: { dateFormatter.string(from: $0.creationDate) })
+        
+        let groupedMeals = Dictionary(grouping: meals, by: { dateFormatter.string(from: $0.creationDate) })
         let groupedMealsValues =  groupedMeals.map { $0.value.map { $0.calories }.reduce(0, +)}
         
         let average = groupedMealsValues.reduce(0, +) / groupedMealsValues.count
@@ -70,7 +73,7 @@ print(sortedMealsDictionary)
     var body: some View {
         VStack(alignment: .leading, spacing: 4, content: {
             Text("Weekly average")
-            Text("\(mealChartData().map { $0.value}.reduce(0, +) / mealChartData().map { $0.value}.count) kcal")
+            Text("\(getAverage(meals: mealsPastWeek)) kcal")
                 .fontWeight(.semibold)
                 .font(.footnote)
                 .foregroundStyle(.secondary)
@@ -89,6 +92,7 @@ print(sortedMealsDictionary)
                     .foregroundStyle(Color.accentColor.gradient)}
             }
             .frame(height: 180)
+           
 //            .chartXAxis {
 //                AxisMarks(values: mealChartData().map { $0.value}) { value in
 //                    //                            AxisGridLine()
@@ -99,7 +103,8 @@ print(sortedMealsDictionary)
             .chartYAxis {
                 AxisMarks(position: .leading)
             }
-        })
+        }) 
+
     }
 }
 

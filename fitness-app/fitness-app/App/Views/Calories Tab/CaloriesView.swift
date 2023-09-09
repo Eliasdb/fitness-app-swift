@@ -35,12 +35,15 @@ struct CaloriesView: View {
                         CaloriesPastWeekView()
                     }
                 }
+                .navigationTitle("Calories")
+                
+                .toolbarBackground(.yellow, for: .navigationBar)
+                .toolbarBackground(.visible, for: .navigationBar)
+                .navigationBarTitleDisplayMode(.inline)
+
                        
             }
-            .navigationTitle("Calories")
-            
-            .toolbarBackground(.yellow, for: .navigationBar)
-            .toolbarBackground(.visible, for: .navigationBar)
+
      
         }
     }

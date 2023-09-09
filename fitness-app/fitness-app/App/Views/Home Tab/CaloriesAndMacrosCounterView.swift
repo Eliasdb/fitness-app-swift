@@ -51,7 +51,7 @@ struct CaloriesAndMacrosCounterView: View {
 //
 //        }
         
-        if (meals.isEmpty != true) {
+       
 //            let numArray = meals.map {$0.protein}
             HStack{
                 Chart(donutData, id: \.type) { dataItem in
@@ -96,7 +96,7 @@ struct CaloriesAndMacrosCounterView: View {
                 .aspectRatio(1, contentMode: .fit)
                 .padding()
             }
-        }
+        
     }
 }
 

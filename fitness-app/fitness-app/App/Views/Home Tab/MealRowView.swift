@@ -10,6 +10,7 @@ import SwiftUI
 @available(iOS 17.0, *)
 struct MealRowView: View {
     @Environment(\.modelContext) private var context
+    @State private var mealToEdit: Meal?
     @Bindable var meal: Meal
 
     var body: some View {
@@ -39,8 +40,16 @@ struct MealRowView: View {
                     context.delete(meal)
                     try? context.save()
                 }
+                Button("Update meal") {
+                  mealToEdit = meal
+                }
             }
             .offset(y: -8)
+        }
+        .sheet(item: $mealToEdit) {
+            mealToEdit = nil
+        } content: { meal in 
+            UpdateMealView(meal: meal)
         }
     }
 }

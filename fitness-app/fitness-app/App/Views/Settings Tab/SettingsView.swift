@@ -20,7 +20,7 @@ struct SettingsView: View {
         NavigationStack {
             List {
                 Section {
-//                    TextField("Protein", value: $proteinAmount, formatter: Self.formatter)
+//
                 } header : {
                     Text("Goals")
                 }
