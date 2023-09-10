@@ -44,7 +44,6 @@ struct CaloriesPastWeekView: View {
         
         // groups by date in dictionary and pulls out keys and values
         let groupedMeals = Dictionary(grouping: mealsPastWeek, by: { dateFormatter.string(from: $0.creationDate) })
-        print(groupedMeals)
 
         let groupedMealsKeys =  groupedMeals.map { $0.key }
         let groupedMealsValues =  groupedMeals.map { $0.value.map { Int($0.calories) }.reduce(0, +)}
@@ -53,7 +52,7 @@ struct CaloriesPastWeekView: View {
         let sortedMealsDictionary = mealsDictionary.sorted( by: { $0.0 < $1.0 })
         
 //        let orderedDict =  OrderedDictionary(uniqueKeys: mealsDictionary.keys, values: mealsDictionary.values)
-//print(sortedMealsDictionary)
+
         return sortedMealsDictionary
         }
     

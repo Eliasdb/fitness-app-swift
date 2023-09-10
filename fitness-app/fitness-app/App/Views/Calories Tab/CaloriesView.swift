@@ -36,15 +36,10 @@ struct CaloriesView: View {
                     }
                 }
                 .navigationTitle("Calories")
-                
                 .toolbarBackground(.yellow, for: .navigationBar)
                 .toolbarBackground(.visible, for: .navigationBar)
                 .navigationBarTitleDisplayMode(.inline)
-
-                       
             }
-
-     
         }
     }
     

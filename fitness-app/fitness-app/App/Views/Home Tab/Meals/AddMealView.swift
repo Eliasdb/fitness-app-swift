@@ -1,41 +1,26 @@
 //
-//  UpdateMealView.swift
+//  NewMealView.swift
 //  Dawn
 //
-//  Created by Elias on 09/09/2023.
+//  Created by Elias on 26/07/2023.
 //
+
 
 import SwiftUI
 
 @available(iOS 17.0, *)
-struct UpdateMealView: View {
-    
-    @Environment(\.dismiss) var dismiss
-    @Bindable var meal: Meal
-    @State private var calendarId: Int = 0
+struct AddMealView: View {
+    @Environment(\.dismiss) private var dismiss
+    // model context to save data
+    @Environment(\.modelContext) private var context
 
-    
-    private static let formatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        return formatter
-    }()
-    
-    struct IntDoubleBinding {
-        let intValue : Binding<Int>
-        
-        let doubleValue : Binding<Double>
-        
-        init(_ intValue : Binding<Int>) {
-            self.intValue = intValue
-            
-            self.doubleValue = Binding<Double>(get: {
-                return Double(intValue.wrappedValue)
-            }, set: {
-                intValue.wrappedValue = Int($0)
-            })
-        }
-    }
+    @State private var mealTitle: String = ""
+    @State private var mealDate: Date = .init()
+    @State private var mealColor: String = "Color 1"
+    @Binding var mealCalories: Double
+    @Binding var mealCarbs: Int
+    @Binding var mealFat: Int
+    @Binding var mealProtein: Int
     
     var body: some View {
         
@@ -54,7 +39,7 @@ struct UpdateMealView: View {
                     .font(.caption)
                     .foregroundStyle(.gray)
                 
-                TextField("Chicken!", text: $meal.title)
+                TextField("Chicken!", text: $mealTitle)
                     .padding(.vertical, 12)
                     .padding(.horizontal, 15)
                     .background(.white.shadow(.drop(color: .black.opacity(0.25), radius: 2)), in: .rect(cornerRadius: 10))
@@ -66,10 +51,8 @@ struct UpdateMealView: View {
                     .foregroundStyle(.gray)
                 
                 VStack {
-                    Text("\(Int(meal.calories))")
-//                          Slider(value: $meal.calories), in: 0...2000)
-                    Slider(value: IntDoubleBinding($meal.calories).doubleValue, in: 0...2000, step: 1.0)
-
+                    Text("\(Int(mealCalories))")
+                          Slider(value: $mealCalories, in: 0...2000)
                       }
             })
             
@@ -83,7 +66,7 @@ struct UpdateMealView: View {
                            .font(.caption)
                            .foregroundStyle(.gray)
                        HStack(alignment: .center, content: {
-                           Picker("protein", selection: $meal.protein){
+                           Picker("protein", selection: $mealProtein){
                              
                                ForEach(1..<150) { i in
                                    Text("\(i) grams protein")
@@ -100,7 +83,7 @@ struct UpdateMealView: View {
                                .frame(width: 10, height:10)
                                .position(x: -28, y: 19)
                               
-                           Picker("carbs", selection: $meal.carbs){
+                           Picker("carbs", selection: $mealCarbs){
                                ForEach(1..<150) { i in
                                    Text("\(i) grams carbs")
                                        .font(.caption)
@@ -121,7 +104,7 @@ struct UpdateMealView: View {
                        
                        HStack(alignment: .center, content: {
                            
-                           Picker("fat", selection: $meal.fat){
+                           Picker("fat", selection: $mealFat){
                                ForEach(1..<150) { i in
                                    Text("\(i) grams fat")
                                        .font(.caption)
@@ -151,14 +134,9 @@ struct UpdateMealView: View {
                         .font(.caption)
                         .foregroundStyle(.gray)
                     
-                    DatePicker("", selection: $meal.creationDate)
+                   DatePicker("", selection: $mealDate)
                         .datePickerStyle(.compact)
                         .scaleEffect(0.9, anchor: .leading)
-                        .id(calendarId)
-                        .onChange(of: meal.creationDate, perform: { _ in
-                          calendarId += 1
-                        })
-                   
                 })
                 .padding(.trailing, -15)
                 
@@ -180,7 +158,7 @@ struct UpdateMealView: View {
                                 .background(content: {
                                     Circle()
                                         .stroke(lineWidth: 2)
-                                        .opacity(meal.tint == colour ? 1 : 0)
+                                        .opacity(mealColor == colour ? 1 : 0)
                                 })
                                 .hSpacing(.center)
                                 .padding(.top, 5)
@@ -188,7 +166,7 @@ struct UpdateMealView: View {
                                 .contentShape(.rect)
                                 .onTapGesture {
                                     withAnimation(.snappy) {
-                                        meal.tint = colour
+                                        mealColor = colour
                                     }
                                 }
                         }
@@ -200,40 +178,37 @@ struct UpdateMealView: View {
             Spacer(minLength: 0)
             
             Button(action: {
-            // updating meal
-                dismiss()
+            // saving meal
+                let meal = Meal(title: mealTitle, calories: Int(mealCalories), carbs: mealCarbs, fat: mealFat, protein: mealProtein, creationDate: mealDate, tint: mealColor)
+                do {
+                    context.insert(meal)
+                    try context.save()
+                    mealCalories = 0
+                    dismiss()
+                } catch {
+                    print(error.localizedDescription)
+                }
             
             }, label: {
-                Text("Update Meal")
+                Text("Add Meal")
                     .font(.title3)
                     .fontWeight(.semibold)
 //                    .textScale(.secondary)
                     .foregroundStyle(.black)
                     .hSpacing(.center)
                     .padding(.vertical, 12)
-                    .background(Color(meal.tint), in: .rect(cornerRadius: 10))
+                    .background(Color(mealColor), in: .rect(cornerRadius: 10))
             })
-            .disabled(meal.title == "")
-            .opacity(meal.title == "" ? 0.5 : 1)
+            .disabled(mealTitle == "")
+            .opacity(mealTitle == "" ? 0.5 : 1)
         })
         .padding(15)
     }
-
-//    var body: some View {
-//        List {
-//            TextField("Meal", text: $meal.title)
-//            TextField("Calories", value: $meal.calories, formatter: Self.formatter)
-//            TextField("Protein", value: $meal.protein, formatter: Self.formatter)
-//            TextField("Carbs", value: $meal.carbs, formatter: Self.formatter)
-//            TextField("Fat", value: $meal.fat, formatter: Self.formatter)
-//            Button("Update meal") {
-//                dismiss()
-//            }
-//
-//        }
-//    }
 }
-//
-//#Preview {
-//    UpdateMealView()
-//}
+
+@available(iOS 17.0, *)
+#Preview {
+    HomeView()
+        .modelContainer(for: [Meal.self], inMemory: true)
+
+}

@@ -21,6 +21,8 @@ struct HomeView: View {
     @State private var currentWeekIndex: Int = 1
     @State private var createWeek: Bool = false
     @State private var createNewMeal: Bool = false
+    @State private var createNewExercise: Bool = false
+
     
     @Namespace var animation
     
@@ -41,16 +43,31 @@ struct HomeView: View {
         })
         .vSpacing(.top)
         .overlay(alignment: .bottomTrailing, content: {
-            Button(action: {
-                createNewMeal.toggle()
-            }, label: {
-                Image(systemName: "plus")
-                    .fontWeight(.semibold)
-                    .foregroundStyle(.white)
-                    .frame(width: 55, height: 55)
-                    .background(.blue.shadow(.drop(color: .black.opacity(0.25), radius: 5, x: 10, y: 10 )), in: .circle)
-            })
-            .padding(15)
+            VStack {
+                Button(action: {
+                    createNewMeal.toggle()
+                }, label: {
+                    Image(systemName: "plus")
+                        .fontWeight(.semibold)
+                        .foregroundStyle(.white)
+                        .frame(width: 55, height: 55)
+                        .background(.blue.shadow(.drop(color: .black.opacity(0.25), radius: 5, x: 10, y: 10 )), in: .circle)
+                })
+//                .padding(15)
+                .padding(.bottom, 5)
+                Button(action: {
+                    createNewExercise.toggle()
+                }, label: {
+                    Image(systemName: "plus")
+                        .fontWeight(.semibold)
+                        .foregroundStyle(.white)
+                        .frame(width: 55, height: 55)
+                        .background(.green.shadow(.drop(color: .black.opacity(0.25), radius: 5, x: 10, y: 10 )), in: .circle)
+                })
+                .padding(15)
+                
+            }
+         
         })
         .background(.gray)
         .onAppear(perform: {
@@ -74,6 +91,13 @@ struct HomeView: View {
                 .interactiveDismissDisabled()
                 .presentationCornerRadius(30)
                 .presentationBackground(.white)
+        })
+        .sheet(isPresented: $createNewExercise, content: {
+            AddExerciseView(mealCalories: $mealCalories,  mealCarbs: $mealCarbs, mealFat: $mealFat, mealProtein: $mealProtein)
+                .presentationDetents([.height(520)])
+                .interactiveDismissDisabled()
+                .presentationCornerRadius(30)
+                .presentationBackground(.gray)
         })
     }
        
