@@ -13,6 +13,7 @@ struct MealRowView: View {
     @State private var mealToEdit: Meal?
     @Bindable var meal: Meal
 
+
     var body: some View {
         HStack(alignment: .top, spacing: 15) {
             Circle()
@@ -50,6 +51,10 @@ struct MealRowView: View {
             mealToEdit = nil
         } content: { meal in 
             UpdateMealView(meal: meal)
+                .presentationDetents([.height(520)])
+                .interactiveDismissDisabled()
+                .presentationCornerRadius(30)
+                .presentationBackground(.white)
         }
     }
 }

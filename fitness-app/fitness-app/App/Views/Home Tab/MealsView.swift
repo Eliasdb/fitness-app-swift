@@ -14,6 +14,7 @@ struct MealsView: View {
     // swiftdata dynamic query
     @Query private var meals: [Meal]    
     @Binding var currentDate: Date
+
     init(currentDate: Binding<Date>) {
         self._currentDate = currentDate
         // predicate

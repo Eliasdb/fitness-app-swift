@@ -14,7 +14,7 @@ struct HomeView: View {
     @State private var mealFat: Int = 0
     @State private var mealProtein: Int = 0
     @State private var mealCarbs: Int = 0
-  
+    @State private var mealColor: String = "Color 1"
     @State private var currentDate: Date = .init()
 
     @State private var weekSlider: [[Date.WeekDay]] = []
@@ -70,7 +70,7 @@ struct HomeView: View {
         })
         .sheet(isPresented: $createNewMeal, content: {
             AddMealView(mealCalories: $mealCalories,  mealCarbs: $mealCarbs, mealFat: $mealFat, mealProtein: $mealProtein)
-                .presentationDetents([.height(600)])
+                .presentationDetents([.height(520)])
                 .interactiveDismissDisabled()
                 .presentationCornerRadius(30)
                 .presentationBackground(.white)
