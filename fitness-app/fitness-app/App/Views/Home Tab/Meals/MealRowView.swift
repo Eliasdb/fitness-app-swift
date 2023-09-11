@@ -12,21 +12,21 @@ struct MealRowView: View {
     @Environment(\.modelContext) private var context
     @State private var mealToEdit: Meal?
     @Bindable var meal: Meal
-
-
+    
+    
     var body: some View {
         HStack(alignment: .top, spacing: 15) {
-          
+            
             VStack(alignment: .leading, spacing: 8, content: {
                 Text(meal.title)
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .fontWeight(.bold)
                     .foregroundStyle(.black)
                 Label("\(meal.calories) kcal", systemImage: "fork.knife.circle")
                     .font(.subheadline)
                     .foregroundStyle(.black)
                 
             })
-//            .rotationEffect(.degrees(-360))
+            //            .rotationEffect(.degrees(-360))
             .padding(15)
             .hSpacing(.leading)
             .background(meal.tintColor, in: .rect(bottomTrailingRadius: 15,topTrailingRadius: 15 ))
@@ -37,39 +37,30 @@ struct MealRowView: View {
                     try? context.save()
                 }
                 Button("Update meal") {
-                  mealToEdit = meal
+                    mealToEdit = meal
                 }
             }
             .offset(y: -8)
+            .offset(x:-15)
+            .sheet(item: $mealToEdit) {
+                mealToEdit = nil
+            } content: { meal in
+                UpdateMealView(meal: meal)
+                    .presentationDetents([.height(520)])
+                    .interactiveDismissDisabled()
+                    .presentationCornerRadius(30)
+                    .presentationBackground(.white)
+            }
+        }
+    }
+    
+    @available(iOS 17.0, *)
+    struct MealRowView_Previews: PreviewProvider {
+        static var previews: some View {
+            HomeView()
+                .modelContainer(for: [Meal.self], inMemory: true)
             
-//            Circle()
-//            .fill(.black)
-//            .frame(width: 10, height: 10)
-//            .padding(5)
-//            .background(.white.shadow(.drop(color: .black.opacity(0.1), radius: 3)), in: .circle)
-//            .offset(y: 16)
-//            .offset(x: -15)
-        }
-//        .rotationEffect(.degrees(-180))
-
-        .offset(x:-15)
-        .sheet(item: $mealToEdit) {
-            mealToEdit = nil
-        } content: { meal in 
-            UpdateMealView(meal: meal)
-                .presentationDetents([.height(520)])
-                .interactiveDismissDisabled()
-                .presentationCornerRadius(30)
-                .presentationBackground(.white)
         }
     }
-}
-
-@available(iOS 17.0, *)
-struct MealRowView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeView()
-            .modelContainer(for: [Meal.self], inMemory: true)
-
-    }
+    
 }

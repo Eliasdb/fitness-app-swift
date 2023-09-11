@@ -44,11 +44,20 @@ struct ExerciseRowView: View {
                     context.delete(exercise)
                     try? context.save()
                 }
-                Button("Update meal") {
+                Button("Update exercise") {
                   exerciseToEdit = exercise
                 }
             }
             .offset(y: -8)
+            .sheet(item: $exerciseToEdit) {
+                exerciseToEdit = nil
+            } content: { meal in
+                UpdateExerciseView(exercise: exercise)
+                    .presentationDetents([.height(520)])
+                    .interactiveDismissDisabled()
+                    .presentationCornerRadius(30)
+                    .presentationBackground(.gray)
+            }
         }
        
 //    
