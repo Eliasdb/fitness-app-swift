@@ -29,17 +29,27 @@ struct HomeView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0, content: {
             HeaderView()
-            ScrollView(.vertical) {
-                VStack {
-// Daily calories counter and macro bar charts
-                    CaloriesAndMacrosCounterView(currentDate: $currentDate)
-// Meal view
-                    MealsView(currentDate: $currentDate)
+            CaloriesAndMacrosCounterView(currentDate: $currentDate)
+            HStack {
+                ScrollView(.vertical) {
+                    VStack {
+                        MealsView(currentDate: $currentDate)
+                      
+                    }
+                    .hSpacing(.center)
+                    .vSpacing(.center)
                 }
-                .hSpacing(.center)
-                .vSpacing(.center)
+                .scrollIndicators(.hidden)
+                ScrollView(.vertical) {
+                    VStack {
+                        AllExercisesView(currentDate: $currentDate)
+                      
+                    }
+                    .hSpacing(.center)
+                    .vSpacing(.center)
+                }
+                .scrollIndicators(.hidden)
             }
-            .scrollIndicators(.hidden)
         })
         .vSpacing(.top)
         .overlay(alignment: .bottomTrailing, content: {
@@ -93,7 +103,8 @@ struct HomeView: View {
                 .presentationBackground(.white)
         })
         .sheet(isPresented: $createNewExercise, content: {
-            AddExerciseView(mealCalories: $mealCalories,  mealCarbs: $mealCarbs, mealFat: $mealFat, mealProtein: $mealProtein)
+            AddExerciseView(
+            )
                 .presentationDetents([.height(520)])
                 .interactiveDismissDisabled()
                 .presentationCornerRadius(30)

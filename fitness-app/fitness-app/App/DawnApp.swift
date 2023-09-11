@@ -25,6 +25,6 @@ struct fitness_appApp: App {
             .environmentObject(launchScreenManager)
           
         }
-        .modelContainer(for: [Meal.self])
+        .modelContainer(for: [Meal.self, Exercise.self])
     }
 }

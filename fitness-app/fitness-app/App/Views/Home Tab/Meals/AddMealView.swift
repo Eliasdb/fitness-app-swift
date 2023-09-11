@@ -51,7 +51,7 @@ struct AddMealView: View {
                     .foregroundStyle(.gray)
                 
                 VStack {
-                    Text("\(Int(mealCalories))")
+                    Text("\(Int(mealCalories)) kcal")
                           Slider(value: $mealCalories, in: 0...2000)
                       }
             })

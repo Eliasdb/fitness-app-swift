@@ -9,10 +9,10 @@ import SwiftUI
 import SwiftData
 
 @available(iOS 17.0, *)
-struct MealsView: View {
+struct AllExercisesView: View {
 
     // swiftdata dynamic query
-    @Query private var meals: [Meal]    
+    @Query private var exercises: [Exercise]
     @Binding var currentDate: Date
 
     init(currentDate: Binding<Date>) {
@@ -21,14 +21,14 @@ struct MealsView: View {
         let calendar = Calendar.current
         let startOfDate = calendar.startOfDay(for: currentDate.wrappedValue)
         let endOfDate = calendar.date(byAdding: .day, value: 1, to: startOfDate)!
-        let predicate = #Predicate<Meal> {
+        let predicate = #Predicate<Exercise> {
             return $0.creationDate >= startOfDate && $0.creationDate < endOfDate
         }
         // sorting
         let sortDescriptor = [
-            SortDescriptor(\Meal.creationDate, order: .reverse)
+            SortDescriptor(\Exercise.creationDate, order: .reverse)
         ]
-        self._meals = Query(filter: predicate, sort: sortDescriptor, animation: .snappy)
+        self._exercises = Query(filter: predicate, sort: sortDescriptor, animation: .snappy)
     }
     
     var x = [1,2,3,4]
@@ -36,15 +36,15 @@ struct MealsView: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 35) {
-                ForEach(meals) { meal in
-                    MealRowView(meal: meal)
+                ForEach(exercises) { exercise in
+                    ExerciseRowView(exercise: exercise)
                 }
             }
             .padding([.vertical, .leading], 15)
             .padding(.top, 15)
             .overlay {
-                if meals.isEmpty {
-                    Text("No meals found...")
+                if exercises.isEmpty {
+                    Text("No exercises found...")
                         .font(.caption)
                         .foregroundStyle(.white)
                         .frame(width: 150)

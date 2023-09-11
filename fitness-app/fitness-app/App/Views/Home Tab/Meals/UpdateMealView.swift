@@ -163,10 +163,10 @@ struct UpdateMealView: View {
                     DatePicker("", selection: $meal.creationDate)
                         .datePickerStyle(.compact)
                         .scaleEffect(0.9, anchor: .leading)
-                        .id(calendarId)
-                        .onChange(of: meal.creationDate, perform: { _ in
-                          calendarId += 1
-                        })
+//                        .id(calendarId)
+//                        .onChange(of: meal.creationDate, perform: { _ in
+//                          calendarId += 1
+//                        })
                    
                 })
                 .padding(.trailing, -15)

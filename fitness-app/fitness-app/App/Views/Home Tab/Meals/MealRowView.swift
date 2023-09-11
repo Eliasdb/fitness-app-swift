@@ -16,12 +16,6 @@ struct MealRowView: View {
 
     var body: some View {
         HStack(alignment: .top, spacing: 15) {
-            Circle()
-                .fill(.black)
-                .frame(width: 10, height: 10)
-                .padding(5)
-                .background(.white.shadow(.drop(color: .black.opacity(0.1), radius: 3)), in: .circle)
-                .offset(y: 25)
           
             VStack(alignment: .leading, spacing: 8, content: {
                 Text(meal.title)
@@ -32,9 +26,10 @@ struct MealRowView: View {
                     .foregroundStyle(.black)
                 
             })
+//            .rotationEffect(.degrees(-360))
             .padding(15)
             .hSpacing(.leading)
-            .background(meal.tintColor, in: .rect(topLeadingRadius: 15, bottomLeadingRadius: 15))
+            .background(meal.tintColor, in: .rect(bottomTrailingRadius: 15,topTrailingRadius: 15 ))
             .contentShape(.contextMenuPreview,.rect(cornerRadius: 15) )
             .contextMenu {
                 Button("Delete meal", role: .destructive) {
@@ -46,7 +41,18 @@ struct MealRowView: View {
                 }
             }
             .offset(y: -8)
+            
+//            Circle()
+//            .fill(.black)
+//            .frame(width: 10, height: 10)
+//            .padding(5)
+//            .background(.white.shadow(.drop(color: .black.opacity(0.1), radius: 3)), in: .circle)
+//            .offset(y: 16)
+//            .offset(x: -15)
         }
+//        .rotationEffect(.degrees(-180))
+
+        .offset(x:-15)
         .sheet(item: $mealToEdit) {
             mealToEdit = nil
         } content: { meal in 
