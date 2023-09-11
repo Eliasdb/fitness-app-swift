@@ -7,12 +7,13 @@
 
 import SwiftUI
 
+@available(iOS 17.0, *)
 struct ExercisesView: View {
     var body: some View {
         NavigationStack {
             Form {
                 Section {
-                    Text("Test")
+                    ExercisesPastWeekView()
                 }
             }
             .navigationTitle("Exercises")
@@ -22,6 +23,7 @@ struct ExercisesView: View {
     }
 }
 
+@available(iOS 17.0, *)
 struct ExercisesView_Previews: PreviewProvider {
     static var previews: some View {
         ExercisesView()

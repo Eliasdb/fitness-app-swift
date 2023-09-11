@@ -15,6 +15,8 @@ struct UpdateExerciseView: View {
     @Environment(\.modelContext) private var context
     
     @Bindable var exercise: Exercise
+    @State private var creationDate: Date = .init()
+
 
     
 //    @State private var exerciseDate: Date = .init()
@@ -202,7 +204,7 @@ struct UpdateExerciseView: View {
                         .font(.caption)
                         .foregroundStyle(.white)
                     
-                   DatePicker("", selection: $exercise.creationDate)
+                   DatePicker("", selection: $creationDate)
                         .datePickerStyle(.compact)
                         .scaleEffect(0.9, anchor: .leading)
                         .offset(x:-115)
@@ -214,6 +216,7 @@ struct UpdateExerciseView: View {
             Button(action: {
             // saving meal
                 dismiss()
+                exercise.creationDate = creationDate
             
             }, label: {
                 Text("Add Exercise")

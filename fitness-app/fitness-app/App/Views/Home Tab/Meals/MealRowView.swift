@@ -26,7 +26,6 @@ struct MealRowView: View {
                     .foregroundStyle(.black)
                 
             })
-            //            .rotationEffect(.degrees(-360))
             .padding(15)
             .hSpacing(.leading)
             .background(meal.tintColor, in: .rect(bottomTrailingRadius: 15,topTrailingRadius: 15 ))

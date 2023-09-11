@@ -15,7 +15,6 @@ struct CaloriesPastWeekView: View {
     @State private var today: Date = .init()
 
     init() {
-        
         self.today = today
         // predicate
         let calendar = Calendar.current
@@ -33,10 +32,6 @@ struct CaloriesPastWeekView: View {
         self._mealsPastWeek = Query(filter: predicate, sort: sortDescriptor, animation: .snappy)
     }
     
-    
-    
-  
-    
     func mealChartData () -> Array<(key: String, value: Int)>  {
         //formats date of meal
         let dateFormatter = DateFormatter()
@@ -49,25 +44,18 @@ struct CaloriesPastWeekView: View {
         let groupedMealsValues =  groupedMeals.map { $0.value.map { Int($0.calories) }.reduce(0, +)}
         
         let mealsDictionary = Dictionary(uniqueKeysWithValues: zip(groupedMealsKeys, groupedMealsValues));
+        print(mealsDictionary)
         let sortedMealsDictionary = mealsDictionary.sorted( by: { $0.0 < $1.0 })
         
-//        let orderedDict =  OrderedDictionary(uniqueKeys: mealsDictionary.keys, values: mealsDictionary.values)
-
         return sortedMealsDictionary
         }
     
     func getAverage (meals: [Meal]) -> Int {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MM"
-//        let average: Int = 0
         
         let groupedMeals = Dictionary(grouping: meals, by: { dateFormatter.string(from: $0.creationDate) })
         let groupedMealsValues =  groupedMeals.map { $0.value.map { Int($0.calories) }.reduce(0, +)}
-        
-//        if (!groupedMealsValues.isEmpty) {
-//           
-//          
-//        }
         
         let average = ((groupedMealsValues.reduce(0, +) / (groupedMealsValues.count)) )
         return average

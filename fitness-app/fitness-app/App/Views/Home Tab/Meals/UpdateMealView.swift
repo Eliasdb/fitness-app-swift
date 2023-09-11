@@ -13,7 +13,9 @@ struct UpdateMealView: View {
     @Environment(\.dismiss) var dismiss
     @Bindable var meal: Meal
     @State private var calendarId: Int = 0
-    @State private var selection: Double = 0
+    @State private var calories: Double = 0
+    @State private var creationDate: Date = .init()
+
 
 
     
@@ -75,9 +77,9 @@ struct UpdateMealView: View {
 //                      }
                 
                 VStack {
-                    Text("\(Int(selection)) kcal")
+                    Text("\(Int(calories)) kcal")
 //                          Slider(value: $meal.calories), in: 0...2000)
-                    Slider(value: $selection, in: 0...2000)
+                    Slider(value: $calories, in: 0...2000)
 
                       }
             })
@@ -159,12 +161,12 @@ struct UpdateMealView: View {
                     Text("Meal Date")
                         .font(.caption)
                         .foregroundStyle(.gray)
-                    
-                    DatePicker("", selection: $meal.creationDate)
+
+                    DatePicker("Meal Date", selection: $creationDate).environment(\.locale, .current)
                         .datePickerStyle(.compact)
                         .scaleEffect(0.9, anchor: .leading)
 //                        .id(calendarId)
-//                        .onChange(of: meal.creationDate, perform: { _ in
+//                        .onChange(of: creationDate, perform: { _ in
 //                          calendarId += 1
 //                        })
                    
@@ -210,7 +212,8 @@ struct UpdateMealView: View {
             
             Button(action: {
             // updating meal
-                meal.calories = Int(selection)
+                meal.calories = Int(calories)
+                meal.creationDate = creationDate
                 dismiss()
             
             }, label: {
