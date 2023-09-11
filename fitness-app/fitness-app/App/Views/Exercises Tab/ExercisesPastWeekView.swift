@@ -92,7 +92,7 @@ struct ExercisesPastWeekView: View {
 //                            .foregroundStyle(.secondary)
 //                    }
                 ForEach(exerciseChartData(), id: \.value) { item in
-                    BarMark(x: .value("amount", item.value), y: .value("month", item.key))
+                    LineMark(x: .value("amount", item.key), y: .value("month", item.value))
                     .foregroundStyle(Color.accentColor.gradient)}
             }
             .frame(height: 180)
@@ -108,7 +108,7 @@ struct ExercisesPastWeekView: View {
                 AxisMarks(position: .leading)
             }
             
-            Picker("Please choose an exercise", selection: $exercise) {
+            Picker("", selection: $exercise) {
                 ForEach(exercises.sorted(by: <), id: \.self) { item in
                     Text("\(item)")
                    
