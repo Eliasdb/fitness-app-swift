@@ -57,9 +57,13 @@ struct CaloriesPastWeekView: View {
         let groupedMeals = Dictionary(grouping: meals, by: { dateFormatter.string(from: $0.creationDate) })
         let groupedMealsValues =  groupedMeals.map { $0.value.map { Int($0.calories) }.reduce(0, +)}
         
+        if (groupedMeals.isEmpty) {
+            return 0
+        }
+        
         let average = ((groupedMealsValues.reduce(0, +) / (groupedMealsValues.count)) )
+        
         return average
-
     }
     
     var body: some View {

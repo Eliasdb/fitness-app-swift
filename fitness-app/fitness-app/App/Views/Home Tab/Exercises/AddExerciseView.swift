@@ -17,8 +17,10 @@ struct AddExerciseView: View {
     @State private var exerciseDate: Date = .init()
     @State private var selectedCategory: String = "Arms"
     @State private var selectedExercise: String = ""
-    @State private var setAmount: Int = 0
-    @State private var repsAmount: Int = 0
+    @State private var setAmount: Int = 1
+    @State private var repsAmount: Int = 1
+    @State private var totalSetsAndReps: Int = 0
+
 
 
     var categories: [String : [(name: String, sets: Int, reps: Int)]] = 
@@ -209,9 +211,13 @@ struct AddExerciseView: View {
 //            .padding(.trailing, -15)
             Spacer(minLength: 0)
             Button(action: {
-            // saving meal
-                let exercise = Exercise(title: selectedExercise, category: selectedCategory, sets: setAmount, reps: repsAmount, minutes: 0, creationDate: exerciseDate)
-//
+                
+            totalSetsAndReps = setAmount * repsAmount
+//             saving meal
+                let exercise = Exercise(title: selectedExercise, category: selectedCategory, sets: setAmount, reps: repsAmount, totalAmount: totalSetsAndReps, minutes: 0, creationDate: exerciseDate)
+                
+                print(exercise.totalAmount)
+
                 do {
                     context.insert(exercise)
                     try context.save()

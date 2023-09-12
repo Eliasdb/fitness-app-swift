@@ -19,6 +19,8 @@ struct ExercisesView: View {
             .navigationTitle("Exercises")
             .toolbarBackground(.mint, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
+            .navigationBarTitleDisplayMode(.inline)
+
         }
     }
 }

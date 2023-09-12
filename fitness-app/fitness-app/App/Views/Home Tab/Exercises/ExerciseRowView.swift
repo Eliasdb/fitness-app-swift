@@ -29,7 +29,7 @@ struct ExerciseRowView: View {
                 Text(exercise.title)
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     .foregroundStyle(.black)
-                Label("\(exercise.sets) sets", systemImage: "fork.knife.circle")
+                Label("\(exercise.totalAmount) sets", systemImage: "fork.knife.circle")
                     .font(.subheadline)
                     .foregroundStyle(.black)
                 

@@ -217,6 +217,7 @@ struct UpdateExerciseView: View {
             // saving meal
                 dismiss()
                 exercise.creationDate = creationDate
+                exercise.totalAmount = exercise.reps * exercise.sets 
             
             }, label: {
                 Text("Add Exercise")
