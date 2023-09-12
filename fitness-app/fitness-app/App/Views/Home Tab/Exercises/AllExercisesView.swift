@@ -30,9 +30,7 @@ struct AllExercisesView: View {
         ]
         self._exercises = Query(filter: predicate, sort: sortDescriptor, animation: .snappy)
     }
-    
-    var x = [1,2,3,4]
-    
+        
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 35) {
@@ -50,21 +48,6 @@ struct AllExercisesView: View {
                         .frame(width: 150)
                 }
             }
-//            VStack(alignment: .leading, spacing: 35) {
-//                ForEach(meals) { meal in
-//                    ExerciseRowView(meal:meal)
-//                }
-//            }
-//            .padding([.vertical, .leading], 15)
-//            .padding(.top, 15)
-//            .overlay {
-//                if meals.isEmpty {
-//                    Text("No meals found...")
-//                        .font(.caption)
-//                        .foregroundStyle(.white)
-//                        .frame(width: 150)
-//                }
-//            }
         }
     }
 }

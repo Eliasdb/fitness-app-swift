@@ -11,21 +11,11 @@ import SwiftUI
 @available(iOS 17.0, *)
 struct UpdateExerciseView: View {
     @Environment(\.dismiss) private var dismiss
-    // model context to save data
     @Environment(\.modelContext) private var context
     
     @Bindable var exercise: Exercise
     @State private var creationDate: Date = .init()
     @Binding var currentDate: Date
-
-
-    
-//    @State private var exerciseDate: Date = .init()
-//    @State private var selectedCategory: String = "Arms"
-//    @State private var selectedExercise: String = ""
-//    @State private var setAmount: Int = 0
-//    @State private var repsAmount: Int = 0
-
 
     var categories: [String : [(name: String, sets: Int, reps: Int)]] =
     ["Abs":

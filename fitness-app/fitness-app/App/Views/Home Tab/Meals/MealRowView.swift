@@ -17,7 +17,6 @@ struct MealRowView: View {
     
     var body: some View {
         HStack(alignment: .top, spacing: 15) {
-            
             VStack(alignment: .leading, spacing: 8, content: {
                 Text(meal.title)
                     .fontWeight(.bold)

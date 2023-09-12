@@ -16,8 +16,6 @@ struct ExercisesPastWeekView: View {
     @State private var exercise: String = "Plank"
     @State private var category: String = "Abs"
     
-
-//    var categories = ["Abs", "Arms", "Back", "Chest", "Legs"]
     var exercisesAbs = ["Plank", "Bicycle Crunch", "Hollow hold", "Bird dog exercise"]
     var exercisesArms = [ "Bicep dumbbell curl", "Overhead Triceps Extension"]
     var exercisesBack = [ "One-arm dumbbell row", "Bridge"]
@@ -47,7 +45,6 @@ struct ExercisesPastWeekView: View {
             [(name: "Deadlift", sets: 0, reps: 0),
             (name: "Bodyweight Squat", sets: 0, reps: 0)]
     ]
-
 
     init() {
         self.today = today
@@ -115,14 +112,6 @@ struct ExercisesPastWeekView: View {
             .pickerStyle(.segmented)
             .padding(.bottom, 12)
             Chart {
-//                RuleMark(x: .value("Goal", 3000))
-//                    .foregroundStyle(Color.mint)
-//                    .lineStyle(StrokeStyle(lineWidth: 1, dash: [5]))
-//                    .annotation(alignment: .trailing) {
-//                        Text("Goal")
-//                            .font(.caption)
-//                            .foregroundStyle(.secondary)
-//                    }
                 ForEach(exerciseChartData(exercises: exercisesPastWeek), id: \.value) { item in
                     LineMark(x: .value("amount", item.key), y: .value("month", item.value))
                     .foregroundStyle(Color.accentColor.gradient)}

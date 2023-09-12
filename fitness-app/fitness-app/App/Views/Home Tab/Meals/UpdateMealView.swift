@@ -223,21 +223,8 @@ struct UpdateMealView: View {
         })
         .padding(15)
     }
-
-//    var body: some View {
-//        List {
-//            TextField("Meal", text: $meal.title)
-//            TextField("Calories", value: $meal.calories, formatter: Self.formatter)
-//            TextField("Protein", value: $meal.protein, formatter: Self.formatter)
-//            TextField("Carbs", value: $meal.carbs, formatter: Self.formatter)
-//            TextField("Fat", value: $meal.fat, formatter: Self.formatter)
-//            Button("Update meal") {
-//                dismiss()
-//            }
-//
-//        }
-//    }
 }
+
 //
 //#Preview {
 //    UpdateMealView()
