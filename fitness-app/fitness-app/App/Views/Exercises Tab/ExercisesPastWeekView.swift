@@ -13,9 +13,41 @@ import _SwiftData_SwiftUI
 struct ExercisesPastWeekView: View {
     @Query private var exercisesPastWeek: [Exercise]
     @State private var today: Date = .init()
-    @State private var exercise: String = "Deadlift"
+    @State private var exercise: String = "Plank"
+    @State private var category: String = "Abs"
     
-    var exercises = ["Deadlift", "Bodyweight Squat"]
+
+//    var categories = ["Abs", "Arms", "Back", "Chest", "Legs"]
+    var exercisesAbs = ["Plank", "Bicycle Crunch", "Hollow hold", "Bird dog exercise"]
+    var exercisesArms = [ "Bicep dumbbell curl", "Overhead Triceps Extension"]
+    var exercisesBack = [ "One-arm dumbbell row", "Bridge"]
+    var exercisesChest = [ "Push ups", "Dumbbell bench press"]
+    var exercisesLegs = ["Deadlift", "Bodyweight Squat"]
+
+    var categories: [String : [(name: String, sets: Int, reps: Int)]] =
+    ["Abs":
+            [(name: "Plank", sets: 0, reps: 0),
+             (name: "Bicycle Crunch", sets: 0, reps: 0),
+             (name: "Hollow hold", sets: 0, reps: 0),
+             (name: "Bird dog exercise", sets: 0, reps: 0),],
+     
+     "Arms":
+            [(name: "Bicep dumbbell curl", sets: 0, reps: 0),
+             (name: "Overhead Triceps Extension", sets: 0, reps: 0)],
+     
+     "Back":
+            [(name: "One-arm dumbbell row", sets: 0, reps: 0),
+              (name: "Bridge", sets: 0, reps: 0)],
+     
+     "Chest":
+            [(name: "Push ups", sets: 0, reps: 0),
+            (name: "Dumbbell bench press", sets: 0, reps: 0)],
+     
+     "Legs":
+            [(name: "Deadlift", sets: 0, reps: 0),
+            (name: "Bodyweight Squat", sets: 0, reps: 0)]
+    ]
+
 
     init() {
         self.today = today
@@ -29,6 +61,7 @@ struct ExercisesPastWeekView: View {
         
 //         sorting
         let sortDescriptor = [
+            
             SortDescriptor(\Exercise.creationDate, order: .forward)
         ]
         
@@ -39,7 +72,7 @@ struct ExercisesPastWeekView: View {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM"
 
-        let groupedExercisesbyDate = Dictionary(grouping: exercisesPastWeek.filter{$0.title.contains(exercise)}.sorted( by: { $0.creationDate < $1.creationDate }), by: { dateFormatter.string(from: $0.creationDate) })
+        let groupedExercisesbyDate = Dictionary(grouping: exercises.filter{$0.category.contains(category)}.filter{$0.title.contains(exercise)}.sorted( by: { $0.creationDate < $1.creationDate }), by: { dateFormatter.string(from: $0.creationDate) })
         
         let groupedExercisesKeys = groupedExercisesbyDate.map {$0.key }
         let groupedExercisesValues = groupedExercisesbyDate.map {$0.value.map {$0.totalAmount}.reduce(0,+) }
@@ -51,26 +84,36 @@ struct ExercisesPastWeekView: View {
     }
 
     
-//    func getAverage (exercises: [Exercise]) -> Int {
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "dd-MM"
-//        
-//        let groupedMeals = Dictionary(grouping: meals, by: { dateFormatter.string(from: $0.creationDate) })
-//        let groupedMealsValues =  groupedMeals.map { $0.value.map { Int($0.calories) }.reduce(0, +)}
-//        
-//        let average = ((groupedMealsValues.reduce(0, +) / (groupedMealsValues.count)) )
-//        return average
-//
-//    }
+    func getAverage (exercises: [Exercise]) -> Int {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM"
+        
+        let groupedExercisesbyDate = Dictionary(grouping: exercises.filter{$0.title.contains(exercise)}.sorted( by: { $0.creationDate < $1.creationDate }), by: { dateFormatter.string(from: $0.creationDate) })
+        
+        let groupedExercisesValues = groupedExercisesbyDate.map {$0.value.map {$0.totalAmount}.reduce(0,+) }
+        
+        if (groupedExercisesValues.isEmpty) {
+            return 0
+        }
+        let average = ((groupedExercisesValues.reduce(0, +) / (groupedExercisesValues.count)) )
+        return average
+    }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 4, content: {
             Text("Weekly average")
-            Text("0 reps")
+            Text("\(getAverage(exercises: exercisesPastWeek)) reps")
                 .fontWeight(.semibold)
                 .font(.footnote)
                 .foregroundStyle(.secondary)
                 .padding(.bottom, 12)
+            Picker("", selection: $category) {
+                ForEach(Array(categories.keys.sorted(by: <)), id: \.self) { item in
+                    Text("\(item)")
+                }
+            }
+            .pickerStyle(.segmented)
+            .padding(.bottom, 12)
             Chart {
 //                RuleMark(x: .value("Goal", 3000))
 //                    .foregroundStyle(Color.mint)
@@ -89,13 +132,68 @@ struct ExercisesPastWeekView: View {
                 AxisMarks(position: .leading)
             }
             
-            Picker("", selection: $exercise) {
-                ForEach(exercises.sorted(by: <), id: \.self) { item in
-                    Text("\(item)")
-                   
+            
+            switch category {
+            case "Abs":
+                Picker("", selection: $exercise) {
+                    ForEach(categories["Abs"].map { $0.map {$0.name} }!, id: \.self) { item in
+                        Text("\(item)")
+                            .tag(item)
+                    }
                 }
+                .onAppear() {
+                          exercise = "Plank"
+                      }
+            case "Arms":
+                Picker("", selection: $exercise) {
+                    ForEach(exercisesArms, id: \.self) { item in
+                        Text("\(item)")
+                            .tag(item)
+                    }
+                }
+                .onAppear() {
+                          exercise = "Bicep dumbbell curl"
+                      }
+            case "Back":
+                Picker("", selection: $exercise) {
+                    ForEach(exercisesBack, id: \.self) { item in
+                        Text("\(item)")
+                            .tag(item)
+                    }
+                }
+                .onAppear() {
+                          exercise = "Push ups"
+                      }
+            case "Chest":
+                Picker("", selection: $exercise) {
+                    ForEach(exercisesChest, id: \.self) { item in
+                        Text("\(item)")
+                            .tag(item)
+                    }
+                }
+                .onAppear() {
+                          exercise = "Bridge"
+                      }
+            case "Legs":
+                Picker("", selection: $exercise) {
+                    ForEach(exercisesLegs, id: \.self) { item in
+                        Text("\(item)")
+                            .tag(item)
+                    }
+                }
+                .onAppear() {
+                          exercise = "Bodyweight Squat"
+                      }
+            default:
+                Picker("", selection: $exercise) {
+                    ForEach(exercisesAbs, id: \.self) { item in
+                        Text("\(item)")
+                            .tag(item)
+                    }
+                }
+                
             }
-//            .pickerStyle(.segmented)
+      
         })
 
     }

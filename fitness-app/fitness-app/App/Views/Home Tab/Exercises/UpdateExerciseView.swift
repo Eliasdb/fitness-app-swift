@@ -31,8 +31,7 @@ struct UpdateExerciseView: View {
             [(name: "Plank", sets: 0, reps: 0),
              (name: "Bicycle Crunch", sets: 0, reps: 0),
              (name: "Hollow hold", sets: 0, reps: 0),
-             (name: "Bird dog exercise", sets: 0, reps: 0),
-             (name: "Bicep dumbbell curl", sets: 0, reps: 0)],
+             (name: "Bird dog exercise", sets: 0, reps: 0),],
      
      "Arms":
             [(name: "Bicep dumbbell curl", sets: 0, reps: 0),
