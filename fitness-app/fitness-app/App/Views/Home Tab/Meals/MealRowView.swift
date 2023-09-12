@@ -12,7 +12,8 @@ struct MealRowView: View {
     @Environment(\.modelContext) private var context
     @State private var mealToEdit: Meal?
     @Bindable var meal: Meal
-    
+    @Binding var currentDate: Date
+
     
     var body: some View {
         HStack(alignment: .top, spacing: 15) {
@@ -44,7 +45,7 @@ struct MealRowView: View {
             .sheet(item: $mealToEdit) {
                 mealToEdit = nil
             } content: { meal in
-                UpdateMealView(meal: meal)
+                UpdateMealView(meal: meal, currentDate: $currentDate)
                     .presentationDetents([.height(520)])
                     .interactiveDismissDisabled()
                     .presentationCornerRadius(30)

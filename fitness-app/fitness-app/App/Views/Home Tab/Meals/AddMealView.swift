@@ -13,7 +13,7 @@ struct AddMealView: View {
     @Environment(\.dismiss) private var dismiss
     // model context to save data
     @Environment(\.modelContext) private var context
-
+    
     @State private var mealTitle: String = ""
     @State private var mealDate: Date = .init()
     @State private var mealColor: String = "Color 1"
@@ -21,6 +21,8 @@ struct AddMealView: View {
     @Binding var mealCarbs: Int
     @Binding var mealFat: Int
     @Binding var mealProtein: Int
+    @Binding var currentDate: Date
+    
     
     var body: some View {
         
@@ -137,6 +139,9 @@ struct AddMealView: View {
                    DatePicker("", selection: $mealDate)
                         .datePickerStyle(.compact)
                         .scaleEffect(0.9, anchor: .leading)
+                        .onAppear() {
+                            mealDate = currentDate
+                        }
                 })
                 .padding(.trailing, -15)
                 

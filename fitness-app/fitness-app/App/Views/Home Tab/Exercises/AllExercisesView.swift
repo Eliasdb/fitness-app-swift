@@ -37,7 +37,7 @@ struct AllExercisesView: View {
         HStack {
             VStack(alignment: .leading, spacing: 35) {
                 ForEach(exercises) { exercise in
-                    ExerciseRowView(exercise: exercise)
+                    ExerciseRowView(exercise: exercise, currentDate: $currentDate)
                 }
             }
             .padding([.vertical, .leading], 15)

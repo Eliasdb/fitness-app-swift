@@ -16,6 +16,7 @@ struct UpdateExerciseView: View {
     
     @Bindable var exercise: Exercise
     @State private var creationDate: Date = .init()
+    @Binding var currentDate: Date
 
 
     
@@ -82,6 +83,9 @@ struct UpdateExerciseView: View {
                             Text("\(value)")
                                   }
                               }
+                    .onAppear(perform: {
+                        self.exercise.title = "Push ups"
+                    })
                     .pickerStyle(.wheel)
 
                 case "Abs":
@@ -90,6 +94,9 @@ struct UpdateExerciseView: View {
                             Text("\(value)")
                                   }
                               }
+                    .onAppear(perform: {
+                        self.exercise.title = "Plank"
+                    })
                     .pickerStyle(.wheel)
 
 
@@ -99,6 +106,9 @@ struct UpdateExerciseView: View {
                             Text("\(value)")
                                   }
                               }
+                    .onAppear(perform: {
+                        self.exercise.title = "Bicep dumbbell curl"
+                    })
                     .pickerStyle(.wheel)
                     
                 case "Back":
@@ -107,6 +117,9 @@ struct UpdateExerciseView: View {
                             Text("\(value)")
                                   }
                               }
+                    .onAppear(perform: {
+                        self.exercise.title = "Bridge"
+                    })
                     .pickerStyle(.wheel)
                     
                 case "Legs":
@@ -115,6 +128,9 @@ struct UpdateExerciseView: View {
                             Text("\(value)")
                                   }
                               }
+                    .onAppear(perform: {
+                        self.exercise.title = "Deadlift"
+                    })
                     .pickerStyle(.wheel)
 
       
@@ -207,6 +223,9 @@ struct UpdateExerciseView: View {
                         .datePickerStyle(.compact)
                         .scaleEffect(0.9, anchor: .leading)
                         .offset(x:-115)
+                        .onAppear() {
+                            creationDate = currentDate
+                        }
                 })
             
           

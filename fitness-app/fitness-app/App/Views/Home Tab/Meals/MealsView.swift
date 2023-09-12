@@ -37,7 +37,7 @@ struct MealsView: View {
         HStack {
             VStack(alignment: .leading, spacing: 35) {
                 ForEach(meals) { meal in
-                    MealRowView(meal: meal)
+                    MealRowView(meal: meal, currentDate: $currentDate)
                 }
             }
             .padding([.vertical, .leading], 15)

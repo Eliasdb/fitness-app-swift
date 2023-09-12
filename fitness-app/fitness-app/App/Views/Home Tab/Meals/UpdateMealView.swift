@@ -15,10 +15,8 @@ struct UpdateMealView: View {
     @State private var calendarId: Int = 0
     @State private var calories: Double = 0
     @State private var creationDate: Date = .init()
+    @Binding var currentDate: Date
 
-
-
-    
     private static let formatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
@@ -69,18 +67,9 @@ struct UpdateMealView: View {
                     .font(.caption)
                     .foregroundStyle(.gray)
                 
-//                VStack {
-//                    Text("\(meal.calories)")
-////                          Slider(value: $meal.calories), in: 0...2000)
-//                    Slider(value: IntDoubleBinding($meal.calories).doubleValue, in: 0...2000)
-//
-//                      }
-                
                 VStack {
                     Text("\(Int(calories)) kcal")
-//                          Slider(value: $meal.calories), in: 0...2000)
                     Slider(value: $calories, in: 0...2000)
-
                       }
             })
             
@@ -165,6 +154,9 @@ struct UpdateMealView: View {
                     DatePicker("Meal Date", selection: $creationDate).environment(\.locale, .current)
                         .datePickerStyle(.compact)
                         .scaleEffect(0.9, anchor: .leading)
+                        .onAppear() {
+                            creationDate = currentDate
+                        }
 //                        .id(calendarId)
 //                        .onChange(of: creationDate, perform: { _ in
 //                          calendarId += 1

@@ -20,6 +20,7 @@ struct AddExerciseView: View {
     @State private var setAmount: Int = 1
     @State private var repsAmount: Int = 1
     @State private var totalSetsAndReps: Int = 0
+    @Binding var currentDate: Date
 
 
 
@@ -223,6 +224,9 @@ struct AddExerciseView: View {
                         .datePickerStyle(.compact)
                         .scaleEffect(0.9, anchor: .leading)
                         .offset(x:-115)
+                        .onAppear() {
+                            exerciseDate = currentDate
+                        }
                 })
             
           

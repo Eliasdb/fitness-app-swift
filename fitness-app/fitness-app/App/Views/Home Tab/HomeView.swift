@@ -23,7 +23,7 @@ struct HomeView: View {
     @State private var createNewMeal: Bool = false
     @State private var createNewExercise: Bool = false
 
-    
+
     @Namespace var animation
     
     var body: some View {
@@ -96,15 +96,14 @@ struct HomeView: View {
             }
         })
         .sheet(isPresented: $createNewMeal, content: {
-            AddMealView(mealCalories: $mealCalories,  mealCarbs: $mealCarbs, mealFat: $mealFat, mealProtein: $mealProtein)
+            AddMealView(mealCalories: $mealCalories,  mealCarbs: $mealCarbs, mealFat: $mealFat, mealProtein: $mealProtein, currentDate: $currentDate)
                 .presentationDetents([.height(520)])
                 .interactiveDismissDisabled()
                 .presentationCornerRadius(30)
                 .presentationBackground(.white)
         })
         .sheet(isPresented: $createNewExercise, content: {
-            AddExerciseView(
-            )
+            AddExerciseView(currentDate: $currentDate)
                 .presentationDetents([.height(520)])
                 .interactiveDismissDisabled()
                 .presentationCornerRadius(30)

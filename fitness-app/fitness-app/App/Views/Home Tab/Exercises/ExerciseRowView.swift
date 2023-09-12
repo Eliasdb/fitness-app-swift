@@ -12,6 +12,7 @@ struct ExerciseRowView: View {
     @Environment(\.modelContext) private var context
     @State private var exerciseToEdit: Exercise?
     @Bindable var exercise: Exercise
+    @Binding var currentDate: Date
 
 
     var body: some View {
@@ -52,7 +53,7 @@ struct ExerciseRowView: View {
             .sheet(item: $exerciseToEdit) {
                 exerciseToEdit = nil
             } content: { meal in
-                UpdateExerciseView(exercise: exercise)
+                UpdateExerciseView(exercise: exercise, currentDate: $currentDate)
                     .presentationDetents([.height(520)])
                     .interactiveDismissDisabled()
                     .presentationCornerRadius(30)
