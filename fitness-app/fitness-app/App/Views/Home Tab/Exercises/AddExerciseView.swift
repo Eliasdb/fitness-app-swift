@@ -80,6 +80,9 @@ struct AddExerciseView: View {
                             Text("\(value)")
                                   }
                               }
+                    .onAppear(perform: {
+                        self.selectedExercise = "Push ups"
+                    })
                     .pickerStyle(.wheel)
 
                 case "Abs":
@@ -88,6 +91,9 @@ struct AddExerciseView: View {
                             Text("\(value)")
                                   }
                               }
+                    .onAppear(perform: {
+                        self.selectedExercise = "Bicycle Crunch"
+                    })
                     .pickerStyle(.wheel)
 
 
@@ -97,6 +103,9 @@ struct AddExerciseView: View {
                             Text("\(value)")
                                   }
                               }
+                    .onAppear(perform: {
+                        self.selectedExercise = "Bicep dumbbell curl"
+                    })
                     .pickerStyle(.wheel)
                     
                 case "Back":
@@ -105,6 +114,9 @@ struct AddExerciseView: View {
                             Text("\(value)")
                                   }
                               }
+                    .onAppear(perform: {
+                        self.selectedExercise = "Bridge"
+                    })
                     .pickerStyle(.wheel)
                     
                 case "Legs":
@@ -113,6 +125,9 @@ struct AddExerciseView: View {
                             Text("\(value)")
                                   }
                               }
+                    .onAppear(perform: {
+                        self.selectedExercise = "Deadlift"
+                    })
                     .pickerStyle(.wheel)
 
       
@@ -122,6 +137,9 @@ struct AddExerciseView: View {
                             Text("\(value)")
                                   }
                               }
+                    .onAppear(perform: {
+                        self.selectedExercise = "Push ups"
+                    })
                     .pickerStyle(.wheel)
                 }
             })

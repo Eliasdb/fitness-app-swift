@@ -162,7 +162,7 @@ struct ExercisesPastWeekView: View {
                     }
                 }
                 .onAppear() {
-                          exercise = "Push ups"
+                          exercise = "Bridge"
                       }
             case "Chest":
                 Picker("", selection: $exercise) {
@@ -172,7 +172,7 @@ struct ExercisesPastWeekView: View {
                     }
                 }
                 .onAppear() {
-                          exercise = "Bridge"
+                          exercise = "Push ups"
                       }
             case "Legs":
                 Picker("", selection: $exercise) {

@@ -58,7 +58,7 @@ struct CaloriesAndMacrosCounterView: View {
                     SectorMark(angle: .value("Type", dataItem.amount), innerRadius: .ratio(0.618), angularInset: 1.5)
                         .cornerRadius(5)
                         .foregroundStyle(by: .value("Name", dataItem.amount))
-                        .opacity(dataItem.type == "Calories eaten" ? 1 : 0.5 )
+//                        .opacity(dataItem.type == "Calories eaten" ? 1 : 0.5 )
                 }
                 .frame(height:150)
                 .chartLegend(.hidden)

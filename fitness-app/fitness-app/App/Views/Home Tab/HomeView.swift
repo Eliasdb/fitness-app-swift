@@ -79,7 +79,7 @@ struct HomeView: View {
             }
          
         })
-        .background(.clear)
+        .background(.mint)
         .onAppear(perform: {
             if weekSlider.isEmpty {
                 let currentWeek = Date().fetchWeek()
