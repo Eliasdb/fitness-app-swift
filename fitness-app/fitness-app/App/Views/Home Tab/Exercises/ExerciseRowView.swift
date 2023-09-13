@@ -13,6 +13,7 @@ struct ExerciseRowView: View {
     @State private var exerciseToEdit: Exercise?
     @Bindable var exercise: Exercise
     @Binding var currentDate: Date
+    @Binding var categories: [String : [(name: String, sets: Int, reps: Int)]]
 
     var body: some View {
         HStack(alignment: .top, spacing: 0) {
@@ -41,7 +42,7 @@ struct ExerciseRowView: View {
             .sheet(item: $exerciseToEdit) {
                 exerciseToEdit = nil
             } content: { meal in
-                UpdateExerciseView(exercise: exercise, currentDate: $currentDate)
+                UpdateExerciseView(exercise: exercise, currentDate: $currentDate, categories: $categories)
                     .presentationDetents([.height(520)])
                     .interactiveDismissDisabled()
                     .presentationCornerRadius(30)
@@ -51,10 +52,10 @@ struct ExerciseRowView: View {
     }
 }
 
-@available(iOS 17.0, *)
-struct ExerciseRowView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeView()
-            .modelContainer(for: [Meal.self], inMemory: true)
-    }
-}
+//@available(iOS 17.0, *)
+//struct ExerciseRowView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        HomeView()
+//            .modelContainer(for: [Meal.self], inMemory: true)
+//    }
+//}

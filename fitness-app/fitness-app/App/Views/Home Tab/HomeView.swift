@@ -22,7 +22,7 @@ struct HomeView: View {
     @State private var createWeek: Bool = false
     @State private var createNewMeal: Bool = false
     @State private var createNewExercise: Bool = false
-
+    @Binding var categories: [String : [(name: String, sets: Int, reps: Int)]]
 
     @Namespace var animation
     
@@ -42,8 +42,7 @@ struct HomeView: View {
                 .scrollIndicators(.hidden)
                 ScrollView(.vertical) {
                     VStack {
-                        AllExercisesView(currentDate: $currentDate)
-                      
+                        AllExercisesView(currentDate: $currentDate, categories: $categories)
                     }
                     .hSpacing(.center)
                     .vSpacing(.center)
@@ -103,7 +102,7 @@ struct HomeView: View {
                 .presentationBackground(.white)
         })
         .sheet(isPresented: $createNewExercise, content: {
-            AddExerciseView(currentDate: $currentDate)
+            AddExerciseView(currentDate: $currentDate, categories: $categories)
                 .presentationDetents([.height(520)])
                 .interactiveDismissDisabled()
                 .presentationCornerRadius(30)

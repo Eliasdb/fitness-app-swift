@@ -14,7 +14,6 @@ struct MealRowView: View {
     @Bindable var meal: Meal
     @Binding var currentDate: Date
 
-    
     var body: some View {
         HStack(alignment: .top, spacing: 15) {
             VStack(alignment: .leading, spacing: 8, content: {
@@ -53,13 +52,14 @@ struct MealRowView: View {
         }
     }
     
-    @available(iOS 17.0, *)
-    struct MealRowView_Previews: PreviewProvider {
-        static var previews: some View {
-            HomeView()
-                .modelContainer(for: [Meal.self], inMemory: true)
-            
-        }
-    }
+    
     
 }
+//@available(iOS 17.0, *)
+//struct MealRowView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        HomeView()
+//            .modelContainer(for: [Meal.self], inMemory: true)
+//        
+//    }
+//}

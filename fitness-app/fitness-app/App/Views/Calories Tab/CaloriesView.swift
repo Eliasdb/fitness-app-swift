@@ -26,13 +26,36 @@ let value: Int
 
 @available(iOS 17.0, *)
 struct CaloriesView: View {
+    @Query private var mealsPastWeek: [Meal]
+    @State private var today: Date = .init()
+    init() {
+        self.today = today
+        // predicate
+        let calendar = Calendar.current
+        let startOfDate = calendar.startOfDay(for: today)
+        let todayminus30 = calendar.date(byAdding: .day, value: -365, to: startOfDate)!
+        let predicate = #Predicate<Meal> {
+            return $0.creationDate < today && $0.creationDate > todayminus30
+        }
+//         sorting
+        let sortDescriptor = [
+            SortDescriptor(\Meal.creationDate, order: .reverse)
+        ]
+        
+        self._mealsPastWeek = Query(filter: predicate, sort: sortDescriptor, animation: .snappy)
+    }
     
-    @State private var function: ()
         var body: some View {
             NavigationStack {
                 VStack(spacing: 0) {
                     Form {
-                        CaloriesPastWeekView()
+                        Section {
+                            CaloriesPastWeekView()
+                        }
+                        Section {
+                            MacrosPastWeekView()
+                        }
+                       
                     }
                 }
                 .navigationTitle("Calories")

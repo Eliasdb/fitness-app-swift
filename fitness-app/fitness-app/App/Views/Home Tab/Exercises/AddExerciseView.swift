@@ -11,8 +11,10 @@ import SwiftUI
 @available(iOS 17.0, *)
 struct AddExerciseView: View {
     @Environment(\.dismiss) private var dismiss
-    // model context to save data
     @Environment(\.modelContext) private var context
+    
+    @Binding var currentDate: Date
+    @Binding var categories: [String : [(name: String, sets: Int, reps: Int)]]
     
     @State private var exerciseDate: Date = .init()
     @State private var selectedCategory: String = "Arms"
@@ -20,37 +22,7 @@ struct AddExerciseView: View {
     @State private var setAmount: Int = 1
     @State private var repsAmount: Int = 1
     @State private var totalSetsAndReps: Int = 0
-    @Binding var currentDate: Date
 
-
-
-    var categories: [String : [(name: String, sets: Int, reps: Int)]] = 
-    ["Abs":
-            [(name: "Plank", sets: 0, reps: 0),
-             (name: "Bicycle Crunch", sets: 0, reps: 0),
-             (name: "Hollow hold", sets: 0, reps: 0),
-             (name: "Bird dog exercise", sets: 0, reps: 0),
-             (name: "Bicep dumbbell curl", sets: 0, reps: 0)],
-     
-     "Arms": 
-            [(name: "Bicep dumbbell curl", sets: 0, reps: 0),
-             (name: "Overhead Triceps Extension", sets: 0, reps: 0)],
-     
-     "Back": 
-            [(name: "One-arm dumbbell row", sets: 0, reps: 0),
-              (name: "Bridge", sets: 0, reps: 0)],
-     
-     "Chest": 
-            [(name: "Push ups", sets: 0, reps: 0),
-            (name: "Dumbbell bench press", sets: 0, reps: 0)],
-     
-     "Legs": 
-            [(name: "Deadlift", sets: 0, reps: 0),
-            (name: "Bodyweight Squat", sets: 0, reps: 0)]
-    ]
-
-
-    
     var body: some View {
         VStack(alignment: .leading, spacing: 15, content: {
             Button(action: {
@@ -97,7 +69,6 @@ struct AddExerciseView: View {
                     })
                     .pickerStyle(.wheel)
 
-
                 case "Arms":
                     Picker("Please choose a category", selection: $selectedExercise) {
                         ForEach(categories["Arms"].map { $0 }!.map {$0.name}, id: \.self) { value in
@@ -131,7 +102,6 @@ struct AddExerciseView: View {
                     })
                     .pickerStyle(.wheel)
 
-      
                 default:
                     Picker("Please choose a category", selection: $selectedExercise) {
                         ForEach(categories["Chest"].map { $0 }!.map {$0.name}, id: \.self) { value in
@@ -144,7 +114,6 @@ struct AddExerciseView: View {
                     .pickerStyle(.wheel)
                 }
             })
-            
             
             Section{
                GeometryReader { geometry in
@@ -188,33 +157,10 @@ struct AddExerciseView: View {
                        })
                        .frame(height:40)
                        .cornerRadius(30)
-                       
-//                       HStack(alignment: .center, content: {
-//                           
-//                           Picker("fat", selection: $mealFat){
-//                               ForEach(1..<50) { i in
-//                                   Text("\(i) grams fat")
-//                                       .font(.caption)
-//                                       .tag(i)
-//                               }
-//                           }
-//                           .pickerStyle(.wheel)
-////                                   .padding(.top, 5)
-//
-//                           .frame(width: 170, height: 40)
-//                           .clipped()
-//                           Image(systemName: "arrowtriangle.left.fill.and.line.vertical.and.arrowtriangle.right.fill")
-//                               .resizable()
-//                               .rotationEffect(.degrees(-90))
-//                               .frame(width: 10, height:10)
-//                               .position(x: -28, y: 20)
-//                       })
-//                       .frame(height:40)
                    })
                }
                .frame(height:100)
             }
-           
                 VStack(alignment: .leading, spacing: 8, content: {
                     Text("Exercise Date")
                         .font(.caption)
@@ -228,18 +174,12 @@ struct AddExerciseView: View {
                             exerciseDate = currentDate
                         }
                 })
-            
-          
 //            .padding(.trailing, -15)
             Spacer(minLength: 0)
             Button(action: {
-                
             totalSetsAndReps = setAmount * repsAmount
 //             saving meal
                 let exercise = Exercise(title: selectedExercise, category: selectedCategory, sets: setAmount, reps: repsAmount, totalAmount: totalSetsAndReps, minutes: 0, creationDate: exerciseDate)
-                
-                print(exercise.totalAmount)
-
                 do {
                     context.insert(exercise)
                     try context.save()
@@ -248,7 +188,6 @@ struct AddExerciseView: View {
                 } catch {
                     print(error.localizedDescription)
                 }
-            
             }, label: {
                 Text("Add Exercise")
                     .font(.title3)
@@ -266,9 +205,9 @@ struct AddExerciseView: View {
     }
 }
 
-@available(iOS 17.0, *)
-#Preview {
-    HomeView()
-        .modelContainer(for: [Meal.self], inMemory: true)
-
-}
+//@available(iOS 17.0, *)
+//#Preview {
+//    HomeView()
+//        .modelContainer(for: [Meal.self], inMemory: true)
+//
+//}

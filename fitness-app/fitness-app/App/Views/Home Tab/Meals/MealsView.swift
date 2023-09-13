@@ -52,8 +52,8 @@ struct MealsView: View {
     }
 }
 
-@available(iOS 17.0, *)
-#Preview {
-    HomeView()
-        .modelContainer(for: [Meal.self], inMemory: true)
-}
+//@available(iOS 17.0, *)
+//#Preview {
+//    HomeView()
+//        .modelContainer(for: [Meal.self], inMemory: true)
+//}

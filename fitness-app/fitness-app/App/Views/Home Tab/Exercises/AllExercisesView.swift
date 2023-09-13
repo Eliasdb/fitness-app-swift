@@ -14,9 +14,11 @@ struct AllExercisesView: View {
     // swiftdata dynamic query
     @Query private var exercises: [Exercise]
     @Binding var currentDate: Date
+    @Binding var categories: [String : [(name: String, sets: Int, reps: Int)]]
 
-    init(currentDate: Binding<Date>) {
+    init(currentDate: Binding<Date>, categories: Binding<[String : [(name: String, sets: Int, reps: Int)]]>) {
         self._currentDate = currentDate
+        self._categories = categories
         // predicate
         let calendar = Calendar.current
         let startOfDate = calendar.startOfDay(for: currentDate.wrappedValue)
@@ -35,7 +37,7 @@ struct AllExercisesView: View {
         HStack {
             VStack(alignment: .leading, spacing: 35) {
                 ForEach(exercises) { exercise in
-                    ExerciseRowView(exercise: exercise, currentDate: $currentDate)
+                    ExerciseRowView(exercise: exercise, currentDate: $currentDate, categories: $categories)
                 }
             }
             .padding([.vertical, .leading], 15)
@@ -52,8 +54,8 @@ struct AllExercisesView: View {
     }
 }
 
-@available(iOS 17.0, *)
-#Preview {
-    HomeView()
-        .modelContainer(for: [Meal.self], inMemory: true)
-}
+//@available(iOS 17.0, *)
+//#Preview {
+//    HomeView(categories: categories)
+//        .modelContainer(for: [Meal.self], inMemory: true)
+//}

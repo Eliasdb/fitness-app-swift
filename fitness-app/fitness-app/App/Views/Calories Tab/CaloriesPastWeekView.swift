@@ -33,7 +33,6 @@ struct CaloriesPastWeekView: View {
         let predicate = #Predicate<Meal> {
             return $0.creationDate < today && $0.creationDate > todayminus30
         }
-        
 //         sorting
         let sortDescriptor = [
             SortDescriptor(\Meal.creationDate, order: .reverse)
@@ -48,13 +47,14 @@ struct CaloriesPastWeekView: View {
         var amount: Int
     }
     
-    func mealChartData () -> [[Data]]  {
+    func mealChartData (meals: [Meal]) -> [[Data]]  {
         //formats date of meal
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd-MM"
+        dateFormatter.dateFormat = "dd/MM"
         
         var mealsArray: [Data] = []
-        let groupedMeals = Dictionary(grouping: mealsPastWeek, by: { dateFormatter.string(from: $0.creationDate) })
+        
+        let groupedMeals = Dictionary(grouping: meals, by: { dateFormatter.string(from: $0.creationDate) })
         let groupedMealsKeys =  groupedMeals.map { $0.key }
         let groupedMealsValues =  groupedMeals.map { $0.value.map { Int($0.calories) }.reduce(0, +)}
         let sequence = zip(groupedMealsKeys, groupedMealsValues)
@@ -81,33 +81,23 @@ struct CaloriesPastWeekView: View {
     }
     
     var body: some View {
-      
-        printv(getAverage(meals: mealChartData()[weekIndex] ))
-      
-    
-
         VStack(alignment: .leading, spacing: 4, content: {
             HStack(content: {
                 Button(action: {
                     weekIndex+=1
                     
-                    if weekIndex >=
-                        mealChartData().count {
+                    if weekIndex >= mealChartData(meals: mealsPastWeek).count {
                         weekIndex = 0
                     }
                 }, label: {
                     Image(systemName: "chevron.left")
                 }).buttonStyle(BorderlessButtonStyle())
-                
-
                 Spacer()
-
-                Text("\(String(describing: mealChartData()[weekIndex].last!.date)) - \(String(describing: mealChartData()[weekIndex].first!.date))")
+                Text("\(String(describing: mealChartData(meals: mealsPastWeek)[weekIndex].last!.date)) - \(String(describing: mealChartData(meals: mealsPastWeek)[weekIndex].first!.date))")
                     .font(.footnote)
-                    .foregroundStyle(.gray)
-
+                    .foregroundStyle(.green)
+                    .fontWeight(.bold)
                 Spacer()
-
                 Button(action: {
                     weekIndex-=1
                     
@@ -118,16 +108,12 @@ struct CaloriesPastWeekView: View {
                 }, label: {
                     Image(systemName: "chevron.right")
                 }).buttonStyle(BorderlessButtonStyle())
-                
-
-
             })
             .padding(.top, 20)
             Spacer()
-
             VStack(alignment: .leading, spacing: 4, content: {
                 Text("Weekly average")
-                Text("\(getAverage(meals: mealChartData()[weekIndex])) kcal")
+                Text("\(getAverage(meals: mealChartData(meals:mealsPastWeek)[weekIndex])) kcal")
                     .fontWeight(.semibold)
                     .font(.footnote)
                     .foregroundStyle(.secondary)
@@ -142,30 +128,15 @@ struct CaloriesPastWeekView: View {
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }
-                ForEach(mealChartData()[weekIndex].sorted(by: { $0.dateasDate < ($1.dateasDate)}) , id: \.self) { item in
-                    
+                ForEach(mealChartData(meals: mealsPastWeek)[weekIndex].sorted(by: { $0.dateasDate < ($1.dateasDate)}) , id: \.self) { item in
                     BarMark(x: .value("day", item.date), y: .value("amount", item.amount))
                     .foregroundStyle(Color.accentColor.gradient)}
             }
             .frame(height: 180)
-            
-            //            .chartXAxis {
-            //                AxisMarks(values: mealChartData().map { $0.value}) { value in
-            //                    //                            AxisGridLine()
-            //                    AxisTick()
-            //                    AxisValueLabel()
-            //                }
-            //            }
             .chartYAxis {
                 AxisMarks(position: .leading)
             }
-
-            VStack(alignment: .center, content: {
-             
-        
-            })
         })
-
     }
 }
 

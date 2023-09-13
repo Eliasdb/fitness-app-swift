@@ -16,32 +16,7 @@ struct UpdateExerciseView: View {
     @Bindable var exercise: Exercise
     @State private var creationDate: Date = .init()
     @Binding var currentDate: Date
-
-    var categories: [String : [(name: String, sets: Int, reps: Int)]] =
-    ["Abs":
-            [(name: "Plank", sets: 0, reps: 0),
-             (name: "Bicycle Crunch", sets: 0, reps: 0),
-             (name: "Hollow hold", sets: 0, reps: 0),
-             (name: "Bird dog exercise", sets: 0, reps: 0),],
-     
-     "Arms":
-            [(name: "Bicep dumbbell curl", sets: 0, reps: 0),
-             (name: "Overhead Triceps Extension", sets: 0, reps: 0)],
-     
-     "Back":
-            [(name: "One-arm dumbbell row", sets: 0, reps: 0),
-              (name: "Bridge", sets: 0, reps: 0)],
-     
-     "Chest":
-            [(name: "Push ups", sets: 0, reps: 0),
-            (name: "Dumbbell bench press", sets: 0, reps: 0)],
-     
-     "Legs":
-            [(name: "Deadlift", sets: 0, reps: 0),
-            (name: "Bodyweight Squat", sets: 0, reps: 0)]
-    ]
-
-
+    @Binding var categories: [String : [(name: String, sets: Int, reps: Int)]]
     
     var body: some View {
         VStack(alignment: .leading, spacing: 15, content: {
@@ -244,9 +219,9 @@ struct UpdateExerciseView: View {
     }
 }
 
-@available(iOS 17.0, *)
-#Preview {
-    HomeView()
-        .modelContainer(for: [Meal.self], inMemory: true)
-
-}
+//@available(iOS 17.0, *)
+//#Preview {
+//    HomeView()
+//        .modelContainer(for: [Meal.self], inMemory: true)
+//
+//}

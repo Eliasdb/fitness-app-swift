@@ -15,6 +15,8 @@ struct ExercisesPastWeekView: View {
     @State private var today: Date = .init()
     @State private var exercise: String = "Plank"
     @State private var category: String = "Abs"
+    @State private var weekIndex: Int = 0
+    
     
     var exercisesAbs = ["Plank", "Bicycle Crunch", "Hollow hold", "Bird dog exercise"]
     var exercisesArms = [ "Bicep dumbbell curl", "Overhead Triceps Extension"]
@@ -51,7 +53,7 @@ struct ExercisesPastWeekView: View {
         // predicate
         let calendar = Calendar.current
         let startOfDate = calendar.startOfDay(for: today)
-        let todayminus30 = calendar.date(byAdding: .day, value: -7, to: startOfDate)!
+        let todayminus30 = calendar.date(byAdding: .day, value: -365, to: startOfDate)!
         let predicate = #Predicate<Exercise> {
             return $0.creationDate <= startOfDate && $0.creationDate > todayminus30
         }
@@ -65,19 +67,35 @@ struct ExercisesPastWeekView: View {
         self._exercisesPastWeek = Query(filter: predicate, sort: sortDescriptor, animation: .snappy)
     }
     
-    func exerciseChartData (exercises: [Exercise]) -> Array<(key: String, value: Int)> {
+    struct Data: Hashable {
+        var  date: String
+        var  dateasDate: Date
+        var amount: Int
+    }
+    
+    func exerciseChartData (exercises: [Exercise]) -> [[Data]] {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM"
+        
+        var exercisesArray: [Data] = []
 
-        let groupedExercisesbyDate = Dictionary(grouping: exercises.filter{$0.category.contains(category)}.filter{$0.title.contains(exercise)}.sorted( by: { $0.creationDate < $1.creationDate }), by: { dateFormatter.string(from: $0.creationDate) })
+        let groupedExercisesbyDate = Dictionary(grouping: exercises.filter{$0.category.contains(category)}.filter{$0.title.contains(exercise)}, by: { dateFormatter.string(from: $0.creationDate) })
+        let groupedExercisesKeys =  groupedExercisesbyDate.map { $0.key }
+        let groupedExercisesValues =  groupedExercisesbyDate.map { $0.value.map {$0.totalAmount}.reduce(0, +)}
+        let sequence = zip(groupedExercisesKeys, groupedExercisesValues)
+
+        for (el1, el2) in sequence {
+            exercisesArray.append( Data(date: el1, dateasDate: Calendar.current.date(byAdding: .day, value: 1, to: dateFormatter.date(from: el1)!)!, amount: el2))
+        }
+
+        let sortedExercises = exercisesArray.sorted(by: { $0.dateasDate > ($1.dateasDate)}).chunked(into: 7)
         
-        let groupedExercisesKeys = groupedExercisesbyDate.map {$0.key }
-        let groupedExercisesValues = groupedExercisesbyDate.map {$0.value.map {$0.totalAmount}.reduce(0,+) }
+        if sortedExercises.isEmpty {
+            return [[]]
+        }
+
         
-        let exercisesDictionary = Dictionary(uniqueKeysWithValues: zip(groupedExercisesKeys, groupedExercisesValues))
-        let sortedExercisesDictionary = exercisesDictionary.sorted( by: { $0.0 < $1.0 })
-        
-        return sortedExercisesDictionary
+        return sortedExercises
     }
 
     
@@ -97,94 +115,125 @@ struct ExercisesPastWeekView: View {
     }
     
     var body: some View {
+        printv(exerciseChartData(exercises: exercisesPastWeek))
         VStack(alignment: .leading, spacing: 4, content: {
-            Text("Weekly average")
-            Text("\(getAverage(exercises: exercisesPastWeek)) reps")
-                .fontWeight(.semibold)
-                .font(.footnote)
-                .foregroundStyle(.secondary)
+            HStack(content: {
+                Button(action: {
+                    weekIndex+=1
+                    
+                    if weekIndex >= exerciseChartData(exercises: exercisesPastWeek).count {
+                        weekIndex = 0
+                    }
+                }, label: {
+                    Image(systemName: "chevron.left")
+                }).buttonStyle(BorderlessButtonStyle())
+                Spacer()
+                Text("\(String(describing: exerciseChartData(exercises: exercisesPastWeek)[weekIndex].last?.date)) - \(String(describing: exerciseChartData(exercises: exercisesPastWeek)[weekIndex].first?.date))")
+                    .font(.footnote)
+                    .foregroundStyle(.green)
+                    .fontWeight(.bold)
+                Spacer()
+                Button(action: {
+                    weekIndex-=1
+                    
+                    if weekIndex == -1 {
+                        weekIndex = 0
+                    }
+                    
+                }, label: {
+                    Image(systemName: "chevron.right")
+                }).buttonStyle(BorderlessButtonStyle())
+            })
+            .padding(.top, 20)
+            Spacer()
+            VStack(alignment: .leading, spacing: 4, content: {
+                Text("Weekly average")
+                Text("\(getAverage(exercises: exercisesPastWeek)) reps")
+                    .fontWeight(.semibold)
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                    .padding(.bottom, 12)
+                Picker("", selection: $category) {
+                    ForEach(Array(categories.keys.sorted(by: <)), id: \.self) { item in
+                        Text("\(item)")
+                    }
+                }
+                .pickerStyle(.segmented)
                 .padding(.bottom, 12)
-            Picker("", selection: $category) {
-                ForEach(Array(categories.keys.sorted(by: <)), id: \.self) { item in
-                    Text("\(item)")
+                Chart {
+                    ForEach(exerciseChartData(exercises: exercisesPastWeek)[weekIndex].sorted(by: { $0.dateasDate < ($1.dateasDate)}) , id: \.self) { item in
+                        LineMark(x: .value("day", item.date), y: .value("amount", item.amount))
+                        .foregroundStyle(Color.accentColor.gradient)}
                 }
-            }
-            .pickerStyle(.segmented)
-            .padding(.bottom, 12)
-            Chart {
-                ForEach(exerciseChartData(exercises: exercisesPastWeek), id: \.value) { item in
-                    LineMark(x: .value("amount", item.key), y: .value("month", item.value))
-                    .foregroundStyle(Color.accentColor.gradient)}
-            }
-            .frame(height: 180)
-            .chartYAxis {
-                AxisMarks(position: .leading)
-            }
-            
-            
-            switch category {
-            case "Abs":
-                Picker("", selection: $exercise) {
-                    ForEach(categories["Abs"].map { $0.map {$0.name} }!, id: \.self) { item in
-                        Text("\(item)")
-                            .tag(item)
-                    }
-                }
-                .onAppear() {
-                          exercise = "Plank"
-                      }
-            case "Arms":
-                Picker("", selection: $exercise) {
-                    ForEach(exercisesArms, id: \.self) { item in
-                        Text("\(item)")
-                            .tag(item)
-                    }
-                }
-                .onAppear() {
-                          exercise = "Bicep dumbbell curl"
-                      }
-            case "Back":
-                Picker("", selection: $exercise) {
-                    ForEach(exercisesBack, id: \.self) { item in
-                        Text("\(item)")
-                            .tag(item)
-                    }
-                }
-                .onAppear() {
-                          exercise = "Bridge"
-                      }
-            case "Chest":
-                Picker("", selection: $exercise) {
-                    ForEach(exercisesChest, id: \.self) { item in
-                        Text("\(item)")
-                            .tag(item)
-                    }
-                }
-                .onAppear() {
-                          exercise = "Push ups"
-                      }
-            case "Legs":
-                Picker("", selection: $exercise) {
-                    ForEach(exercisesLegs, id: \.self) { item in
-                        Text("\(item)")
-                            .tag(item)
-                    }
-                }
-                .onAppear() {
-                          exercise = "Bodyweight Squat"
-                      }
-            default:
-                Picker("", selection: $exercise) {
-                    ForEach(exercisesAbs, id: \.self) { item in
-                        Text("\(item)")
-                            .tag(item)
-                    }
+                .frame(height: 180)
+                .chartYAxis {
+                    AxisMarks(position: .leading)
                 }
                 
-            }
-      
+                
+                switch category {
+                case "Abs":
+                    Picker("", selection: $exercise) {
+                        ForEach(categories["Abs"].map { $0.map {$0.name} }!, id: \.self) { item in
+                            Text("\(item)")
+                                .tag(item)
+                        }
+                    }
+                    .onAppear() {
+                        exercise = "Plank"
+                    }
+                case "Arms":
+                    Picker("", selection: $exercise) {
+                        ForEach(exercisesArms, id: \.self) { item in
+                            Text("\(item)")
+                                .tag(item)
+                        }
+                    }
+                    .onAppear() {
+                        exercise = "Bicep dumbbell curl"
+                    }
+                case "Back":
+                    Picker("", selection: $exercise) {
+                        ForEach(exercisesBack, id: \.self) { item in
+                            Text("\(item)")
+                                .tag(item)
+                        }
+                    }
+                    .onAppear() {
+                        exercise = "Bridge"
+                    }
+                case "Chest":
+                    Picker("", selection: $exercise) {
+                        ForEach(exercisesChest, id: \.self) { item in
+                            Text("\(item)")
+                                .tag(item)
+                        }
+                    }
+                    .onAppear() {
+                        exercise = "Push ups"
+                    }
+                case "Legs":
+                    Picker("", selection: $exercise) {
+                        ForEach(exercisesLegs, id: \.self) { item in
+                            Text("\(item)")
+                                .tag(item)
+                        }
+                    }
+                    .onAppear() {
+                        exercise = "Bodyweight Squat"
+                    }
+                default:
+                    Picker("", selection: $exercise) {
+                        ForEach(exercisesAbs, id: \.self) { item in
+                            Text("\(item)")
+                                .tag(item)
+                        }
+                    }
+                    
+                }
+                
+            })
         })
-
     }
 }
 

@@ -45,14 +45,6 @@ struct CaloriesAndMacrosCounterView: View {
     }
     
     var body: some View {
-//        if (calorieCounter.last?.number) != nil {
-//             let numberArray = calorieCounter.map { $0.number }
-//          
-//
-//        }
-        
-       
-//            let numArray = meals.map {$0.protein}
             HStack{
                 Chart(donutData, id: \.type) { dataItem in
                     SectorMark(angle: .value("Type", dataItem.amount), innerRadius: .ratio(0.618), angularInset: 1.5)
@@ -98,7 +90,6 @@ struct CaloriesAndMacrosCounterView: View {
                 .aspectRatio(1, contentMode: .fit)
                 .padding()
             }
-        
     }
 }
 
