@@ -81,62 +81,62 @@ struct CaloriesPastWeekView: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 4, content: {
-            HStack(content: {
-                Button(action: {
-                    weekIndex+=1
-                    
-                    if weekIndex >= mealChartData(meals: mealsPastWeek).count {
-                        weekIndex = 0
-                    }
-                }, label: {
-                    Image(systemName: "chevron.left")
-                }).buttonStyle(BorderlessButtonStyle())
-                Spacer()
-                Text("\(String(describing: mealChartData(meals: mealsPastWeek)[weekIndex].last!.date)) - \(String(describing: mealChartData(meals: mealsPastWeek)[weekIndex].first!.date))")
-                    .font(.footnote)
-                    .foregroundStyle(.green)
-                    .fontWeight(.bold)
-                Spacer()
-                Button(action: {
-                    weekIndex-=1
-                    
-                    if weekIndex == -1 {
-                        weekIndex = 0
-                    }
-                    
-                }, label: {
-                    Image(systemName: "chevron.right")
-                }).buttonStyle(BorderlessButtonStyle())
-            })
-            .padding(.top, 20)
-            Spacer()
             VStack(alignment: .leading, spacing: 4, content: {
-                Text("Weekly average")
-                Text("\(getAverage(meals: mealChartData(meals:mealsPastWeek)[weekIndex])) kcal")
-                    .fontWeight(.semibold)
-                    .font(.footnote)
-                    .foregroundStyle(.secondary)
-                    .padding(.bottom, 12)
+                HStack(content: {
+                    Button(action: {
+                        weekIndex+=1
+                        
+                        if weekIndex >= mealChartData(meals: mealsPastWeek).count {
+                            weekIndex = 0
+                        }
+                    }, label: {
+                        Image(systemName: "chevron.left")
+                    }).buttonStyle(BorderlessButtonStyle())
+                    Spacer()
+                    Text("\(String(describing: mealChartData(meals: mealsPastWeek)[weekIndex].last!.date)) - \(String(describing: mealChartData(meals: mealsPastWeek)[weekIndex].first!.date))")
+                        .font(.footnote)
+                        .foregroundStyle(.green)
+                        .fontWeight(.bold)
+                    Spacer()
+                    Button(action: {
+                        weekIndex-=1
+                        
+                        if weekIndex == -1 {
+                            weekIndex = 0
+                        }
+                        
+                    }, label: {
+                        Image(systemName: "chevron.right")
+                    }).buttonStyle(BorderlessButtonStyle())
+                })
+                .padding(.top, 20)
+                Spacer()
+                VStack(alignment: .leading, spacing: 4, content: {
+                    Text("Average")
+                    Text("\(getAverage(meals: mealChartData(meals:mealsPastWeek)[weekIndex])) kcal")
+                        .fontWeight(.semibold)
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                        .padding(.bottom, 12)
+                })
+                Chart {
+                    RuleMark(y: .value("Goal", 3000))
+                        .foregroundStyle(Color.mint)
+                        .lineStyle(StrokeStyle(lineWidth: 1, dash: [5]))
+                        .annotation(alignment: .trailing) {
+                            Text("Goal")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                    ForEach(mealChartData(meals: mealsPastWeek)[weekIndex].sorted(by: { $0.dateasDate < ($1.dateasDate)}) , id: \.self) { item in
+                        BarMark(x: .value("day", item.date), y: .value("amount", item.amount))
+                        .foregroundStyle(Color.accentColor.gradient)}
+                }
+                .frame(height: 180)
+                .chartYAxis {
+                    AxisMarks(position: .leading)
+                }
             })
-            Chart {
-                RuleMark(y: .value("Goal", 3000))
-                    .foregroundStyle(Color.mint)
-                    .lineStyle(StrokeStyle(lineWidth: 1, dash: [5]))
-                    .annotation(alignment: .trailing) {
-                        Text("Goal")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                    }
-                ForEach(mealChartData(meals: mealsPastWeek)[weekIndex].sorted(by: { $0.dateasDate < ($1.dateasDate)}) , id: \.self) { item in
-                    BarMark(x: .value("day", item.date), y: .value("amount", item.amount))
-                    .foregroundStyle(Color.accentColor.gradient)}
-            }
-            .frame(height: 180)
-            .chartYAxis {
-                AxisMarks(position: .leading)
-            }
-        })
     }
 }
 

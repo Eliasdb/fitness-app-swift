@@ -36,53 +36,89 @@ struct ContentView: View {
             [(name: "Deadlift", sets: 0, reps: 0),
             (name: "Bodyweight Squat", sets: 0, reps: 0)]
     ]
-
-
+    @State private var selectedIndex: Int = 2
+    
+    let icons = ["fork.knife", "dumbbell", "house", "waveform.path.ecg", "gearshape" ]
     
     var body: some View {
-        TabView(selection: $selection) {
-            Group {
-                CaloriesView()
-                    .tag(1)
-                    .tabItem {
-                        Label("Calories", systemImage: "fork.knife")
-                    }
-                ExercisesView()
-                    .tag(2)
-                    .tabItem {
-                        Label("Exercises", systemImage: "dumbbell")
-                    }
-                HomeView(categories: $categories)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(.green)
-                    .tag(3)
-                    .tabItem {
-                        Image("house")
-                        Label("", systemImage: "sunrise.circle")
-                    } 
-                HealthView()
-                    .tag(4)
-                    .tabItem {
-                        Label("Health", systemImage: "waveform.path.ecg")
-                    }
-                SettingsView()
-                    .tag(5)
-                    .tabItem {
-                        Label("Settings", systemImage: "gearshape")
-                    }
+//        TabView(selection: $selection) {
+//            Group {
+//                CaloriesView()
+//                    .tag(1)
+//                    .tabItem {
+//                        Label("Calories", systemImage: "fork.knife")
+//                    }
+//                ExercisesView()
+//                    .tag(2)
+//                    .tabItem {
+//                        Label("Exercises", systemImage: "dumbbell")
+//                    }
+//                HomeView(categories: $categories)
+//                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+//                    .background(.green)
+//                    .tag(3)
+//                    .tabItem {
+//                        Image("house")
+//                        Label("", systemImage: "sunrise.circle")
+//                    } 
+//                HealthView()
+//                    .tag(4)
+//                    .tabItem {
+//                        Label("Health", systemImage: "waveform.path.ecg")
+//                    }
+//                SettingsView()
+//                    .tag(5)
+//                    .tabItem {
+//                        Label("Settings", systemImage: "gearshape")
+//                    }
+//            }
+//            .toolbarBackground(.visible, for: .tabBar)
+////          .toolbarBackground(.brown, for: .tabBar)
+//            .toolbarColorScheme(.dark, for: .tabBar)
+//        }
+        VStack {
+            ZStack {
+                switch selectedIndex {
+                case 0:  CaloriesView()
+                case 1:  ExercisesView()
+                case 2:  HomeView(categories: $categories)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            .background(.green)
+                case 3:  HealthView()
+                case 4:  SettingsView()
+                default: HomeView(categories: $categories)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .background(.green)
+                }
             }
-            .toolbarBackground(.visible, for: .tabBar)
-//          .toolbarBackground(.brown, for: .tabBar)
-            .toolbarColorScheme(.dark, for: .tabBar)
-        }
-        .onAppear {
+         
+            Spacer()
+            HStack {
+                ForEach(0..<5) { num in
+                    Button(action: {
+                        selectedIndex = num
+                    } , label: {
+                        Spacer()
+                        Image(systemName: icons[num])
+                            .font(.system(size: 24, weight: .bold))
+                            .foregroundStyle(Color.mint)
+                        Spacer()
+                    })
+                   
+                }
+               
+
+            }
+        }.onAppear {
             DispatchQueue
                 .main
                 .asyncAfter(deadline: .now() + 5) {
                     launchScreenManager.dismiss()
                 }
         }
+       
     }
+    
 }
 
 @available(iOS 17.0, *)

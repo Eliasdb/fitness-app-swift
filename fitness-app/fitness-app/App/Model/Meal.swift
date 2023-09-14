@@ -11,7 +11,7 @@ import SwiftData
 @available(iOS 16.4, *)
 @available(iOS 17.0, *)
 @Model
-    class Meal {
+class Meal: ObservableObject {
         var id: UUID
         var title: String
         var calories: Int

@@ -125,13 +125,20 @@ struct ExercisesPastWeekView: View {
                         weekIndex = 0
                     }
                 }, label: {
-                    Image(systemName: "chevron.left")
+                    Image(systemName: "chevron.left").foregroundStyle(Color("TestColor"))
                 }).buttonStyle(BorderlessButtonStyle())
                 Spacer()
-                Text("\(String(describing: exerciseChartData(exercises: exercisesPastWeek)[weekIndex].last?.date)) - \(String(describing: exerciseChartData(exercises: exercisesPastWeek)[weekIndex].first?.date))")
-                    .font(.footnote)
-                    .foregroundStyle(.green)
-                    .fontWeight(.bold)
+                if exerciseChartData(exercises: exercisesPastWeek)[weekIndex].isEmpty {
+                    Text("No data yet.")
+                        .font(.footnote)
+                        .foregroundStyle(Color("TestColor"))
+                        .fontWeight(.bold)
+                } else if !exerciseChartData(exercises: exercisesPastWeek)[weekIndex].isEmpty {
+                    Text("\(String(describing: exerciseChartData(exercises: exercisesPastWeek)[weekIndex].last!.date)) - \(String(describing: exerciseChartData(exercises: exercisesPastWeek)[weekIndex].first!.date))")
+                        .font(.footnote)
+                        .foregroundStyle(Color("TestColor"))
+                        .fontWeight(.bold)
+                }
                 Spacer()
                 Button(action: {
                     weekIndex-=1
@@ -141,13 +148,13 @@ struct ExercisesPastWeekView: View {
                     }
                     
                 }, label: {
-                    Image(systemName: "chevron.right")
+                    Image(systemName: "chevron.right").foregroundStyle(Color("TestColor"))
                 }).buttonStyle(BorderlessButtonStyle())
             })
             .padding(.top, 20)
             Spacer()
             VStack(alignment: .leading, spacing: 4, content: {
-                Text("Weekly average")
+                Text("Average")
                 Text("\(getAverage(exercises: exercisesPastWeek)) reps")
                     .fontWeight(.semibold)
                     .font(.footnote)
@@ -162,8 +169,8 @@ struct ExercisesPastWeekView: View {
                 .padding(.bottom, 12)
                 Chart {
                     ForEach(exerciseChartData(exercises: exercisesPastWeek)[weekIndex].sorted(by: { $0.dateasDate < ($1.dateasDate)}) , id: \.self) { item in
-                        LineMark(x: .value("day", item.date), y: .value("amount", item.amount))
-                        .foregroundStyle(Color.accentColor.gradient)}
+                       BarMark(x: .value("day", item.date), y: .value("amount", item.amount))
+                        .foregroundStyle(Color("TestColor").gradient)}
                 }
                 .frame(height: 180)
                 .chartYAxis {

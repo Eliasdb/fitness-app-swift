@@ -11,18 +11,6 @@ import _SwiftData_SwiftUI
 import Foundation
 import Collections
 
-struct meal: Identifiable {
-let id: UUID
-let key: String
-let value: Int
-}
-//
-//extension Dictionary: Identifiable {
-//    public typealias ID = Int
-//    public var id: Int {
-//        return hash
-//    }
-//}
 
 @available(iOS 17.0, *)
 struct CaloriesView: View {
@@ -44,24 +32,22 @@ struct CaloriesView: View {
         
         self._mealsPastWeek = Query(filter: predicate, sort: sortDescriptor, animation: .snappy)
     }
-    
+    struct Datar: Hashable {
+   var type: Int
+
+       var amount: Int
+    }
+    var x: [Datar] = [Datar(type: 1, amount:60), Datar(type: 2, amount:80), Datar(type: 3, amount:100), Datar(type: 4, amount:40), Datar(type:5, amount:20), Datar(type:6, amount:50), Datar(type:7, amount:70)]
+
+
         var body: some View {
             NavigationStack {
-                VStack(spacing: 0) {
-                    Form {
-                        Section {
-                            CaloriesPastWeekView()
-                        }
-                        Section {
-                            MacrosPastWeekView()
-                        }
-                       
-                    }
-                }
-                .navigationTitle("Calories")
-                .toolbarBackground(.yellow, for: .navigationBar)
-                .toolbarBackground(.visible, for: .navigationBar)
-                .navigationBarTitleDisplayMode(.inline)
+                List {
+                    Text("Calories")
+             
+                }.navigationTitle("Nutrition")
+                    .navigationBarTitleDisplayMode(.inline)
+
             }
         }
     }
@@ -73,4 +59,5 @@ struct CaloriesView_Previews: PreviewProvider {
             CaloriesView()
         }
     }
+
 
