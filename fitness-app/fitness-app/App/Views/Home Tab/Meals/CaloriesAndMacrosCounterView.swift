@@ -12,8 +12,9 @@ import Charts
 @available(iOS 17.0, *)
 struct CaloriesAndMacrosCounterView: View {
     @Binding var currentDate: Date
-    @Query private var meals: [Meal]    
     @State var progressValue: Float = 0.0
+    @Query private var meals: [Meal]
+
     
     init(currentDate: Binding<Date>) {
         self._currentDate = currentDate
@@ -30,6 +31,7 @@ struct CaloriesAndMacrosCounterView: View {
         ]
         self._meals = Query(filter: predicate, sort: sortDescriptor, animation: .snappy)
     }
+    
     
     var donutData: [(type: String, amount: Int)] {
         [(type: "Calories eaten", amount: meals.map {$0.calories}.reduce(0, +)),

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import _SwiftData_SwiftUI
 
 @available(iOS 17.0, *)
 struct HomeView: View {
@@ -23,7 +24,7 @@ struct HomeView: View {
     @State private var createNewMeal: Bool = false
     @State private var createNewExercise: Bool = false
     @Binding var categories: [String : [(name: String, sets: Int, reps: Int)]]
-
+  
     @Namespace var animation
     
     var body: some View {
@@ -106,7 +107,7 @@ struct HomeView: View {
                 .presentationDetents([.height(520)])
                 .interactiveDismissDisabled()
                 .presentationCornerRadius(30)
-                .presentationBackground(.gray)
+                .presentationBackground(.teal)
         })
     }
        

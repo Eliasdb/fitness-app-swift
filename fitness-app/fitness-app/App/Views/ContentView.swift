@@ -79,7 +79,7 @@ struct ContentView: View {
         VStack {
             ZStack {
                 switch selectedIndex {
-                case 0:  CaloriesView()
+                case 0:  NutritionView()
                 case 1:  ExercisesView()
                 case 2:  HomeView(categories: $categories)
                             .frame(maxWidth: .infinity, maxHeight: .infinity)

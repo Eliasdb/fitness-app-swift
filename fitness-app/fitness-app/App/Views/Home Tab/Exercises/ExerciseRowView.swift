@@ -46,7 +46,7 @@ struct ExerciseRowView: View {
                     .presentationDetents([.height(520)])
                     .interactiveDismissDisabled()
                     .presentationCornerRadius(30)
-                    .presentationBackground(.gray)
+                    .presentationBackground(.teal)
             }
         }
     }
