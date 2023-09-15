@@ -130,7 +130,7 @@ struct MacrosPastWeekView: View {
         return [[]]
     }
     
-    func getAverage (meals: [Data]) -> Int {
+    func getMacrosAverage (meals: [Data]) -> Int {
         let allCalories = meals.map {$0.amount}.reduce(0, +)
         let numberOfMeals = meals.count
         
@@ -224,7 +224,7 @@ struct MacrosPastWeekView: View {
                     Text("Average").foregroundStyle(.green)
                 }
                 
-                Text("\(getAverage(meals: mealDonutChartData(meals:mealsPastWeek)[weekIndex])) grams")
+                Text("\(getMacrosAverage(meals: mealDonutChartData(meals:mealsPastWeek)[weekIndex])) grams")
                     .fontWeight(.semibold)
                     .font(.footnote)
                     .foregroundStyle(.secondary)

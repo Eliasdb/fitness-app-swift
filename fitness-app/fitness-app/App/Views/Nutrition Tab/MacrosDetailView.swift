@@ -115,154 +115,18 @@ struct MacrosDetailView: View {
     }
     
     var body: some View {
-            NavigationLink {
-                            VStack(alignment: .leading, spacing: 4, content: {
-                                HStack(content: {
-                                    Button(action: {
-                                        weekIndex+=1
-                                        
-                                        if weekIndex >= mealDonutChartData(meals: mealsPastWeek).count {
-                                            weekIndex = 0
-                                        }
-                                    }, label: {
-                                        switch macro {
-                                        case "Protein": Image(systemName: "chevron.left").foregroundStyle(.indigo)
-                                        case "Carbs": Image(systemName: "chevron.left").foregroundStyle(.yellow)
-                                        case "Fat": Image(systemName: "chevron.left").foregroundStyle(.red)
-                                        default:
-                                            Image(systemName: "chevron.left").foregroundStyle(.green)
-                                        }
-                                  
-                                    }).buttonStyle(BorderlessButtonStyle())
-                                    Spacer()
-                                  
-                                    
-                                    if mealDonutChartData(meals: mealsPastWeek)[weekIndex].isEmpty {
-                                        Text("No data yet")
-                                    } else if !mealDonutChartData(meals: mealsPastWeek)[weekIndex].isEmpty {
-                                        
-                                    switch macro {
-                                    case "Protein":
-                                        Text("\(String(describing: mealDonutChartData(meals: mealsPastWeek)[weekIndex].last!.date)) - \(String(describing: mealDonutChartData(meals: mealsPastWeek)[weekIndex].first!.date))")
-                                            .font(.footnote)
-                                            .foregroundStyle(.indigo)
-                                            .fontWeight(.bold)
-                                    case "Fat":
-                                        Text("\(String(describing: mealDonutChartData(meals: mealsPastWeek)[weekIndex].last!.date)) - \(String(describing: mealDonutChartData(meals: mealsPastWeek)[weekIndex].first!.date))")
-                                            .font(.footnote)
-                                            .foregroundStyle(.red)
-                                            .fontWeight(.bold)
-                                    case "Carbs":
-                                        Text("\(String(describing: mealDonutChartData(meals: mealsPastWeek)[weekIndex].last!.date)) - \(String(describing: mealDonutChartData(meals: mealsPastWeek)[weekIndex].first!.date))")
-                                            .font(.footnote)
-                                            .foregroundStyle(.yellow)
-                                            .fontWeight(.bold)
-                                    default:
-                                        Text("\(String(describing: mealDonutChartData(meals: mealsPastWeek)[weekIndex].last!.date)) - \(String(describing: mealDonutChartData(meals: mealsPastWeek)[weekIndex].first!.date))")
-                                            .font(.footnote)
-                                            .foregroundStyle(.red)
-                                            .fontWeight(.bold)
-                                    }
-                                   
-                                    }
-                                    Spacer()
-                                    Button(action: {
-                                        weekIndex-=1
-                                        
-                                        if weekIndex == -1 {
-                                            weekIndex = 0
-                                        }
-                                        
-                                    }, label: {
-                                        switch macro {
-                                        case "Protein": Image(systemName: "chevron.right").foregroundStyle(.indigo)
-                                        case "Carbs": Image(systemName: "chevron.right").foregroundStyle(.yellow)
-                                        case "Fat": Image(systemName: "chevron.right").foregroundStyle(.red)
-                                        default:
-                                            Image(systemName: "chevron.right").foregroundStyle(.green)
-                                        }
-                                    }).buttonStyle(BorderlessButtonStyle())
-                                })
-                                .padding(.top, 20)
-                                Spacer()
-                                VStack(alignment: .leading, spacing: 4, content: {
-                                    switch macro {
-                                    case "Protein": Text("Average").foregroundStyle(.indigo)
-                                    case "Carbs": Text("Average").foregroundStyle(.yellow)
-                                    case "Fat": Text("Average").foregroundStyle(.red)
-                                    default:
-                                        Text("Average").foregroundStyle(.green)
-                                    }
-                                    
-                                    Text("\(getAverage(meals: mealDonutChartData(meals:mealsPastWeek)[weekIndex])) grams")
-                                        .fontWeight(.semibold)
-                                        .font(.footnote)
-                                        .foregroundStyle(.secondary)
-                                        .padding(.bottom, 12)
-                                })
-                                
-
-                                Chart {
-                    //                RuleMark(y: .value("Goal", 3000))
-                    //                    .foregroundStyle(Color.mint)
-                    //                    .lineStyle(StrokeStyle(lineWidth: 1, dash: [5]))
-                    //                    .annotation(alignment: .trailing) {
-                    //                        Text("Goal")
-                    //                            .font(.caption)
-                    //                            .foregroundStyle(.secondary)
-                    //                    }
-                                    switch macro {
-                                    case "Carbs":
-                                        ForEach(mealDonutChartData(meals: mealsPastWeek)[weekIndex].sorted(by: { $0.dateasDate < ($1.dateasDate)}) , id: \.self) { item in
-                                            AreaMark(x: .value("day", item.date), y: .value("amount", item.amount))
-                                                .foregroundStyle(Color.yellow.gradient)
-                                        }
-                                    case "Protein":
-                                        ForEach(mealDonutChartData(meals: mealsPastWeek)[weekIndex].sorted(by: { $0.dateasDate < ($1.dateasDate)}) , id: \.self) { item in
-                                            AreaMark(x: .value("day", item.date), y: .value("amount", item.amount))
-                                                .foregroundStyle(Color.indigo.gradient)
-                                        }
-                                    case "Fat":
-                                        ForEach(mealDonutChartData(meals: mealsPastWeek)[weekIndex].sorted(by: { $0.dateasDate < ($1.dateasDate)}) , id: \.self) { item in
-                                            AreaMark(x: .value("day", item.date), y: .value("amount", item.amount))
-                                                .foregroundStyle(Color.red.gradient)
-                                        }
-                                    default:
-                                        ForEach(mealDonutChartData(meals: mealsPastWeek)[weekIndex].sorted(by: { $0.dateasDate < ($1.dateasDate)}) , id: \.self) { item in
-                                            AreaMark(x: .value("day", item.date), y: .value("amount", item.amount))
-                                                .foregroundStyle(Color.red.gradient)
-                                        }
-                                    }
-                                    
-                                }
-                                .frame(height: 180)
-                                .chartYAxis {
-                                    AxisMarks(position: .leading)
-                                }
-                                Picker("", selection: $macro) {
-                                    ForEach(macros, id: \.self) { item in
-                                        Text("\(item)")
-                                            .tag(item)
-                                    }
-                                }.onAppear() {
-                                    macro = "Fat"
-                                }
-                                
-                            })
-
-            } label: {
-                VStack(content: {
-                    Text("Macros history")
-                    Chart {
-                        ForEach(mealDonutChartData(meals: mealsPastWeek)[weekIndex].sorted(by: { $0.dateasDate < ($1.dateasDate)}) , id: \.self) { item in
-                            BarMark(x: .value("day", item.date), y: .value("amount", item.amount))
-                            .foregroundStyle(Color.teal.gradient)}
-                    }
-                    .frame(height: 70)
-                    .chartXAxis(.hidden)
-                    .chartYAxis(.hidden)
-                })
+        VStack(content: {
+            Text("Macros history")
+            Chart {
+                ForEach(mealDonutChartData(meals: mealsPastWeek)[weekIndex].sorted(by: { $0.dateasDate < ($1.dateasDate)}) , id: \.self) { item in
+                    AreaMark(x: .value("day", item.date), y: .value("amount", item.amount))
+                    .foregroundStyle(Color.teal.gradient)}
             }
+            .frame(height: 70)
+            .chartXAxis(.hidden)
+            .chartYAxis(.hidden)
+        })
+           
         }
 }
 
