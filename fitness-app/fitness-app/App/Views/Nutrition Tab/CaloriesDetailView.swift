@@ -59,18 +59,6 @@ struct CaloriesDetailView: View {
         return sortedMeals
         }
     
-    func getAverage (meals: [Data]) -> Int {
-        let allCalories = meals.map {$0.amount}.reduce(0, +)
-        let numberOfMeals = meals.count
-        
-        let average = allCalories / numberOfMeals
-        
-        if (meals.isEmpty) {
-            return 0
-        }
-        return average
-    }
-    
     func caloriesProgressString() -> String? {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .percent
@@ -94,7 +82,6 @@ struct CaloriesDetailView: View {
     
     
     var body: some View {
-     
         VStack(content: {
             Text("Your calorie intake has ") + Text("\(caloriesProgressString()!)").bold() + Text(" compared to last week!")
             Chart {

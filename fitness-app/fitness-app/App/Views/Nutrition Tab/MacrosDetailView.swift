@@ -14,7 +14,7 @@ struct MacrosDetailView: View {
     @Query private var mealsPastWeek: [Meal]
     @State private var today: Date = .init()
     @State private var weekIndex: Int = 0
-    @State private var macro: String = "Fat"
+    @State private var macro: String = "Protein"
     
     
     @State private var macros = ["Carbs", "Fat", "Protein"]
@@ -114,9 +114,32 @@ struct MacrosDetailView: View {
         return average
     }
     
+    func macrosProgressString() -> String? {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .percent
+        if macro == "Protein" {
+            let totalProteinLastWeek: Int = mealDonutChartData(meals: mealsPastWeek)[1].map { $0.amount }.reduce(0,+)
+
+            let totalProteinThisWeek = mealDonutChartData(meals: mealsPastWeek)[0].map { $0.amount }.reduce(0,+)
+            let percentage: Double = (Double(totalProteinThisWeek) - Double(totalProteinLastWeek)) / Double(totalProteinThisWeek)
+            guard let formattedPercentage = numberFormatter.string(from: NSNumber(value: abs(percentage)
+                                                                                 ))
+            else {
+                return nil }
+
+            let description: String = percentage < 0 ? "is down by" : "is up by"
+
+            return "\(description) \(formattedPercentage)"
+        }
+
+        
+        return ""
+    }
+    
     var body: some View {
+        Text("Your protein intake ") + Text("\(macrosProgressString()!)").bold() + Text(" compared to last week!")
+
         VStack(content: {
-            Text("Macros history")
             Chart {
                 ForEach(mealDonutChartData(meals: mealsPastWeek)[weekIndex].sorted(by: { $0.dateasDate < ($1.dateasDate)}) , id: \.self) { item in
                     AreaMark(x: .value("day", item.date), y: .value("amount", item.amount))

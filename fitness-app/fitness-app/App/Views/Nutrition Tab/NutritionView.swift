@@ -424,6 +424,8 @@ struct NutritionView: View {
                         MacrosDetailView()
                     }
                 }
+                
+                
             }.navigationTitle("Nutrition")
                 .toolbarBackground(.mint, for: .navigationBar)
                 .toolbarBackground(.visible, for: .navigationBar)
