@@ -62,6 +62,14 @@ struct CaloriesDetailView: View {
     func caloriesProgressString() -> String? {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .percent
+        
+        if mealChartData(meals: mealsPastWeek)[weekIndex].isEmpty {
+            return ""
+        }
+        
+//        if mealChartData(meals: mealsPastWeek)[]
+        
+      
         let totalCaloriesThisWeek: Int = mealChartData(meals: mealsPastWeek)[0].map { $0.amount }.reduce(0,+)
 
         let totalCaloriesLastWeek: Int = mealChartData(meals: mealsPastWeek)[1].map { $0.amount }.reduce(0,+)
@@ -80,18 +88,42 @@ struct CaloriesDetailView: View {
         return "\(description) \(formattedPercentage)"
     }
     
-    
+    struct TestData: Hashable {
+        var date:Int
+        var amount:Int
+    }
     var body: some View {
+        var preloadedData: [TestData] = [TestData(date: 0, amount: 1000), TestData(date:1, amount: 1000), TestData(date:2, amount: 1000), TestData(date:3, amount: 1000), TestData(date:4, amount: 1000), TestData(date:5, amount: 1000), TestData(date:6, amount: 1000)]
         VStack(content: {
-            Text("Your calorie intake has ") + Text("\(caloriesProgressString()!)").bold() + Text(" compared to last week!")
-            Chart {
-                ForEach(mealChartData(meals: mealsPastWeek)[weekIndex].sorted(by: { $0.dateasDate < ($1.dateasDate)}) , id: \.self) { item in
-                    BarMark(x: .value("day", item.date), y: .value("amount", item.amount))
-                    .foregroundStyle(Color.accentColor.gradient)}
+            if mealChartData(meals: mealsPastWeek).isEmpty {
+                Text("Track your calories here.")
+            } else {
+                Text("Your calorie intake has ") + Text("\(caloriesProgressString()!)").bold() + Text(" compared to last week!")
             }
-            .frame(height: 70)
-            .chartXAxis(.hidden)
-            .chartYAxis(.hidden)
+            
+            if mealChartData(meals: mealsPastWeek).isEmpty {
+//                Chart {
+//                    ForEach(preloadedData, id: \.self) { item in
+//                        BarMark(x: .value("day", item.date), y: .value("amount", item.amount))
+//                        .foregroundStyle(Color.accentColor.gradient)}
+//                }
+//                .frame(height: 70)
+//                .aspectRatio(4, contentMode: .fit)
+//                .chartXAxis(.hidden)
+//                .chartYAxis(.hidden)
+//                .chartXScale(domain: 0...6
+//                )
+                
+            } else {
+                Chart {
+                    ForEach(mealChartData(meals: mealsPastWeek)[weekIndex].sorted(by: { $0.dateasDate < ($1.dateasDate)}) , id: \.self) { item in
+                        BarMark(x: .value("day", item.date), y: .value("amount", item.amount))
+                        .foregroundStyle(Color.accentColor.gradient)}
+                }
+                .frame(height: 70)
+                .chartXAxis(.hidden)
+                .chartYAxis(.hidden)
+            }
         })
         
     }

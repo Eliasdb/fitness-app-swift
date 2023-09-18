@@ -8,13 +8,6 @@
 import SwiftUI
 
 struct SettingsView: View {
-    private static let formatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        return formatter
-    }()
-    
-//    @Binding var proteinAmount: Int
     
     var body: some View {
         NavigationStack {

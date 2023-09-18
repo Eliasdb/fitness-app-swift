@@ -117,6 +117,10 @@ struct MacrosDetailView: View {
     func macrosProgressString() -> String? {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .percent
+        
+        if mealDonutChartData(meals: mealsPastWeek).isEmpty {
+            return ""
+        }
         if macro == "Protein" {
             let totalProteinLastWeek: Int = mealDonutChartData(meals: mealsPastWeek)[1].map { $0.amount }.reduce(0,+)
 
@@ -135,19 +139,40 @@ struct MacrosDetailView: View {
         
         return ""
     }
+    struct TestData: Hashable {
+        var date:Int
+        var amount:Int
+    }
     
     var body: some View {
-        Text("Your protein intake ") + Text("\(macrosProgressString()!)").bold() + Text(" compared to last week!")
+        let preloadedData: [TestData] = [TestData(date:1, amount: 500), TestData(date:2, amount: 750), TestData(date:3, amount: 1000), TestData(date:4, amount: 1250), TestData(date:5, amount: 1500), TestData(date:6, amount: 1750), TestData(date:7, amount: 2000)]
 
+        if mealDonutChartData(meals: mealsPastWeek).isEmpty {
+            Text("Track your macros here.")
+        } else {
+            Text("Your protein intake ") + Text("\(macrosProgressString()!)").bold() + Text(" compared to last week!")
+        }
+    
         VStack(content: {
-            Chart {
-                ForEach(mealDonutChartData(meals: mealsPastWeek)[weekIndex].sorted(by: { $0.dateasDate < ($1.dateasDate)}) , id: \.self) { item in
-                    AreaMark(x: .value("day", item.date), y: .value("amount", item.amount))
-                    .foregroundStyle(Color.teal.gradient)}
+            if mealDonutChartData(meals: mealsPastWeek).isEmpty {
+//                Chart {
+//                    ForEach(preloadedData , id: \.self) { item in
+//                        AreaMark(x: .value("day", item.date), y: .value("amount", item.amount))
+//                        .foregroundStyle(Color.teal.gradient)}
+//                }
+//                .frame(height: 70)
+//                .chartXAxis(.hidden)
+//                .chartYAxis(.hidden)
+            } else {
+                Chart {
+                    ForEach(mealDonutChartData(meals: mealsPastWeek)[weekIndex].sorted(by: { $0.dateasDate < ($1.dateasDate)}) , id: \.self) { item in
+                        AreaMark(x: .value("day", item.date), y: .value("amount", item.amount))
+                        .foregroundStyle(Color.teal.gradient)}
+                }
+                .frame(height: 70)
+                .chartXAxis(.hidden)
+                .chartYAxis(.hidden)
             }
-            .frame(height: 70)
-            .chartXAxis(.hidden)
-            .chartYAxis(.hidden)
         })
            
         }

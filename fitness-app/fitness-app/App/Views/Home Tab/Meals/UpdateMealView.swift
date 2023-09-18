@@ -16,12 +16,6 @@ struct UpdateMealView: View {
     @State private var calories: Double = 0
     @State private var creationDate: Date = .init()
     @Binding var currentDate: Date
-
-    private static let formatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        return formatter
-    }()
     
     struct IntDoubleBinding {
         let intValue : Binding<Int>
