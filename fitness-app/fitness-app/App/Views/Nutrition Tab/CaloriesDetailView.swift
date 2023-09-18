@@ -63,29 +63,30 @@ struct CaloriesDetailView: View {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .percent
         
-        if mealChartData(meals: mealsPastWeek)[weekIndex].isEmpty {
-            return ""
-        }
-        
-//        if mealChartData(meals: mealsPastWeek)[]
-        
-      
-        let totalCaloriesThisWeek: Int = mealChartData(meals: mealsPastWeek)[0].map { $0.amount }.reduce(0,+)
-
-        let totalCaloriesLastWeek: Int = mealChartData(meals: mealsPastWeek)[1].map { $0.amount }.reduce(0,+)
-        print(totalCaloriesLastWeek)
-
-        print(totalCaloriesThisWeek)
-
-        let percentage: Double = (Double(totalCaloriesThisWeek) - Double(totalCaloriesLastWeek)) / Double(totalCaloriesThisWeek)
-        guard let formattedPercentage = numberFormatter.string(from: NSNumber(value: abs(percentage)
-                                                                             ))
-        else {
-            return nil }
-
-        let description: String = percentage < 0 ? "decreased by" : "increased by"
-
-        return "\(description) \(formattedPercentage)"
+//        if mealChartData(meals: mealsPastWeek)[weekIndex]. {
+//            return ""
+//        }
+//        
+////        if mealChartData(meals: mealsPastWeek)[]
+//        
+//      
+//        let totalCaloriesThisWeek: Int = mealChartData(meals: mealsPastWeek)[0].map { $0.amount }.reduce(0,+)
+//
+//        let totalCaloriesLastWeek: Int = mealChartData(meals: mealsPastWeek)[1].map { $0.amount }.reduce(0,+)
+//        print(totalCaloriesLastWeek)
+//
+//        print(totalCaloriesThisWeek)
+//
+//        let percentage: Double = (Double(totalCaloriesThisWeek) - Double(totalCaloriesLastWeek)) / Double(totalCaloriesThisWeek)
+//        guard let formattedPercentage = numberFormatter.string(from: NSNumber(value: abs(percentage)
+//                                                                             ))
+//        else {
+//            return nil }
+//
+//        let description: String = percentage < 0 ? "decreased by" : "increased by"
+//
+//        return "\(description) \(formattedPercentage)"
+        return "To be fixed"
     }
     
     struct TestData: Hashable {

@@ -118,23 +118,23 @@ struct MacrosDetailView: View {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .percent
         
-        if mealDonutChartData(meals: mealsPastWeek).isEmpty {
-            return ""
-        }
-        if macro == "Protein" {
-            let totalProteinLastWeek: Int = mealDonutChartData(meals: mealsPastWeek)[1].map { $0.amount }.reduce(0,+)
-
-            let totalProteinThisWeek = mealDonutChartData(meals: mealsPastWeek)[0].map { $0.amount }.reduce(0,+)
-            let percentage: Double = (Double(totalProteinThisWeek) - Double(totalProteinLastWeek)) / Double(totalProteinThisWeek)
-            guard let formattedPercentage = numberFormatter.string(from: NSNumber(value: abs(percentage)
-                                                                                 ))
-            else {
-                return nil }
-
-            let description: String = percentage < 0 ? "is down by" : "is up by"
-
-            return "\(description) \(formattedPercentage)"
-        }
+//        if mealDonutChartData(meals: mealsPastWeek).isEmpty {
+//            return ""
+//        }
+//        if macro == "Protein" {
+//            let totalProteinLastWeek: Int = mealDonutChartData(meals: mealsPastWeek)[1].map { $0.amount }.reduce(0,+)
+//
+//            let totalProteinThisWeek = mealDonutChartData(meals: mealsPastWeek)[0].map { $0.amount }.reduce(0,+)
+//            let percentage: Double = (Double(totalProteinThisWeek) - Double(totalProteinLastWeek)) / Double(totalProteinThisWeek)
+//            guard let formattedPercentage = numberFormatter.string(from: NSNumber(value: abs(percentage)
+//                                                                                 ))
+//            else {
+//                return nil }
+//
+//            let description: String = percentage < 0 ? "is down by" : "is up by"
+//
+//            return "\(description) \(formattedPercentage)"
+//        }
 
         
         return ""

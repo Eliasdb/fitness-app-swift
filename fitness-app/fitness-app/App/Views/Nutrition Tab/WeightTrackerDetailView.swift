@@ -14,7 +14,7 @@ struct WeightTrackerDetailView: View {
     
 
     var body: some View {
-        Text("track your weight")
+        Text("Track your weight here.")
 
     }
 }

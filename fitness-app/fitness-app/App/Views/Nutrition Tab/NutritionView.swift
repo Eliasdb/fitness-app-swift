@@ -16,6 +16,7 @@ import Collections
 struct NutritionView: View {
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
+    @State private var calendarId: Int = 0
 
     @Query private var mealsPastWeek: [Meal]
     @Query private var weights: [Weight]
@@ -24,7 +25,9 @@ struct NutritionView: View {
     @State private var weekIndexMacros: Int = 0
     @State private var weight: Double = 0.0
     
-    @State private var weightDay: Date = .init()
+    @State private var weightDay: Date = Date()
+    @State private var currentDateString: String = ""
+
 
     @State private var macro: String = ""
     
@@ -99,6 +102,14 @@ struct NutritionView: View {
             return 0
         }
         return average
+    }
+    
+    func getDateString (date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM"
+        
+        let dateString = dateFormatter.string(from: date)
+        return dateString
     }
     
     func mealDonutChartData (meals: [Meal]) ->  [[Data]]   {
@@ -186,7 +197,7 @@ struct NutritionView: View {
     
   
     
-    func getWeights () -> [[WeightData]] {
+    func getWeights () -> [WeightData] {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM"
         
@@ -201,7 +212,7 @@ struct NutritionView: View {
         for (el1, el2) in sequence {
             weightsArray.append( WeightData(date: el1, dateasDate: Calendar.current.date(byAdding: .day, value: 1, to: dateFormatter.date(from: el1)!)!, amount: el2!))
         }
-        let sortedWeights = weightsArray.sorted(by: { $0.dateasDate > ($1.dateasDate)}).chunked(into: 7)
+        let sortedWeights = weightsArray.sorted(by: { $0.dateasDate < ($1.dateasDate)})
         return sortedWeights
     }
     
@@ -224,6 +235,7 @@ struct NutritionView: View {
     
     var y: [Int] = [0,1]
     var body: some View {
+    
         printv(getWeights())
 //        NavigationStack {
 //            VStack {
@@ -506,7 +518,9 @@ struct NutritionView: View {
                                             LabeledContent {
                                                 DatePicker("", selection: $weightDay)
                                                     .datePickerStyle(.compact)
+                                                    .labelsHidden()
                                                     .scaleEffect(0.9, anchor: .center)
+                                                  
                                             } label: {
                                                 Text("Date")
                                             }
@@ -549,10 +563,20 @@ struct NutritionView: View {
                                         Text("No data yet...")
                                     } else {
                                         Chart {
-                                            ForEach(getWeights()[0].sorted(by: { $0.dateasDate < ($1.dateasDate)}) , id: \.self) { item in
-                                               BarMark(x: .value("day", item.date), y: .value("amount", item.amount))
-                                                .foregroundStyle(Color("TestColor").gradient)}
+                                            ForEach(getWeights().sorted(by: { $0.dateasDate < ($1.dateasDate)}) , id: \.self) { item in
+                                                LineMark(x: .value("day", item.date), y: .value("amount", item.amount))
+                                                    .foregroundStyle(Color("TestColor").gradient)
+//                                                    .symbol(by: .value("day", item.amount))
+                                            }
+                                            
                                         }
+                                        .chartScrollableAxes(.horizontal)
+//                                        .chartXVisibleDomain(length: -2)
+                                        .chartScrollPosition(initialX: getDateString(date: weightDay))
+                                        .chartScrollTargetBehavior(
+                                            .valueAligned(matching: .init(hour:0), majorAlignment: .matching(.init(day:1)))
+                                        )
+                                      
                                         .frame(height: 180)
                                         .padding(15)
                                         .chartYAxis {
