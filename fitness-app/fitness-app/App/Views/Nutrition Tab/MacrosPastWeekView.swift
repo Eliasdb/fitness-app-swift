@@ -145,7 +145,6 @@ struct MacrosPastWeekView: View {
     }
     
     var body: some View {
-        printv(mealDonutChartData(meals: mealsPastWeek))
         VStack(alignment: .leading, spacing: 4, content: {
             HStack(content: {
                 Button(action: {

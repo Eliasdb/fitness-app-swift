@@ -8,10 +8,9 @@
 import SwiftUI
 import SwiftData
 
-@available(iOS 16.4, *)
 @available(iOS 17.0, *)
 @Model
-class Meal: ObservableObject {
+class Meal {
         var id: UUID
         var title: String
         var calories: Int
@@ -43,10 +42,6 @@ class Meal: ObservableObject {
         }
         
     }
-
-
-
-
 
 extension Date {
     static func updateHour(_ value: Int) -> Date {

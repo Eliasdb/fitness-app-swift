@@ -115,7 +115,6 @@ struct ExercisesPastWeekView: View {
     }
     
     var body: some View {
-        printv(exerciseChartData(exercises: exercisesPastWeek))
         VStack(alignment: .leading, spacing: 4, content: {
             HStack(content: {
                 Button(action: {

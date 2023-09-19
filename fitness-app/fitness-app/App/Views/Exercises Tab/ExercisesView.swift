@@ -12,11 +12,18 @@ import _SwiftData_SwiftUI
 @available(iOS 17.0, *)
 struct ExercisesView: View {
     @Query private var exercisesPastWeek: [Exercise]
+    @Query private var photos: [Photo]
+
     @State private var today: Date = .init()
     @State private var exercise: String = "Plank"
     @State private var category: String = "Abs"
     @State private var weekIndex: Int = 0
     
+    @State private var createNewPhoto: Bool = false
+    var categoriesString: [String] = ["Abs", "Arms", "Back", "Chest", "Legs"]
+
+    @State private var selectedPhotoCategory: String = ""
+
     
     var exercisesAbs = ["Plank", "Bicycle Crunch", "Hollow hold", "Bird dog exercise"]
     var exercisesArms = [ "Bicep dumbbell curl", "Overhead Triceps Extension"]
@@ -115,6 +122,7 @@ struct ExercisesView: View {
     }
     
     var body: some View {
+      
         NavigationStack {
             List {
                 Section {
@@ -256,6 +264,97 @@ struct ExercisesView: View {
                     }
 
                 }
+                Section {
+                    NavigationLink {
+                        VStack(alignment: .center, spacing: 0, content: {
+                            Picker("", selection: $selectedPhotoCategory){
+                                ForEach(categoriesString, id: \.self) { item in
+                                    Text("\(item)")                                        .tag(item)
+                                }
+                            }
+
+                            Section {
+                                ScrollView(.horizontal) {
+                                    HStack {
+                                        ForEach(photos) { item in
+                                            ZStack(alignment: .bottom) {
+                                                Image(uiImage: UIImage(data: item.image!)!)
+                                                        .resizable()
+                                                        .scaledToFill()
+                                                        .frame(minWidth: 300, maxHeight
+                                                               : 400)
+
+                                                VStack(spacing: 0) {
+                                                    Rectangle()
+                                                        .fill(.white)
+                                                        .frame(height: 3)
+
+                                                    HStack(alignment: .top) {
+                                                        VStack(alignment: .leading) {
+                                                            Text("\(item.imageCategory)")
+
+                                                            Text("\(item.creationDate)")
+                                                                .font(.body)
+                                                        }
+
+                                                        Spacer()
+
+                                                    
+                                                    }
+                                                    .font(.title3.bold())
+                                                    .padding(10)
+                                                    .padding(.horizontal, 10)
+                                                    .background(.mint)
+                                                    .foregroundStyle(.black)
+                                                    .frame(maxWidth: .infinity)
+                                                }
+                                            }
+                                           
+                                            .clipShape(RoundedRectangle(cornerRadius: 25))
+                                            .shadow(color: .black.opacity(0.2), radius: 2)
+                                            .padding(4)
+                                            .containerRelativeFrame(.horizontal)
+                                        }
+                                    }
+                                        .scrollTargetLayout()
+                                    
+                                }.scrollIndicators(.hidden)
+                                    .scrollTargetBehavior(.viewAligned)
+                                    .contentMargins(20, for: .scrollContent)
+                                    .listRowInsets(EdgeInsets())
+                            }
+                        }).overlay(alignment: .bottomTrailing, content: {
+                            VStack {
+                                Button(action: {
+                                    createNewPhoto.toggle()
+                                }, label: {
+                                    Image(systemName: "plus")
+                                        .fontWeight(.semibold)
+                                        .foregroundStyle(.white)
+                                        .frame(width: 55, height: 55)
+                                        .background(.indigo.shadow(.drop(color: .black.opacity(0.25), radius: 5, x: 10, y: 10 )), in: .circle)
+                                })
+                                .padding(15)
+                                .offset(y:70)
+                                
+                                
+                            }
+                         
+                        })
+                      
+                        .sheet(isPresented: $createNewPhoto, content: {
+                            AddPhotoView()
+                                .presentationDetents([.height(520)])
+                                .interactiveDismissDisabled()
+                                .presentationCornerRadius(30)
+                                .presentationBackground(.white)
+                        })
+
+                    } label : {
+                        PhotoGalleryDetailView()
+                    }
+                }
+
                 
             }   .navigationTitle("Exercises")
                 .toolbarBackground(.mint, for: .navigationBar)

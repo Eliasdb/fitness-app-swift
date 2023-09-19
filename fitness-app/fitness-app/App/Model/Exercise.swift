@@ -8,7 +8,6 @@
 import SwiftUI
 import SwiftData
 
-@available(iOS 16.4, *)
 @available(iOS 17.0, *)
 @Model
     class Exercise {

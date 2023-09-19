@@ -10,6 +10,7 @@ import Charts
 import _SwiftData_SwiftUI
 import Foundation
 import Collections
+import PhotosUI
 
 
 @available(iOS 17.0, *)
@@ -19,18 +20,18 @@ struct NutritionView: View {
     @State private var calendarId: Int = 0
 
     @Query private var mealsPastWeek: [Meal]
+
     @Query private var weights: [Weight]
     @State private var today: Date = .init()
     @State private var weekIndexCalories: Int = 0
     @State private var weekIndexMacros: Int = 0
     @State private var weight: Double = 0.0
-    
+    @State private var macro: String = ""
+
     @State private var weightDay: Date = Date()
     @State private var currentDateString: String = ""
 
-
-    @State private var macro: String = ""
-    
+ 
     var macros = ["Carbs", "Fat", "Protein"]
 
 
@@ -51,12 +52,11 @@ struct NutritionView: View {
         self._mealsPastWeek = Query(filter: predicate, sort: sortDescriptor, animation: .snappy)
     }
     struct Datar: Hashable {
-   var type: Int
-
-       var amount: Int
+        var type: Int
+        var amount: Int
     }
     
-    struct Data: Hashable {
+    struct MealData: Hashable {
         var  date: String
         var  dateasDate: Date
         var amount: Int
@@ -71,12 +71,12 @@ struct NutritionView: View {
     
     var x: [Datar] = [Datar(type: 1, amount:60), Datar(type: 2, amount:80), Datar(type: 3, amount:100), Datar(type: 4, amount:40), Datar(type:5, amount:20), Datar(type:6, amount:50), Datar(type:7, amount:70)]
 
-    func mealChartData (meals: [Meal]) -> [[Data]]  {
+    func mealChartData (meals: [Meal]) -> [[MealData]]  {
         //formats date of meal
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM"
         
-        var mealsArray: [Data] = []
+        var mealsArray: [MealData] = []
         
         let groupedMeals = Dictionary(grouping: meals, by: { dateFormatter.string(from: $0.creationDate) })
         let groupedMealsKeys =  groupedMeals.map { $0.key }
@@ -84,7 +84,7 @@ struct NutritionView: View {
         let sequence = zip(groupedMealsKeys, groupedMealsValues)
         
         for (el1, el2) in sequence {
-            mealsArray.append( Data(date: el1, dateasDate: Calendar.current.date(byAdding: .day, value: 1, to: dateFormatter.date(from: el1)!)!, amount: el2))
+            mealsArray.append( MealData(date: el1, dateasDate: Calendar.current.date(byAdding: .day, value: 1, to: dateFormatter.date(from: el1)!)!, amount: el2))
         }
         
         let sortedMeals = mealsArray.sorted(by: { $0.dateasDate > ($1.dateasDate)}).chunked(into: 7)
@@ -92,7 +92,7 @@ struct NutritionView: View {
         return sortedMeals
         }
     
-    func getAverage (meals: [Data]) -> Int {
+    func getAverage (meals: [MealData]) -> Int {
         let allCalories = meals.map {$0.amount}.reduce(0, +)
         let numberOfMeals = meals.count
         
@@ -112,37 +112,20 @@ struct NutritionView: View {
         return dateString
     }
     
-    func mealDonutChartData (meals: [Meal]) ->  [[Data]]   {
+    func mealDonutChartData (meals: [Meal]) ->  [[MealData]]   {
         //formats date of meal
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM"
-        
-        
-        var mealsArray: [Data] = []
-        
+        var mealsArray: [MealData] = []
         let groupedMeals = Dictionary(grouping: meals, by: { dateFormatter.string(from: $0.creationDate) })
-        
-//        switch macro {
-//        case "Protein":
-//        case "Carbs":
-//            let groupedMealsValues =  groupedMeals.map { $0.value.map { $0.carbs }.reduce(0, +)}
-//        case "Fat":
-//            let groupedMealsValues =  groupedMeals.map { $0.value.map { $0.fat }.reduce(0, +)}
-//        default:
-//            let groupedMealsValues =  groupedMeals.map { $0.value.map { $0.fat }.reduce(0, +)}
-//
-//        }
-        
-       
         let groupedMealsKeys =  groupedMeals.map { $0.key }
-//        let groupedMealsValues =  groupedMeals.map { $0.value.map { $0.fat }.reduce(0, +)}
 
         if macro == "Protein" {
             let groupedMealsValues =  groupedMeals.map { $0.value.map { $0.protein }.reduce(0, +)}
             let sequence = zip(groupedMealsKeys, groupedMealsValues)
             
             for (el1, el2) in sequence {
-                mealsArray.append( Data(date: el1, dateasDate: Calendar.current.date(byAdding: .day, value: 1, to: dateFormatter.date(from: el1)!)!, amount: el2))
+                mealsArray.append( MealData(date: el1, dateasDate: Calendar.current.date(byAdding: .day, value: 1, to: dateFormatter.date(from: el1)!)!, amount: el2))
             }
             
             let sortedMacro = mealsArray.sorted(by: { $0.dateasDate > ($1.dateasDate)}).chunked(into: 7)
@@ -154,7 +137,7 @@ struct NutritionView: View {
             let sequence = zip(groupedMealsKeys, groupedMealsValues)
             
             for (el1, el2) in sequence {
-                mealsArray.append( Data(date: el1, dateasDate: Calendar.current.date(byAdding: .day, value: 1, to: dateFormatter.date(from: el1)!)!, amount: el2))
+                mealsArray.append( MealData(date: el1, dateasDate: Calendar.current.date(byAdding: .day, value: 1, to: dateFormatter.date(from: el1)!)!, amount: el2))
             }
             
             let sortedMacro = mealsArray.sorted(by: { $0.dateasDate > ($1.dateasDate)}).chunked(into: 7)
@@ -166,7 +149,7 @@ struct NutritionView: View {
             let sequence = zip(groupedMealsKeys, groupedMealsValues)
             
             for (el1, el2) in sequence {
-                mealsArray.append( Data(date: el1, dateasDate: Calendar.current.date(byAdding: .day, value: 1, to: dateFormatter.date(from: el1)!)!, amount: el2))
+                mealsArray.append( MealData(date: el1, dateasDate: Calendar.current.date(byAdding: .day, value: 1, to: dateFormatter.date(from: el1)!)!, amount: el2))
             }
             
             let sortedMacro = mealsArray.sorted(by: { $0.dateasDate > ($1.dateasDate)}).chunked(into: 7)
@@ -181,7 +164,7 @@ struct NutritionView: View {
         return [[]]
     }
     
-    func getMacrosAverage (meals: [Data]) -> Int {
+    func getMacrosAverage (meals: [MealData]) -> Int {
         let allCalories = meals.map {$0.amount}.reduce(0, +)
         let numberOfMeals = meals.count
         
@@ -207,7 +190,7 @@ struct NutritionView: View {
         let groupedWeights = Dictionary(grouping: weights, by: { dateFormatter.string(from: $0.creationDate) })
         let groupedWeightsKeys =  groupedWeights.map { $0.key }
         let groupedWeightsValues =  groupedWeights.map { $0.value.map { $0.weight }.last}
-        print(groupedWeightsValues)
+//        print(groupedWeightsValues)
         let sequence = zip(groupedWeightsKeys, groupedWeightsValues)
         for (el1, el2) in sequence {
             weightsArray.append( WeightData(date: el1, dateasDate: Calendar.current.date(byAdding: .day, value: 1, to: dateFormatter.date(from: el1)!)!, amount: el2!))
@@ -216,42 +199,7 @@ struct NutritionView: View {
         return sortedWeights
     }
     
-//    init() {
-//        self.today = today
-//        // predicate
-//        let calendar = Calendar.current
-//        let startOfDate = calendar.startOfDay(for: today)
-//        let todayminus30 = calendar.date(byAdding: .day, value: -365, to: startOfDate)!
-//        let predicate = #Predicate<Meal> {
-//            return $0.creationDate < today && $0.creationDate > todayminus30
-//        }
-////         sorting
-//        let sortDescriptor = [
-//            SortDescriptor(\Meal.creationDate, order: .reverse)
-//        ]
-//        
-//        self._mealsPastWeek = Query(filter: predicate, sort: sortDescriptor, animation: .snappy)
-//    }
-    
-    var y: [Int] = [0,1]
     var body: some View {
-    
-        printv(getWeights())
-//        NavigationStack {
-//            VStack {
-//                
-//                ForEach(y, id: \.self) { x in
-//                    NavigationLink(destination: {
-//                        Text("\(x)")
-//                    }, label: {Text("click me")
-//                    })
-//                }
-//        } .navigationTitle("Nutrition")
-//            .toolbarBackground(.mint, for: .navigationBar)
-//            .toolbarBackground(.visible, for: .navigationBar)
-//            .navigationBarTitleDisplayMode(.inline)
-//        }
-        
         NavigationStack {
             List {
                 Section {
@@ -309,8 +257,6 @@ struct NutritionView: View {
                                                     .padding(.bottom, 12)
                                             
                                         })
-                        
-                                     
                                             Chart {
                                                 RuleMark(y: .value("Goal", 3000))
                                                     .foregroundStyle(Color.mint)
@@ -330,17 +276,12 @@ struct NutritionView: View {
                                             }
                                     }
                                 
-                                 
-                                 
                                 }).padding(.horizontal, 15 ).padding(.bottom, 15)
                             }
                         }
-                     
-
                     } label: {
                         CaloriesDetailView()
                     }
-
                 }
                 
                 Section {
@@ -435,20 +376,9 @@ struct NutritionView: View {
                                                     .font(.footnote)
                                                     .foregroundStyle(.secondary)
                                                     .padding(.bottom, 12)
-                                            
-                                            
                                         })
                                         
-                                        
                                         Chart {
-                                            //                RuleMark(y: .value("Goal", 3000))
-                                            //                    .foregroundStyle(Color.mint)
-                                            //                    .lineStyle(StrokeStyle(lineWidth: 1, dash: [5]))
-                                            //                    .annotation(alignment: .trailing) {
-                                            //                        Text("Goal")
-                                            //                            .font(.caption)
-                                            //                            .foregroundStyle(.secondary)
-                                            //                    }
                                             switch macro {
                                             case "Carbs":
                                                 ForEach(mealDonutChartData(meals: mealsPastWeek)[weekIndexMacros].sorted(by: { $0.dateasDate < ($1.dateasDate)}) , id: \.self) { item in
@@ -466,17 +396,11 @@ struct NutritionView: View {
                                                         .foregroundStyle(Color.red.gradient)
                                                 }
                                             default:
-                                                //                  var y = Date()
-                                                //                    var x: [(date: String, amount: Int)] = [
-                                                //                        (date: "")
-                                                //                    ]
-                                                
                                                 ForEach(mealDonutChartData(meals: mealsPastWeek)[weekIndexMacros].sorted(by: { $0.dateasDate < ($1.dateasDate)}) , id: \.self) { item in
                                                     AreaMark(x: .value("day", item.date), y: .value("amount", item.amount))
                                                         .foregroundStyle(Color.red.gradient)
                                                 }
                                             }
-                                            
                                         }
                                         .frame(height: 180)
                                         .chartYAxis {
@@ -506,10 +430,38 @@ struct NutritionView: View {
                         VStack {
                             Form {
                                 Section {
+                                    
+                                    if getWeights().isEmpty {
+                                        Text("No data yet...")
+                                    } else {
+                                        Chart {
+                                            ForEach(getWeights().sorted(by: { $0.dateasDate < ($1.dateasDate)}) , id: \.self) { item in
+                                                LineMark(x: .value("day", item.date), y: .value("amount", item.amount))
+                                                    .foregroundStyle(Color("TestColor").gradient)
+                                            }
+                                        }
+                                        .chartScrollableAxes(.horizontal)
+//                                        .chartXVisibleDomain(length: -2)
+                                        .chartScrollPosition(initialX: getDateString(date: weightDay))
+                                        .chartScrollTargetBehavior(
+                                            .valueAligned(matching: .init(hour:0), majorAlignment: .matching(.init(day:1)))
+                                        )
+                                      
+                                        .frame(height: 180)
+                                        .padding(15)
+                                        .chartYAxis {
+                                            AxisMarks(position: .leading)
+                                        }
+                                    }
+                                }
+
+                                Section {
                                     LabeledContent {
                                         TextField("60kg", value: $weight, format: .number)
                                     } label: {
                                         Text("Your weight")
+                                            .font(.caption)
+                                            .foregroundStyle(.gray)
                                     }
                                     
                                     ZStack {
@@ -520,20 +472,16 @@ struct NutritionView: View {
                                                     .datePickerStyle(.compact)
                                                     .labelsHidden()
                                                     .scaleEffect(0.9, anchor: .center)
-                                                  
                                             } label: {
                                                 Text("Date")
+                                                    .font(.caption)
+                                                    .foregroundStyle(.gray)
                                             }
-
-                                         
-
                                         }                                            
                                         Spacer()
 
-                                       
                                     }
                                   
-                                    
                                     Button(action: {
                                         // saving meal
                                         let weight = Weight(weight: weight,creationDate: weightDay)
@@ -555,45 +503,10 @@ struct NutritionView: View {
                                             .padding(.vertical, 12)
                                             .background(Color(.green), in: .rect(cornerRadius: 10))
                                     })
-                                    
                                 }
-                                Section {
-                                    
-                                    if getWeights().isEmpty {
-                                        Text("No data yet...")
-                                    } else {
-                                        Chart {
-                                            ForEach(getWeights().sorted(by: { $0.dateasDate < ($1.dateasDate)}) , id: \.self) { item in
-                                                LineMark(x: .value("day", item.date), y: .value("amount", item.amount))
-                                                    .foregroundStyle(Color("TestColor").gradient)
-//                                                    .symbol(by: .value("day", item.amount))
-                                            }
-                                            
-                                        }
-                                        .chartScrollableAxes(.horizontal)
-//                                        .chartXVisibleDomain(length: -2)
-                                        .chartScrollPosition(initialX: getDateString(date: weightDay))
-                                        .chartScrollTargetBehavior(
-                                            .valueAligned(matching: .init(hour:0), majorAlignment: .matching(.init(day:1)))
-                                        )
-                                      
-                                        .frame(height: 180)
-                                        .padding(15)
-                                        .chartYAxis {
-                                            AxisMarks(position: .leading)
-                                        }
-                                    }
-                                    
-                                  
-
-                                  
-                                }
-
                             }
                         }
                         Spacer()
-                      
-                     
                     } label : {
                         WeightTrackerDetailView()
                     }
@@ -605,9 +518,8 @@ struct NutritionView: View {
                 .toolbarBackground(.visible, for: .navigationBar)
                 .navigationBarTitleDisplayMode(.inline)
         }
-                         
-        }
-                                   }
+    }
+}
 //
 //@available(iOS 17.0, *)
 //#Preview {
