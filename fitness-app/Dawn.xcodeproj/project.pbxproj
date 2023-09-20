@@ -18,6 +18,10 @@
 		643A38092ABB18C100C15F30 /* PhotoGalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643A38082ABB18C100C15F30 /* PhotoGalleryView.swift */; };
 		643A38112ABB299D00C15F30 /* DawnTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643A38102ABB299D00C15F30 /* DawnTests.swift */; };
 		643A38182ABB29EF00C15F30 /* NutritionViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643A38172ABB29EF00C15F30 /* NutritionViewModelTests.swift */; };
+		643A381B2ABB410600C15F30 /* OnboardingFirstPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643A381A2ABB410600C15F30 /* OnboardingFirstPageView.swift */; };
+		643A381D2ABB42BF00C15F30 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643A381C2ABB42BF00C15F30 /* OnboardingView.swift */; };
+		643A381F2ABB4E1600C15F30 /* OnboardingSecondPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643A381E2ABB4E1600C15F30 /* OnboardingSecondPageView.swift */; };
+		643A38212ABB4F9A00C15F30 /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643A38202ABB4F9A00C15F30 /* test.swift */; };
 		6445BD0A2A697A3A00833E65 /* LaunchScreenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6445BD092A697A3A00833E65 /* LaunchScreenManager.swift */; };
 		645866202A71537A00D88176 /* MealsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6458661F2A71537A00D88176 /* MealsView.swift */; };
 		6467CA592A6FEFB5003F6387 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6467CA582A6FEFB5003F6387 /* Meal.swift */; };
@@ -76,6 +80,10 @@
 		643A380E2ABB299D00C15F30 /* DawnTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DawnTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		643A38102ABB299D00C15F30 /* DawnTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DawnTests.swift; sourceTree = "<group>"; };
 		643A38172ABB29EF00C15F30 /* NutritionViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionViewModelTests.swift; sourceTree = "<group>"; };
+		643A381A2ABB410600C15F30 /* OnboardingFirstPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFirstPageView.swift; sourceTree = "<group>"; };
+		643A381C2ABB42BF00C15F30 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		643A381E2ABB4E1600C15F30 /* OnboardingSecondPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSecondPageView.swift; sourceTree = "<group>"; };
+		643A38202ABB4F9A00C15F30 /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
 		6445BD092A697A3A00833E65 /* LaunchScreenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenManager.swift; sourceTree = "<group>"; };
 		6458661F2A71537A00D88176 /* MealsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealsView.swift; sourceTree = "<group>"; };
 		6467CA582A6FEFB5003F6387 /* Meal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
@@ -147,6 +155,17 @@
 				643A38172ABB29EF00C15F30 /* NutritionViewModelTests.swift */,
 			);
 			path = DawnTests;
+			sourceTree = "<group>";
+		};
+		643A38192ABB40F000C15F30 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				643A381A2ABB410600C15F30 /* OnboardingFirstPageView.swift */,
+				643A381E2ABB4E1600C15F30 /* OnboardingSecondPageView.swift */,
+				643A381C2ABB42BF00C15F30 /* OnboardingView.swift */,
+				643A38202ABB4F9A00C15F30 /* test.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		6467CA552A6FEF2D003F6387 /* Models */ = {
@@ -291,6 +310,7 @@
 			isa = PBXGroup;
 			children = (
 				64D955F72A682548003D679E /* ContentView.swift */,
+				643A38192ABB40F000C15F30 /* Onboarding */,
 				64FB07FF2A71738B0060571A /* Launch Screen */,
 				64FB07FE2A7173590060571A /* Home Tab */,
 				648AE1E82AA8959B00DB254A /* Nutrition Tab */,
@@ -443,8 +463,10 @@
 				648AE1F82AAC742B00DB254A /* UpdateMealView.swift in Sources */,
 				64D956042A68259F003D679E /* HealthView.swift in Sources */,
 				64D42F5E2AB48C3800E66943 /* ExerciseDetailView.swift in Sources */,
+				643A381F2ABB4E1600C15F30 /* OnboardingSecondPageView.swift in Sources */,
 				648AE20D2AB327CC00DB254A /* NutritionView.swift in Sources */,
 				64D9560A2A682689003D679E /* SettingsView.swift in Sources */,
+				643A381B2ABB410600C15F30 /* OnboardingFirstPageView.swift in Sources */,
 				6467CA5E2A6FF53E003F6387 /* Date+Extensions.swift in Sources */,
 				648AE2062AB062C000DB254A /* Exercise.swift in Sources */,
 				64877BCF2AB9CCCB0000A5C0 /* Photo.swift in Sources */,
@@ -452,6 +474,7 @@
 				642C59992A703A9200A88029 /* OffsetKey.swift in Sources */,
 				648AE1FC2AADD5DA00DB254A /* AddExerciseView.swift in Sources */,
 				6467CA5C2A6FF52F003F6387 /* View+Extensions.swift in Sources */,
+				643A38212ABB4F9A00C15F30 /* test.swift in Sources */,
 				64D955F82A682548003D679E /* ContentView.swift in Sources */,
 				642C599B2A7046F000A88029 /* MealRowView.swift in Sources */,
 				64877BCA2AB9A38A0000A5C0 /* PhotoGalleryDetailView.swift in Sources */,
@@ -459,6 +482,7 @@
 				643A38012ABAFC6800C15F30 /* NutritionViewModel.swift in Sources */,
 				64D955F62A682548003D679E /* DawnApp.swift in Sources */,
 				645866202A71537A00D88176 /* MealsView.swift in Sources */,
+				643A381D2ABB42BF00C15F30 /* OnboardingView.swift in Sources */,
 				642C599D2A713AAD00A88029 /* AddMealView.swift in Sources */,
 				648AE2022AAF103E00DB254A /* UpdateExerciseView.swift in Sources */,
 				648AE1FE2AAEF3FE00DB254A /* ExerciseRowView.swift in Sources */,

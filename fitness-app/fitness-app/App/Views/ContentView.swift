@@ -10,6 +10,8 @@ import SwiftUI
 @available(iOS 17.0, *)
 struct ContentView: View {
     
+    @AppStorage("showOnboarding") var showOnboarding: Bool = true
+    
     @EnvironmentObject var launchScreenManager: LaunchScreenManager
     @State private var selection = 3
     @State private var categories: [String : [(name: String, sets: Int, reps: Int)]] =
@@ -77,42 +79,55 @@ struct ContentView: View {
 ////          .toolbarBackground(.brown, for: .tabBar)
 //            .toolbarColorScheme(.dark, for: .tabBar)
 //        }
-        VStack {
-            ZStack {
-                switch selectedIndex {
-                case 0:  NutritionView()
-                case 1:  ExercisesView()
-                case 2:  HomeView(categories: $categories)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                            .background(.green)
-                case 3:  HealthView()
-                case 4:  SettingsView()
-                default: HomeView(categories: $categories)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background(.green)
+        ZStack {
+            if showOnboarding {
+                OnboardingView(showOnboarding: $showOnboarding)
+                    .background(Color.white)
+                    .transition(.move(edge: .bottom))
+                    .onAppear {
+                        launchScreenManager.dismiss()
+                    }
+            } else {
+                VStack {
+                    ZStack {
+                        switch selectedIndex {
+                        case 0:  NutritionView()
+                        case 1:  ExercisesView()
+                        case 2:  HomeView(categories: $categories)
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                    .background(.green)
+                        case 3:  HealthView()
+                        case 4:  SettingsView()
+                        default: HomeView(categories: $categories)
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                .background(.green)
+                        }
+                    }
+                    Spacer()
+                    HStack {
+                        ForEach(0..<5) { num in
+                            Button(action: {
+                                selectedIndex = num
+                            } , label: {
+                                Spacer()
+                                Image(systemName: icons[num])
+                                    .font(.system(size: 24, weight: .bold))
+                                    .foregroundStyle(Color.mint)
+                                Spacer()
+                            })
+                        }
+                    }
+                }.onAppear {
+                    DispatchQueue
+                        .main
+                        .asyncAfter(deadline: .now() + 5) {
+                            launchScreenManager.dismiss()
+                        }
                 }
             }
-            Spacer()
-            HStack {
-                ForEach(0..<5) { num in
-                    Button(action: {
-                        selectedIndex = num
-                    } , label: {
-                        Spacer()
-                        Image(systemName: icons[num])
-                            .font(.system(size: 24, weight: .bold))
-                            .foregroundStyle(Color.mint)
-                        Spacer()
-                    })
-                }
-            }
-        }.onAppear {
-            DispatchQueue
-                .main
-                .asyncAfter(deadline: .now() + 5) {
-                    launchScreenManager.dismiss()
-                }
         }
+
+
     }
 }
 
