@@ -10,9 +10,7 @@ import SwiftUI
 @available(iOS 17.0, *)
 @main
 struct fitness_appApp: App {
- 
     @StateObject var launchScreenManager = LaunchScreenManager()
-    
     
     var body: some Scene {
         WindowGroup {
@@ -23,7 +21,6 @@ struct fitness_appApp: App {
                 }
             }
             .environmentObject(launchScreenManager)
-          
         }
         .modelContainer(for: [Meal.self, Exercise.self, Weight.self, Photo.self])
     }

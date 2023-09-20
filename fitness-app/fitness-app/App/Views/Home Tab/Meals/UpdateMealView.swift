@@ -17,22 +17,6 @@ struct UpdateMealView: View {
     @State private var creationDate: Date = .init()
     @Binding var currentDate: Date
     
-    struct IntDoubleBinding {
-        let intValue : Binding<Int>
-        
-        let doubleValue : Binding<Double>
-        
-        init(_ intValue : Binding<Int>) {
-            self.intValue = intValue
-            
-            self.doubleValue = Binding<Double>(get: {
-                return Double(intValue.wrappedValue)
-            }, set: {
-                intValue.wrappedValue = Int($0)
-            })
-        }
-    }
-    
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .leading, spacing: 15, content: {

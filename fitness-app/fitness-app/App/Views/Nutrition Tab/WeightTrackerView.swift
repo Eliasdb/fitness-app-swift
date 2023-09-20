@@ -12,7 +12,7 @@ import Charts
 @available(iOS 17.0, *)
 struct WeightTrackerView: View {
     @Environment(\.modelContext) private var context
-    @ObservedObject var vm = ViewModel()
+    @ObservedObject var vm = NutritionViewModel()
     @Query private var weights: [Weight]
     @Binding var weightDay: Date
     @Binding var weight: Double

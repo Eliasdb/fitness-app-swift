@@ -10,7 +10,6 @@ import _SwiftData_SwiftUI
 
 @available(iOS 17.0, *)
 struct HomeView: View {
-    
     @State private var mealCalories: Double = 0
     @State private var mealFat: Int = 0
     @State private var mealProtein: Int = 0

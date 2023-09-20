@@ -18,7 +18,7 @@ import _SwiftData_SwiftUI
 
 @available(iOS 17.0, *)
 struct MacrosPastWeekView: View {
-    @ObservedObject var vm = ViewModel()
+    @ObservedObject var vm = NutritionViewModel()
     @Query private var mealsPastWeek: [Meal]
     @Binding var weekIndexMacros: Int
     @State private var today: Date = .init()
@@ -159,9 +159,7 @@ struct MacrosPastWeekView: View {
                                     macro = "Fat"
                                 }
                             }
-                            
                         }).padding(.horizontal, 15 ).padding(.bottom, 15)
-
                     }
                 }
             } label: {

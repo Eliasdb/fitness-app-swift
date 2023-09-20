@@ -9,11 +9,9 @@ import SwiftUI
 import Charts
 import _SwiftData_SwiftUI
 
-
-
 @available(iOS 17.0, *)
 struct CaloriesPastWeekView: View {
-    @ObservedObject var vm = ViewModel()
+    @ObservedObject var vm = NutritionViewModel()
     @Query private var mealsPastWeek: [Meal]
     @State private var today: Date = .init()
     @State private var weekIndex: Int = 0
@@ -47,7 +45,6 @@ struct CaloriesPastWeekView: View {
                                         .foregroundStyle(.green)
                                         .fontWeight(.bold)
                                 }
-                              
                                 Spacer()
                                 Button(action: {
                                     weekIndexCalories-=1
@@ -67,7 +64,6 @@ struct CaloriesPastWeekView: View {
                             } else {
                                 VStack(alignment: .leading, spacing: 4, content: {
                                     Text("Average")
-                                 
                                     Text("\(vm.getAverage(meals: vm.mealChartData(meals:mealsPastWeek)[weekIndexCalories])) kcal")
                                             .fontWeight(.semibold)
                                             .font(.footnote)

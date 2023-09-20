@@ -36,6 +36,7 @@ struct ContentView: View {
             [(name: "Deadlift", sets: 0, reps: 0),
             (name: "Bodyweight Squat", sets: 0, reps: 0)]
     ]
+    
     @State private var selectedIndex: Int = 2
     
     let icons = ["fork.knife", "dumbbell", "house", "waveform.path.ecg", "gearshape" ]
@@ -91,7 +92,6 @@ struct ContentView: View {
                         .background(.green)
                 }
             }
-         
             Spacer()
             HStack {
                 ForEach(0..<5) { num in
@@ -104,10 +104,7 @@ struct ContentView: View {
                             .foregroundStyle(Color.mint)
                         Spacer()
                     })
-                   
                 }
-               
-
             }
         }.onAppear {
             DispatchQueue

@@ -17,7 +17,7 @@ struct NutritionView: View {
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
 
-    @ObservedObject var vm = ViewModel()
+    @ObservedObject var vm = NutritionViewModel()
 
     @Query private var mealsPastWeek: [Meal]
     @Query private var weights: [Weight]

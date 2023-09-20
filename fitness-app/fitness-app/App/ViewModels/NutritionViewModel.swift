@@ -9,7 +9,7 @@ import Foundation
 
 
 @available(iOS 17.0, *)
-class ViewModel: ObservableObject {
+class NutritionViewModel: ObservableObject {
     // declare as a property
     let func1: () -> Void = {
         print("func1")
@@ -32,18 +32,28 @@ class ViewModel: ObservableObject {
         var amount: Double
     }
 
-    func getAverage (meals: [MealData]) -> Int {
-       let allCalories = meals.map {$0.amount}.reduce(0, +)
-       let numberOfMeals = meals.count
-       
-       let average = allCalories / numberOfMeals
-       
-       if (meals.isEmpty) {
-           return 0
-       }
-       return average
-   }
+    func mealChartData (meals: [Meal]) -> [[MealData]]  {
+        //formats date of meal
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM"
+        
+        var mealsArray: [MealData] = []
+        
+        let groupedMeals = Dictionary(grouping: meals, by: { dateFormatter.string(from: $0.creationDate) })
+        let groupedMealsKeys =  groupedMeals.map { $0.key }
+        let groupedMealsValues =  groupedMeals.map { $0.value.map { Int($0.calories) }.reduce(0, +)}
+        let sequence = zip(groupedMealsKeys, groupedMealsValues)
+        
+        for (el1, el2) in sequence {
+            mealsArray.append( MealData(date: el1, dateasDate: Calendar.current.date(byAdding: .day, value: 1, to: dateFormatter.date(from: el1)!)!, amount: el2))
+        }
+        
+        let sortedMeals = mealsArray.sorted(by: { $0.dateasDate > ($1.dateasDate)}).chunked(into: 7)
+        
+        return sortedMeals
+        }
     
+
     func mealDonutChartData (meals: [Meal], macro: String) ->  [[MealData]]   {
         //formats date of meal
         let dateFormatter = DateFormatter()
@@ -110,26 +120,19 @@ class ViewModel: ObservableObject {
         return average
     }
     
-    func mealChartData (meals: [Meal]) -> [[MealData]]  {
-        //formats date of meal
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM"
-        
-        var mealsArray: [MealData] = []
-        
-        let groupedMeals = Dictionary(grouping: meals, by: { dateFormatter.string(from: $0.creationDate) })
-        let groupedMealsKeys =  groupedMeals.map { $0.key }
-        let groupedMealsValues =  groupedMeals.map { $0.value.map { Int($0.calories) }.reduce(0, +)}
-        let sequence = zip(groupedMealsKeys, groupedMealsValues)
-        
-        for (el1, el2) in sequence {
-            mealsArray.append( MealData(date: el1, dateasDate: Calendar.current.date(byAdding: .day, value: 1, to: dateFormatter.date(from: el1)!)!, amount: el2))
-        }
-        
-        let sortedMeals = mealsArray.sorted(by: { $0.dateasDate > ($1.dateasDate)}).chunked(into: 7)
-        
-        return sortedMeals
-        }
+    func getAverage (meals: [MealData]) -> Int {
+       let allCalories = meals.map {$0.amount}.reduce(0, +)
+       let numberOfMeals = meals.count
+       
+       let average = allCalories / numberOfMeals
+       
+       if (meals.isEmpty) {
+           return 0
+       }
+       return average
+   }
+    
+   
     
     func getDateString (date: Date) -> String {
         let dateFormatter = DateFormatter()
@@ -185,6 +188,32 @@ class ViewModel: ObservableObject {
 //
 //        return "\(description) \(formattedPercentage)"
         return "To be fixed"
+    }
+    
+    func macrosProgressString() -> String? {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .percent
+        
+//        if mealDonutChartData(meals: mealsPastWeek).isEmpty {
+//            return ""
+//        }
+//        if macro == "Protein" {
+//            let totalProteinLastWeek: Int = mealDonutChartData(meals: mealsPastWeek)[1].map { $0.amount }.reduce(0,+)
+//
+//            let totalProteinThisWeek = mealDonutChartData(meals: mealsPastWeek)[0].map { $0.amount }.reduce(0,+)
+//            let percentage: Double = (Double(totalProteinThisWeek) - Double(totalProteinLastWeek)) / Double(totalProteinThisWeek)
+//            guard let formattedPercentage = numberFormatter.string(from: NSNumber(value: abs(percentage)
+//                                                                                 ))
+//            else {
+//                return nil }
+//
+//            let description: String = percentage < 0 ? "is down by" : "is up by"
+//
+//            return "\(description) \(formattedPercentage)"
+//        }
+
+        
+        return ""
     }
     
 

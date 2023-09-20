@@ -16,7 +16,6 @@ struct AddPhotoView: View {
 
     @State private var selectedPhotoCategory: String = "Abs"
     @State private var selectedPhotoDate: Date = .init()
-    
     @State private var selectedPhoto: PhotosPickerItem?
     @State private var selectedPhotoData: Data?
     var categories: [String] = ["Abs", "Arms", "Back", "Chest", "Legs"]
@@ -33,8 +32,6 @@ struct AddPhotoView: View {
             .hSpacing(.leading)
             
             VStack(alignment: .leading, spacing: 8, content: {
-
-                
                     Section {
                         
                         LabeledContent {

@@ -11,7 +11,7 @@ import SwiftData
 
 @available(iOS 17.0, *)
 struct CaloriesDetailView: View {
-    @ObservedObject var vm = ViewModel()
+    @ObservedObject var vm = NutritionViewModel()
     @Query private var mealsPastWeek: [Meal]
     @State private var today: Date = .init()
     @State private var weekIndex: Int = 0

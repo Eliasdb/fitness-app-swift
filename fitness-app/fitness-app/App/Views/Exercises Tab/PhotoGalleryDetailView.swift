@@ -9,13 +9,8 @@ import SwiftUI
 
 
 struct PhotoGalleryDetailView: View {
-    
-
-
     var body: some View {
-        Text("Photo diary")
-       
-      
+        Text("Photo diary")     
     }
 }
 

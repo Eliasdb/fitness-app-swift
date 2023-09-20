@@ -15,7 +15,6 @@ enum LaunchScreenPhase {
 
 final class LaunchScreenManager: ObservableObject {
     @Published private(set) var state: LaunchScreenPhase = .first
-    
     func dismiss() {
         self.state = .second
         
