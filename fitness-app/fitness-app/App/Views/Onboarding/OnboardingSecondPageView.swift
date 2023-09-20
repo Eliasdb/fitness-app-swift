@@ -36,7 +36,8 @@ struct OnboardingSecondPageView: View {
                         .padding(.vertical, 12)
                         .padding(.horizontal, 15)
                         .background(.white.shadow(.drop(color: .black.opacity(0.25), radius: 2)), in: .rect(cornerRadius: 10))
-                })
+                    
+                }).listRowSeparator(.hidden)
                 
                 VStack(alignment: .leading, content: {
                     Text("Age")
@@ -46,7 +47,7 @@ struct OnboardingSecondPageView: View {
                         .padding(.vertical, 12)
                         .padding(.horizontal, 15)
                         .background(.white.shadow(.drop(color: .black.opacity(0.25), radius: 2)), in: .rect(cornerRadius: 10))
-                })
+                }).listRowSeparator(.hidden)
         
                 VStack(alignment: .leading, content: {
                     Text("Weight")
@@ -56,7 +57,8 @@ struct OnboardingSecondPageView: View {
                         .padding(.vertical, 12)
                         .padding(.horizontal, 15)
                         .background(.white.shadow(.drop(color: .black.opacity(0.25), radius: 2)), in: .rect(cornerRadius: 10))
-                })
+                    
+                }).listRowSeparator(.hidden)
                 
                 VStack(alignment: .leading, content: {
                     Text("Height")
@@ -67,7 +69,7 @@ struct OnboardingSecondPageView: View {
                         .padding(.horizontal, 15)
                         .background(.white.shadow(.drop(color: .black.opacity(0.25), radius: 2)), in: .rect(cornerRadius: 10))
 
-                })
+                }).listRowSeparator(.hidden)
 
                 VStack(alignment: .leading, content: {
                     Text("Sex")
@@ -84,7 +86,7 @@ struct OnboardingSecondPageView: View {
                         .padding(.horizontal, 10)
                         .background(.white.shadow(.drop(color: .black.opacity(0.25), radius: 2)), in: .rect(cornerRadius: 10))
                         
-                })
+                }).listRowSeparator(.hidden)
                 
                 VStack(alignment: .leading, content: {
                     Text("Activity level")
@@ -103,12 +105,10 @@ struct OnboardingSecondPageView: View {
                                         .background(.white.shadow(.drop(color: .black.opacity(0.25), radius: 2)), in: .rect(cornerRadius: 10))
                        
                         
-                })
+                })  .listRowSeparator(.hidden)
         
-            }.navigationTitle("Biometrics")
-                .background(Color.white)
-
-        }.padding().background(Color.white)
+            }.scrollContentBackground(.hidden).background(.white)
+        }.padding()
 
     }
 }

@@ -25,94 +25,103 @@ struct test: View {
     var levels: [String] = ["No to a bit", "Light", "Normal", "Heavy exercise", "Very heavy"]
     
     var body: some View {
-        Form {
-            VStack(alignment: .leading, content: {
-                Text("Name")
-//                        .font(.caption)
-                    .foregroundStyle(.gray)   
-                
-                TextField("Name", text: $firstName)
-                    .padding(.vertical, 12)
-                    .padding(.horizontal, 15)
-                    .background(.white.shadow(.drop(color: .black.opacity(0.25), radius: 2)), in: .rect(cornerRadius: 10))
-            })
-            
-            VStack(alignment: .leading, content: {
-                Text("Age")
-//                        .font(.caption)
-                    .foregroundStyle(.gray)
-                TextField("Age", value: $age, formatter: formatter)
-                    .padding(.vertical, 12)
-                    .padding(.horizontal, 15)
-                    .background(.white.shadow(.drop(color: .black.opacity(0.25), radius: 2)), in: .rect(cornerRadius: 10))
-            })
-    
-            VStack(alignment: .leading, content: {
-                Text("Weight")
-//                        .font(.caption)
-                    .foregroundStyle(.gray)
-                TextField("Weight", value: $weight, formatter: formatter)
-                    .padding(.vertical, 12)
-                    .padding(.horizontal, 15)
-                    .background(.white.shadow(.drop(color: .black.opacity(0.25), radius: 2)), in: .rect(cornerRadius: 10))
-            })
-            
-            VStack(alignment: .leading, content: {
-                Text("Height")
-//                        .font(.caption)
-                    .foregroundStyle(.gray)
-                TextField("Height", value: $height, formatter: formatter)
-                    .padding(.vertical, 12)
-                    .padding(.horizontal, 15)
-                    .background(.white.shadow(.drop(color: .black.opacity(0.25), radius: 2)), in: .rect(cornerRadius: 10))
-
-            })
-
-            VStack(alignment: .leading, content: {
-                Text("Sex")
-                //                        .font(.caption)
-                                   .foregroundStyle(.gray)
-                              
-                                   Picker("", selection: $sex){
-                                       ForEach(sexes, id: \.self) { i in
-                                           Text(i)
-                                               .font(.caption)
-                                               .tag(i)
-                                       }
-                                   } .padding(.vertical, 12)
-                    .padding(.horizontal, 10)
-                    .background(.white.shadow(.drop(color: .black.opacity(0.25), radius: 2)), in: .rect(cornerRadius: 10))
+        VStack {
+            Spacer()
+            Form {
+                HStack {
+                    VStack(alignment: .leading, content: {
+                        Text("Name")
+        //                        .font(.caption)
+                            .foregroundStyle(.gray)
+                        
+                        TextField("Name", text: $firstName)
+                            .padding(.vertical, 12)
+                            .padding(.horizontal, 15)
+                            .background(.white.shadow(.drop(color: .black.opacity(0.25), radius: 2)), in: .rect(cornerRadius: 10))
+                        
+                    }).listRowSeparator(.hidden)
                     
-            })
-            
-            VStack(alignment: .leading, content: {
-                Text("Activity level")
-//                        .font(.caption)
-                    .foregroundStyle(.gray)
-                              
-                Picker("", selection: $activityLevel){
-                    ForEach(levels, id: \.self) { i in
-                        Text(i)
-                            .font(.caption)
-                            .tag(i)
-                           
-                }
-            }.padding(.vertical, 12)
-                                    .padding(.horizontal, 10)
-                                    .background(.white.shadow(.drop(color: .black.opacity(0.25), radius: 2)), in: .rect(cornerRadius: 10))
-                   
-                    
-            })
-    
-        }.navigationTitle("Biometrics")
-               
-
-
-               
-                
+                    VStack(alignment: .leading, content: {
+                        Text("Age")
+        //                        .font(.caption)
+                            .foregroundStyle(.gray)
+                        TextField("Age", value: $age, formatter: formatter)
+                            .padding(.vertical, 12)
+                            .padding(.horizontal, 15)
+                            .background(.white.shadow(.drop(color: .black.opacity(0.25), radius: 2)), in: .rect(cornerRadius: 10))
+                    }).listRowSeparator(.hidden)
+                }.listRowSeparator(.hidden)
               
-            
+                HStack {
+                    VStack(alignment: .leading, content: {
+                    Text("Weight")
+    //                        .font(.caption)
+                        .foregroundStyle(.gray)
+                    TextField("Weight", value: $weight, formatter: formatter)
+                        .padding(.vertical, 12)
+                        .padding(.horizontal, 15)
+                        .background(.white.shadow(.drop(color: .black.opacity(0.25), radius: 2)), in: .rect(cornerRadius: 10))
+                    
+                }).listRowSeparator(.hidden)
+                    
+                 
+                
+                VStack(alignment: .leading, content: {
+                    Text("Height")
+    //                        .font(.caption)
+                        .foregroundStyle(.gray)
+                    TextField("Height", value: $height, formatter: formatter)
+                        .padding(.vertical, 12)
+                        .padding(.horizontal, 15)
+                        .background(.white.shadow(.drop(color: .black.opacity(0.25), radius: 2)), in: .rect(cornerRadius: 10))
+
+                }).listRowSeparator(.hidden)}.listRowSeparator(.hidden)
+           
+              
+                    VStack(alignment: .leading, content: {
+                        Text("Sex")
+                        //                        .font(.caption)
+                                           .foregroundStyle(.gray)
+                                      
+                                           Picker("", selection: $sex){
+                                               ForEach(sexes, id: \.self) { i in
+                                                   Text(i)
+                                                       .font(.caption)
+                                                       .tag(i)
+                                               }
+                                           } .padding(.vertical, 6)
+                            .padding(.horizontal, 10)
+                            .background(.white.shadow(.drop(color: .black.opacity(0.25), radius: 2)), in: .rect(cornerRadius: 10))
+                            
+                    }).listRowSeparator(.hidden)
+                    
+                    VStack(alignment: .leading, content: {
+                        Text("Activity level")
+        //                        .font(.caption)
+                            .foregroundStyle(.gray)
+                                      
+                        Picker("", selection: $activityLevel){
+                            ForEach(levels, id: \.self) { i in
+                                Text(i)
+                                    .font(.caption)
+                                    .tag(i)
+                                   
+                        }
+                    }.padding(.vertical, 6)
+                                            .padding(.horizontal, 10)
+                                            .background(.white.shadow(.drop(color: .black.opacity(0.25), radius: 2)), in: .rect(cornerRadius: 10))
+                           
+                            
+                    })  .listRowSeparator(.hidden)
+              
+
+              
+        
+            }.scrollContentBackground(.hidden).background(.white).padding(10)
+            Spacer()
+        }
       
+
     }
 }
 

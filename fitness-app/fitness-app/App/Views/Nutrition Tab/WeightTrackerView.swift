@@ -49,6 +49,7 @@ struct WeightTrackerView: View {
                         Section {
                             LabeledContent {
                                 TextField("60kg", value: $weight, format: .number)
+                                    .listRowSeparator(.hidden)
                             } label: {
                                 Text("Your weight")
                                     .font(.caption)
@@ -71,7 +72,7 @@ struct WeightTrackerView: View {
                                 }
                                 Spacer()
 
-                            }
+                            }.listRowSeparator(.hidden)
                           
                             Button(action: {
                                 // saving meal
@@ -93,7 +94,7 @@ struct WeightTrackerView: View {
                                     .hSpacing(.center)
                                     .padding(.vertical, 12)
                                     .background(Color(.green), in: .rect(cornerRadius: 10))
-                            })
+                            }).listRowSeparator(.hidden)
                         }
                     }
                 }
