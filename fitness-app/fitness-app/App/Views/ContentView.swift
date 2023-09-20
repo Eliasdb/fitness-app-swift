@@ -113,11 +113,8 @@ struct ContentView: View {
                     launchScreenManager.dismiss()
                 }
         }
-       
     }
-    
 }
-
 
 //@available(iOS 17.0, *)
 //#Preview {

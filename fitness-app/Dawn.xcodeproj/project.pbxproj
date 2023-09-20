@@ -16,6 +16,8 @@
 		643A38052ABB04A300C15F30 /* Array+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643A38042ABB04A300C15F30 /* Array+extensions.swift */; };
 		643A38072ABB0F0800C15F30 /* ExercisesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643A38062ABB0F0800C15F30 /* ExercisesViewModel.swift */; };
 		643A38092ABB18C100C15F30 /* PhotoGalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643A38082ABB18C100C15F30 /* PhotoGalleryView.swift */; };
+		643A38112ABB299D00C15F30 /* DawnTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643A38102ABB299D00C15F30 /* DawnTests.swift */; };
+		643A38182ABB29EF00C15F30 /* NutritionViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643A38172ABB29EF00C15F30 /* NutritionViewModelTests.swift */; };
 		6445BD0A2A697A3A00833E65 /* LaunchScreenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6445BD092A697A3A00833E65 /* LaunchScreenManager.swift */; };
 		645866202A71537A00D88176 /* MealsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6458661F2A71537A00D88176 /* MealsView.swift */; };
 		6467CA592A6FEFB5003F6387 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6467CA582A6FEFB5003F6387 /* Meal.swift */; };
@@ -27,9 +29,6 @@
 		64877BCD2AB9BFF30000A5C0 /* AddPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64877BCC2AB9BFF30000A5C0 /* AddPhotoView.swift */; };
 		64877BCF2AB9CCCB0000A5C0 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64877BCE2AB9CCCB0000A5C0 /* Photo.swift */; };
 		648AE1ED2AAA04C400DB254A /* Print.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648AE1EC2AAA04C400DB254A /* Print.swift */; };
-		648AE1F02AAB317400DB254A /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 648AE1EF2AAB317400DB254A /* Collections */; };
-		648AE1F22AAB317400DB254A /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = 648AE1F12AAB317400DB254A /* DequeModule */; };
-		648AE1F42AAB317400DB254A /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 648AE1F32AAB317400DB254A /* OrderedCollections */; };
 		648AE1F62AAB7A9A00DB254A /* CaloriesPastWeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648AE1F52AAB7A9A00DB254A /* CaloriesPastWeekView.swift */; };
 		648AE1F82AAC742B00DB254A /* UpdateMealView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648AE1F72AAC742B00DB254A /* UpdateMealView.swift */; };
 		648AE1FC2AADD5DA00DB254A /* AddExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648AE1FB2AADD5DA00DB254A /* AddExerciseView.swift */; };
@@ -54,6 +53,16 @@
 		64FB08012A71891C0060571A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FB08002A71891C0060571A /* HomeView.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		643A38122ABB299D00C15F30 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 64D955EA2A682548003D679E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 64D955F12A682548003D679E;
+			remoteInfo = Dawn;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		641B65E92A7A6A9A00482967 /* CaloriesAndMacrosCounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaloriesAndMacrosCounterView.swift; sourceTree = "<group>"; };
 		642C59982A703A9200A88029 /* OffsetKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetKey.swift; sourceTree = "<group>"; };
@@ -64,6 +73,9 @@
 		643A38042ABB04A300C15F30 /* Array+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+extensions.swift"; sourceTree = "<group>"; };
 		643A38062ABB0F0800C15F30 /* ExercisesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesViewModel.swift; sourceTree = "<group>"; };
 		643A38082ABB18C100C15F30 /* PhotoGalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGalleryView.swift; sourceTree = "<group>"; };
+		643A380E2ABB299D00C15F30 /* DawnTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DawnTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		643A38102ABB299D00C15F30 /* DawnTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DawnTests.swift; sourceTree = "<group>"; };
+		643A38172ABB29EF00C15F30 /* NutritionViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionViewModelTests.swift; sourceTree = "<group>"; };
 		6445BD092A697A3A00833E65 /* LaunchScreenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenManager.swift; sourceTree = "<group>"; };
 		6458661F2A71537A00D88176 /* MealsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealsView.swift; sourceTree = "<group>"; };
 		6467CA582A6FEFB5003F6387 /* Meal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
@@ -102,13 +114,17 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		643A380B2ABB299D00C15F30 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		64D955EF2A682548003D679E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				648AE1F02AAB317400DB254A /* Collections in Frameworks */,
-				648AE1F22AAB317400DB254A /* DequeModule in Frameworks */,
-				648AE1F42AAB317400DB254A /* OrderedCollections in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -122,6 +138,15 @@
 				643A38062ABB0F0800C15F30 /* ExercisesViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		643A380F2ABB299D00C15F30 /* DawnTests */ = {
+			isa = PBXGroup;
+			children = (
+				643A38102ABB299D00C15F30 /* DawnTests.swift */,
+				643A38172ABB29EF00C15F30 /* NutritionViewModelTests.swift */,
+			);
+			path = DawnTests;
 			sourceTree = "<group>";
 		};
 		6467CA552A6FEF2D003F6387 /* Models */ = {
@@ -229,6 +254,7 @@
 			isa = PBXGroup;
 			children = (
 				64D955F42A682548003D679E /* fitness-app */,
+				643A380F2ABB299D00C15F30 /* DawnTests */,
 				64D955F32A682548003D679E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -237,6 +263,7 @@
 			isa = PBXGroup;
 			children = (
 				64D955F22A682548003D679E /* Dawn.app */,
+				643A380E2ABB299D00C15F30 /* DawnTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -296,6 +323,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		643A380D2ABB299D00C15F30 /* DawnTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 643A38142ABB299D00C15F30 /* Build configuration list for PBXNativeTarget "DawnTests" */;
+			buildPhases = (
+				643A380A2ABB299D00C15F30 /* Sources */,
+				643A380B2ABB299D00C15F30 /* Frameworks */,
+				643A380C2ABB299D00C15F30 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				643A38132ABB299D00C15F30 /* PBXTargetDependency */,
+			);
+			name = DawnTests;
+			productName = DawnTests;
+			productReference = 643A380E2ABB299D00C15F30 /* DawnTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		64D955F12A682548003D679E /* Dawn */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 64D956002A682548003D679E /* Build configuration list for PBXNativeTarget "Dawn" */;
@@ -310,9 +355,6 @@
 			);
 			name = Dawn;
 			packageProductDependencies = (
-				648AE1EF2AAB317400DB254A /* Collections */,
-				648AE1F12AAB317400DB254A /* DequeModule */,
-				648AE1F32AAB317400DB254A /* OrderedCollections */,
 			);
 			productName = "fitness-app";
 			productReference = 64D955F22A682548003D679E /* Dawn.app */;
@@ -325,9 +367,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1430;
+				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
+					643A380D2ABB299D00C15F30 = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = 64D955F12A682548003D679E;
+					};
 					64D955F12A682548003D679E = {
 						CreatedOnToolsVersion = 14.3.1;
 					};
@@ -343,18 +389,25 @@
 			);
 			mainGroup = 64D955E92A682548003D679E;
 			packageReferences = (
-				648AE1EE2AAB317400DB254A /* XCRemoteSwiftPackageReference "swift-collections" */,
 			);
 			productRefGroup = 64D955F32A682548003D679E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				64D955F12A682548003D679E /* Dawn */,
+				643A380D2ABB299D00C15F30 /* DawnTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		643A380C2ABB299D00C15F30 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		64D955F02A682548003D679E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -367,6 +420,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		643A380A2ABB299D00C15F30 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				643A38112ABB299D00C15F30 /* DawnTests.swift in Sources */,
+				643A38182ABB29EF00C15F30 /* NutritionViewModelTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		64D955EE2A682548003D679E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -416,7 +478,58 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		643A38132ABB299D00C15F30 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 64D955F12A682548003D679E /* Dawn */;
+			targetProxy = 643A38122ABB299D00C15F30 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		643A38152ABB299D00C15F30 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = elias.DawnTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Dawn.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Dawn";
+			};
+			name = Debug;
+		};
+		643A38162ABB299D00C15F30 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = elias.DawnTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Dawn.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Dawn";
+			};
+			name = Release;
+		};
 		64D955FE2A682548003D679E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -596,6 +709,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		643A38142ABB299D00C15F30 /* Build configuration list for PBXNativeTarget "DawnTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				643A38152ABB299D00C15F30 /* Debug */,
+				643A38162ABB299D00C15F30 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		64D955ED2A682548003D679E /* Build configuration list for PBXProject "Dawn" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -615,35 +737,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		648AE1EE2AAB317400DB254A /* XCRemoteSwiftPackageReference "swift-collections" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/apple/swift-collections.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.4;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		648AE1EF2AAB317400DB254A /* Collections */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 648AE1EE2AAB317400DB254A /* XCRemoteSwiftPackageReference "swift-collections" */;
-			productName = Collections;
-		};
-		648AE1F12AAB317400DB254A /* DequeModule */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 648AE1EE2AAB317400DB254A /* XCRemoteSwiftPackageReference "swift-collections" */;
-			productName = DequeModule;
-		};
-		648AE1F32AAB317400DB254A /* OrderedCollections */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 648AE1EE2AAB317400DB254A /* XCRemoteSwiftPackageReference "swift-collections" */;
-			productName = OrderedCollections;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 64D955EA2A682548003D679E /* Project object */;
 }

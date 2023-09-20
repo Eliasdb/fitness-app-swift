@@ -9,7 +9,6 @@ import SwiftUI
 import Charts
 import _SwiftData_SwiftUI
 import Foundation
-import Collections
 import PhotosUI
 
 @available(iOS 17.0, *)

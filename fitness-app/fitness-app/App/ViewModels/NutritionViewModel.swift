@@ -7,9 +7,21 @@
 
 import Foundation
 
+struct MealData: Hashable {
+   var date: String
+   var dateasDate: Date
+   var amount: Int
+}
+
+struct WeightData: Hashable {
+    var date: String
+    var dateasDate: Date
+    var amount: Double
+}
 
 @available(iOS 17.0, *)
 class NutritionViewModel: ObservableObject {
+    
     // declare as a property
     let func1: () -> Void = {
         print("func1")
@@ -20,18 +32,6 @@ class NutritionViewModel: ObservableObject {
         print("func2")
     }
     
-    struct MealData: Hashable {
-       var  date: String
-       var  dateasDate: Date
-       var amount: Int
-   }
-    
-    struct WeightData: Hashable {
-        var date: String
-        var dateasDate: Date
-        var amount: Double
-    }
-
     func mealChartData (meals: [Meal]) -> [[MealData]]  {
         //formats date of meal
         let dateFormatter = DateFormatter()
