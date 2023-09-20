@@ -7,7 +7,9 @@
 
 import SwiftUI
 
+@available(iOS 17.0, *)
 struct HealthView: View {
+
     var body: some View {
         NavigationStack {
             Form {

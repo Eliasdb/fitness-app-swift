@@ -15,9 +15,11 @@ class Weight: Hashable {
         var weight: Double
         var creationDate: Date
                 
-        init(id: UUID = .init(), weight: Double, creationDate: Date = .init()) {
+    init(id: UUID = .init(), weight: Double, creationDate: Date = .init()) {
             self.id = id
             self.weight = weight
             self.creationDate = creationDate
+      
+
         }
     }

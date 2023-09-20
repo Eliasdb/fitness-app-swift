@@ -11,6 +11,9 @@
 		642C59992A703A9200A88029 /* OffsetKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642C59982A703A9200A88029 /* OffsetKey.swift */; };
 		642C599B2A7046F000A88029 /* MealRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642C599A2A7046F000A88029 /* MealRowView.swift */; };
 		642C599D2A713AAD00A88029 /* AddMealView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642C599C2A713AAD00A88029 /* AddMealView.swift */; };
+		643A38012ABAFC6800C15F30 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643A38002ABAFC6800C15F30 /* ViewModel.swift */; };
+		643A38032ABB039D00C15F30 /* WeightTrackerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643A38022ABB039D00C15F30 /* WeightTrackerView.swift */; };
+		643A38052ABB04A300C15F30 /* Array+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643A38042ABB04A300C15F30 /* Array+extensions.swift */; };
 		6445BD0A2A697A3A00833E65 /* LaunchScreenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6445BD092A697A3A00833E65 /* LaunchScreenManager.swift */; };
 		645866202A71537A00D88176 /* MealsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6458661F2A71537A00D88176 /* MealsView.swift */; };
 		6467CA592A6FEFB5003F6387 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6467CA582A6FEFB5003F6387 /* Meal.swift */; };
@@ -39,7 +42,6 @@
 		648AE20F2AB3605700DB254A /* CaloriesDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648AE20E2AB3605700DB254A /* CaloriesDetailView.swift */; };
 		648AE2112AB364A300DB254A /* MacrosDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648AE2102AB364A300DB254A /* MacrosDetailView.swift */; };
 		64B832362A696E1800079C83 /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B832352A696E1800079C83 /* LaunchScreenView.swift */; };
-		64D42F5C2AB378DC00E66943 /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D42F5B2AB378DC00E66943 /* test.swift */; };
 		64D42F5E2AB48C3800E66943 /* ExerciseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D42F5D2AB48C3800E66943 /* ExerciseDetailView.swift */; };
 		64D955F62A682548003D679E /* DawnApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D955F52A682548003D679E /* DawnApp.swift */; };
 		64D955F82A682548003D679E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D955F72A682548003D679E /* ContentView.swift */; };
@@ -55,6 +57,9 @@
 		642C59982A703A9200A88029 /* OffsetKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetKey.swift; sourceTree = "<group>"; };
 		642C599A2A7046F000A88029 /* MealRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealRowView.swift; sourceTree = "<group>"; };
 		642C599C2A713AAD00A88029 /* AddMealView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMealView.swift; sourceTree = "<group>"; };
+		643A38002ABAFC6800C15F30 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		643A38022ABB039D00C15F30 /* WeightTrackerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightTrackerView.swift; sourceTree = "<group>"; };
+		643A38042ABB04A300C15F30 /* Array+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+extensions.swift"; sourceTree = "<group>"; };
 		6445BD092A697A3A00833E65 /* LaunchScreenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenManager.swift; sourceTree = "<group>"; };
 		6458661F2A71537A00D88176 /* MealsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealsView.swift; sourceTree = "<group>"; };
 		6467CA582A6FEFB5003F6387 /* Meal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
@@ -80,7 +85,6 @@
 		648AE2102AB364A300DB254A /* MacrosDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacrosDetailView.swift; sourceTree = "<group>"; };
 		64B832322A696C3D00079C83 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		64B832352A696E1800079C83 /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
-		64D42F5B2AB378DC00E66943 /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
 		64D42F5D2AB48C3800E66943 /* ExerciseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetailView.swift; sourceTree = "<group>"; };
 		64D955F22A682548003D679E /* Dawn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dawn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		64D955F52A682548003D679E /* DawnApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DawnApp.swift; sourceTree = "<group>"; };
@@ -107,6 +111,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		643A37FF2ABAFC5700C15F30 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				643A38002ABAFC6800C15F30 /* ViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		6467CA552A6FEF2D003F6387 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -123,6 +135,7 @@
 			children = (
 				6467CA5B2A6FF52F003F6387 /* View+Extensions.swift */,
 				6467CA5D2A6FF53E003F6387 /* Date+Extensions.swift */,
+				643A38042ABB04A300C15F30 /* Array+extensions.swift */,
 				642C59982A703A9200A88029 /* OffsetKey.swift */,
 				648AE1EC2AAA04C400DB254A /* Print.swift */,
 			);
@@ -132,6 +145,7 @@
 		648AE1E72AA8946E00DB254A /* App */ = {
 			isa = PBXGroup;
 			children = (
+				643A37FF2ABAFC5700C15F30 /* ViewModel */,
 				64D955F52A682548003D679E /* DawnApp.swift */,
 				64D9560B2A68276A003D679E /* Views */,
 				6467CA552A6FEF2D003F6387 /* Model */,
@@ -144,12 +158,12 @@
 			isa = PBXGroup;
 			children = (
 				648AE20C2AB327CC00DB254A /* NutritionView.swift */,
-				648AE20E2AB3605700DB254A /* CaloriesDetailView.swift */,
-				648AE2102AB364A300DB254A /* MacrosDetailView.swift */,
-				64877BC52AB8637F0000A5C0 /* WeightTrackerDetailView.swift */,
-				64D42F5B2AB378DC00E66943 /* test.swift */,
 				648AE1F52AAB7A9A00DB254A /* CaloriesPastWeekView.swift */,
+				648AE20E2AB3605700DB254A /* CaloriesDetailView.swift */,
 				648AE2072AB225B900DB254A /* MacrosPastWeekView.swift */,
+				648AE2102AB364A300DB254A /* MacrosDetailView.swift */,
+				643A38022ABB039D00C15F30 /* WeightTrackerView.swift */,
+				64877BC52AB8637F0000A5C0 /* WeightTrackerDetailView.swift */,
 			);
 			path = "Nutrition Tab";
 			sourceTree = "<group>";
@@ -354,6 +368,7 @@
 				64D956062A6825C1003D679E /* ExercisesView.swift in Sources */,
 				648AE2042AAF1CA300DB254A /* ExercisesPastWeekView.swift in Sources */,
 				64877BCD2AB9BFF30000A5C0 /* AddPhotoView.swift in Sources */,
+				643A38032ABB039D00C15F30 /* WeightTrackerView.swift in Sources */,
 				6445BD0A2A697A3A00833E65 /* LaunchScreenManager.swift in Sources */,
 				64B832362A696E1800079C83 /* LaunchScreenView.swift in Sources */,
 				648AE1F82AAC742B00DB254A /* UpdateMealView.swift in Sources */,
@@ -367,11 +382,11 @@
 				648AE1ED2AAA04C400DB254A /* Print.swift in Sources */,
 				642C59992A703A9200A88029 /* OffsetKey.swift in Sources */,
 				648AE1FC2AADD5DA00DB254A /* AddExerciseView.swift in Sources */,
-				64D42F5C2AB378DC00E66943 /* test.swift in Sources */,
 				6467CA5C2A6FF52F003F6387 /* View+Extensions.swift in Sources */,
 				64D955F82A682548003D679E /* ContentView.swift in Sources */,
 				642C599B2A7046F000A88029 /* MealRowView.swift in Sources */,
 				64877BCA2AB9A38A0000A5C0 /* PhotoGalleryDetailView.swift in Sources */,
+				643A38012ABAFC6800C15F30 /* ViewModel.swift in Sources */,
 				64D955F62A682548003D679E /* DawnApp.swift in Sources */,
 				645866202A71537A00D88176 /* MealsView.swift in Sources */,
 				642C599D2A713AAD00A88029 /* AddMealView.swift in Sources */,
@@ -387,6 +402,7 @@
 				648AE20F2AB3605700DB254A /* CaloriesDetailView.swift in Sources */,
 				648AE2112AB364A300DB254A /* MacrosDetailView.swift in Sources */,
 				64FB08012A71891C0060571A /* HomeView.swift in Sources */,
+				643A38052ABB04A300C15F30 /* Array+extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -517,6 +533,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"fitness-app/Preview Content\"";
+				DEVELOPMENT_TEAM = KT5X64TDF4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "fitness-app/Info.plist";
@@ -546,6 +563,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"fitness-app/Preview Content\"";
+				DEVELOPMENT_TEAM = KT5X64TDF4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "fitness-app/Info.plist";

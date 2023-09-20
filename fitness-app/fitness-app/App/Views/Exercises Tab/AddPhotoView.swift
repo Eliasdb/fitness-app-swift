@@ -14,13 +14,11 @@ struct AddPhotoView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var context
 
-
-    @State private var selectedPhotoCategory: String = ""
-    @State private var selectedPhotoDate: Date = Date()
-
+    @State private var selectedPhotoCategory: String = "Abs"
+    @State private var selectedPhotoDate: Date = .init()
     
-    @State var selectedPhoto: PhotosPickerItem?
-    @State var selectedPhotoData: Data?
+    @State private var selectedPhoto: PhotosPickerItem?
+    @State private var selectedPhotoData: Data?
     var categories: [String] = ["Abs", "Arms", "Back", "Chest", "Legs"]
 
     var body: some View {
@@ -95,8 +93,10 @@ struct AddPhotoView: View {
             })
             Spacer(minLength: 0)
             Button(action: {
-//                 saving meal
-                        let photo = Photo(imageCategory: selectedPhotoCategory, image: selectedPhotoData)
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateStyle = .long
+                let formattedPhotoDate = dateFormatter.string(from: selectedPhotoDate)
+                let photo = Photo(imageCategory: selectedPhotoCategory, image: selectedPhotoData, dateAsString: formattedPhotoDate)
                         do {
                             context.insert(photo)
                             try context.save()

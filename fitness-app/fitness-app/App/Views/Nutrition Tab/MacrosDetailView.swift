@@ -11,12 +11,11 @@ import SwiftData
 
 @available(iOS 17.0, *)
 struct MacrosDetailView: View {
+    @ObservedObject var vm = ViewModel()
     @Query private var mealsPastWeek: [Meal]
     @State private var today: Date = .init()
     @State private var weekIndex: Int = 0
     @State private var macro: String = "Protein"
-    
-    
     @State private var macros = ["Carbs", "Fat", "Protein"]
     
     struct Data: Hashable {
@@ -39,80 +38,6 @@ struct MacrosDetailView: View {
                   ]
                 self._mealsPastWeek = Query(filter: predicate, sort: sortDescriptor, animation: .snappy)
         }
-
-   
-    
-    func mealDonutChartData (meals: [Meal]) ->  [[Data]]   {
-        //formats date of meal
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM"
-        
-        
-        var mealsArray: [Data] = []
-        
-        let groupedMeals = Dictionary(grouping: meals, by: { dateFormatter.string(from: $0.creationDate) })
-    
-        
-       
-        let groupedMealsKeys =  groupedMeals.map { $0.key }
-
-        if macro == "Protein" {
-            let groupedMealsValues =  groupedMeals.map { $0.value.map { $0.protein }.reduce(0, +)}
-            let sequence = zip(groupedMealsKeys, groupedMealsValues)
-            
-            for (el1, el2) in sequence {
-                mealsArray.append( Data(date: el1, dateasDate: Calendar.current.date(byAdding: .day, value: 1, to: dateFormatter.date(from: el1)!)!, amount: el2))
-            }
-            
-            let sortedMacro = mealsArray.sorted(by: { $0.dateasDate > ($1.dateasDate)}).chunked(into: 7)
-            return sortedMacro
-        }
-        
-        if macro == "Carbs" {
-            let groupedMealsValues =  groupedMeals.map { $0.value.map { $0.carbs }.reduce(0, +)}
-            let sequence = zip(groupedMealsKeys, groupedMealsValues)
-            
-            for (el1, el2) in sequence {
-                mealsArray.append( Data(date: el1, dateasDate: Calendar.current.date(byAdding: .day, value: 1, to: dateFormatter.date(from: el1)!)!, amount: el2))
-            }
-            
-            let sortedMacro = mealsArray.sorted(by: { $0.dateasDate > ($1.dateasDate)}).chunked(into: 7)
-            return sortedMacro
-        }
-        
-        if macro == "Fat" {
-            let groupedMealsValues =  groupedMeals.map { $0.value.map { $0.fat }.reduce(0, +)}
-            let sequence = zip(groupedMealsKeys, groupedMealsValues)
-            
-            for (el1, el2) in sequence {
-                mealsArray.append( Data(date: el1, dateasDate: Calendar.current.date(byAdding: .day, value: 1, to: dateFormatter.date(from: el1)!)!, amount: el2))
-            }
-            let sortedMacro = mealsArray.sorted(by: { $0.dateasDate > ($1.dateasDate)}).chunked(into: 7)
-            return sortedMacro
-
-        }
-        
-        if (meals.isEmpty) {
-            return [[]]
-        }
-        
-
-        return [[]]
-    }
-    
-    func getAverage (meals: [Data]) -> Int {
-        let allCalories = meals.map {$0.amount}.reduce(0, +)
-        let numberOfMeals = meals.count
-        
-        
-        if (meals.isEmpty) {
-            return 0
-        }
-        
-        let average = allCalories / numberOfMeals
-
-        return average
-    }
     
     func macrosProgressString() -> String? {
         let numberFormatter = NumberFormatter()
@@ -139,22 +64,16 @@ struct MacrosDetailView: View {
         
         return ""
     }
-    struct TestData: Hashable {
-        var date:Int
-        var amount:Int
-    }
-    
+  
     var body: some View {
-        let preloadedData: [TestData] = [TestData(date:1, amount: 500), TestData(date:2, amount: 750), TestData(date:3, amount: 1000), TestData(date:4, amount: 1250), TestData(date:5, amount: 1500), TestData(date:6, amount: 1750), TestData(date:7, amount: 2000)]
-
-        if mealDonutChartData(meals: mealsPastWeek).isEmpty {
+        if vm.mealDonutChartData(meals: mealsPastWeek, macro: macro).isEmpty {
             Text("Track your macros here.")
         } else {
             Text("Your protein intake ") + Text("\(macrosProgressString()!)").bold() + Text(" compared to last week!")
         }
     
         VStack(content: {
-            if mealDonutChartData(meals: mealsPastWeek).isEmpty {
+            if vm.mealDonutChartData(meals: mealsPastWeek, macro: macro).isEmpty {
 //                Chart {
 //                    ForEach(preloadedData , id: \.self) { item in
 //                        AreaMark(x: .value("day", item.date), y: .value("amount", item.amount))
@@ -165,7 +84,7 @@ struct MacrosDetailView: View {
 //                .chartYAxis(.hidden)
             } else {
                 Chart {
-                    ForEach(mealDonutChartData(meals: mealsPastWeek)[weekIndex].sorted(by: { $0.dateasDate < ($1.dateasDate)}) , id: \.self) { item in
+                    ForEach(vm.mealDonutChartData(meals: mealsPastWeek, macro: macro)[weekIndex].sorted(by: { $0.dateasDate < ($1.dateasDate)}) , id: \.self) { item in
                         AreaMark(x: .value("day", item.date), y: .value("amount", item.amount))
                         .foregroundStyle(Color.teal.gradient)}
                 }

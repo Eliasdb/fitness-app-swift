@@ -10,7 +10,6 @@ import SwiftUI
 struct WeightTrackerDetailView: View {
     var body: some View {
         Text("Track your weight here.")
-
     }
 }
 
