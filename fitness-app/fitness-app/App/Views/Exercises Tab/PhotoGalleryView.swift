@@ -16,8 +16,6 @@ struct PhotoGalleryView: View {
     @Binding var categoriesString: [String]
     @Binding var createNewPhoto: Bool
 
-
-    
     var body: some View {
         Section {
             NavigationLink {
@@ -40,9 +38,7 @@ struct PhotoGalleryView: View {
                                             Image(uiImage: UIImage(data: item.image!)!)
                                                     .resizable()
                                                     .scaledToFill()
-                                                    .frame(minWidth: 300, minHeight
-                                                           : 400)
-
+                                                    .frame(minWidth: 300, maxHeight: 450)
                                             VStack(spacing: 0) {
                                                 Rectangle()
                                                     .fill(.white)
@@ -55,10 +51,7 @@ struct PhotoGalleryView: View {
                                                         Text("\(item.dateAsString)")
                                                             .font(.body)
                                                     }
-
                                                     Spacer()
-
-                                                
                                                 }
                                                 .font(.title3.bold())
                                                 .padding(10)
@@ -68,7 +61,6 @@ struct PhotoGalleryView: View {
                                                 .frame(maxWidth: .infinity)
                                             }
                                         }
-                                       
                                         .clipShape(RoundedRectangle(cornerRadius: 25))
                                         .shadow(color: .black.opacity(0.2), radius: 2)
                                         .padding(4)
@@ -81,14 +73,9 @@ struct PhotoGalleryView: View {
                                 .scrollTargetBehavior(.viewAligned)
                                 .contentMargins(20, for: .scrollContent)
                                 .listRowInsets(EdgeInsets())
-
                         }
                         Spacer()
                     })
-                  Spacer()
-                  
-
-                
                 })
                 .overlay(alignment: .bottomTrailing, content: {
                     VStack {

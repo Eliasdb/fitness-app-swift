@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct LaunchScreenView: View {
-    
     @EnvironmentObject var launchScreenManager: LaunchScreenManager
     @State private var firstPhaseIsAnimating: Bool = false
     @State private var secondPhaseIsAnimating: Bool = false
@@ -54,9 +53,8 @@ private extension LaunchScreenView {
     }
 }
 
-//struct LaunchScreenView_Previews: PreviewProvider {
-//    static var previews: some View {
+//@available(iOS 17.0, *)
+//#Preview {
 //        LaunchScreenView()
 //            .environmentObject(LaunchScreenManager())
-//    }
 //}

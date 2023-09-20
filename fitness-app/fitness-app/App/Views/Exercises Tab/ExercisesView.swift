@@ -32,7 +32,6 @@ struct ExercisesView: View {
         let predicate = #Predicate<Exercise> {
             return $0.creationDate <= startOfDate && $0.creationDate > todayminus30
         }
-        
 //         sorting
         let sortDescriptor = [
             
@@ -49,17 +48,16 @@ struct ExercisesView: View {
                 
                 PhotoGalleryView(selectedPhotoCategory: $selectedPhotoCategory, categoriesString: $categoriesString, createNewPhoto: $createNewPhoto)
                 
-            }   .navigationTitle("Exercises")
-                .toolbarBackground(.mint, for: .navigationBar)
-                .toolbarBackground(.visible, for: .navigationBar)
-                .navigationBarTitleDisplayMode(.inline)
+            }
+            .navigationTitle("Exercises")
+            .toolbarBackground(.mint, for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
 
-@available(iOS 17.0, *)
-struct ExercisesView_Previews: PreviewProvider {
-    static var previews: some View {
-        ExercisesView()
-    }
-}
+//@available(iOS 17.0, *)
+//#Preview {
+//   ExercisesView()
+//}

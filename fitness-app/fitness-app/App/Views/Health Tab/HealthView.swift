@@ -23,8 +23,7 @@ struct HealthView: View {
     }
 }
 
-//struct HealthView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        HealthView()
-//    }
+//@available(iOS 17.0, *)
+//#Preview {
+//   HealthView()
 //}

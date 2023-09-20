@@ -14,17 +14,16 @@ import _PhotosUI_SwiftUI
 class Photo: Hashable {
         var id: UUID
         var imageCategory: String
-    @Attribute(.externalStorage)
+@Attribute(.externalStorage)
         var image: Data?
         var creationDate: Date 
-    var dateAsString: String
+        var dateAsString: String
 
-                
     init(id: UUID = .init(), imageCategory: String, image: Data?, creationDate: Date = .init(),  dateAsString: String) {
             self.id = id
             self.imageCategory = imageCategory
             self.image = image
             self.creationDate = creationDate
-        self.dateAsString = dateAsString
+            self.dateAsString = dateAsString
         }
     }

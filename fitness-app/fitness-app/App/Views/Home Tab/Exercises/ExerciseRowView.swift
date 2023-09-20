@@ -53,9 +53,8 @@ struct ExerciseRowView: View {
 }
 
 //@available(iOS 17.0, *)
-//struct ExerciseRowView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        HomeView()
-//            .modelContainer(for: [Meal.self], inMemory: true)
-//    }
+//#Preview {
+//    HomeView()
+//        .modelContainer(for: [Meal.self], inMemory: true)
 //}
+

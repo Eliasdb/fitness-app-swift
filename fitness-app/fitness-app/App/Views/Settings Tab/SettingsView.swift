@@ -25,20 +25,9 @@ struct SettingsView: View {
     }
 }
 
-extension Binding {
-    public static func variable(_ proteinAmount: Int) -> Binding<Int> {
-        var state = proteinAmount
-        return Binding<Int> {
-            state
-        } set: {
-            state = $0
-        }
-    }
-}
 
-
-//struct SettingsView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SettingsView()
-//    }
+//@available(iOS 17.0, *)
+//#Preview {
+//   SettingsView()
 //}
+

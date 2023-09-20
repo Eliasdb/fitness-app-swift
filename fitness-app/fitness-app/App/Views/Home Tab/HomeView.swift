@@ -236,10 +236,9 @@ struct HomeView: View {
     }
 }
 
+
 //@available(iOS 17.0, *)
-//struct HomeView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        HomeView(currentDate: $currentDate)
+//#Preview {
+//         HomeView(currentDate: $currentDate)
 //            .modelContainer(for: [Meal.self], inMemory: true)
-//    }
 //}

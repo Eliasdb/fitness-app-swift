@@ -44,7 +44,7 @@ struct ContentView: View {
     var body: some View {
 //        TabView(selection: $selection) {
 //            Group {
-//                CaloriesView()
+//                NutritionView()
 //                    .tag(1)
 //                    .tabItem {
 //                        Label("Calories", systemImage: "fork.knife")
@@ -118,12 +118,10 @@ struct ContentView: View {
     
 }
 
-@available(iOS 17.0, *)
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-            .environmentObject(LaunchScreenManager())
-            .modelContainer(for: [Meal.self, Exercise.self], inMemory: true)
 
-    }
-}
+//@available(iOS 17.0, *)
+//#Preview {
+//        ContentView()
+//}
+
+

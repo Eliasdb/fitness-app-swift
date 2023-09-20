@@ -28,7 +28,7 @@ struct WeightTrackerView: View {
                             } else {
                                 Chart {
                                     ForEach(vm.getWeights(weights: weights).sorted(by: { $0.dateasDate < ($1.dateasDate)}) , id: \.self) { item in
-                                        LineMark(x: .value("day", item.date), y: .value("amount", item.amount))
+                                        BarMark(x: .value("day", item.date), y: .value("amount", item.amount))
                                             .foregroundStyle(Color("TestColor").gradient)
                                     }
                                 }

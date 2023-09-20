@@ -19,7 +19,5 @@ class Weight: Hashable {
             self.id = id
             self.weight = weight
             self.creationDate = creationDate
-      
-
         }
     }

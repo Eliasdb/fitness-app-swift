@@ -20,8 +20,7 @@ import SwiftData
         var minutes : Int?
         var creationDate: Date
                 
-        init(id: UUID = .init(), title: String, category: String
-             , sets: Int, reps: Int, totalAmount: Int, minutes: Int, creationDate: Date = .init()) {
+        init(id: UUID = .init(), title: String, category: String, sets: Int, reps: Int, totalAmount: Int, minutes: Int, creationDate: Date = .init()) {
             self.id = id
             self.category = category
             self.title = title

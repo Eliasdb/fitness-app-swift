@@ -10,7 +10,6 @@ import PhotosUI
 
 @available(iOS 17.0, *)
 struct AddPhotoView: View {
-    
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var context
 
@@ -33,7 +32,6 @@ struct AddPhotoView: View {
             
             VStack(alignment: .leading, spacing: 8, content: {
                     Section {
-                        
                         LabeledContent {
                             Picker("", selection: $selectedPhotoCategory){
                                 ForEach(categories, id: \.self) { item in
@@ -71,7 +69,6 @@ struct AddPhotoView: View {
                                 .foregroundStyle(.gray)
                         }
                         
-                        
                         if let selectedPhotoData,
                            let uiImage = UIImage(data: selectedPhotoData) {
                             Image(uiImage: uiImage)
@@ -79,14 +76,11 @@ struct AddPhotoView: View {
                                 .scaledToFit()
                                 .frame(maxWidth: .infinity, maxHeight: 300)
                         }
-                        
-                        
                     }.task(id: selectedPhoto) {
                         if let data = try? await selectedPhoto?.loadTransferable(type: Data.self) {
                             selectedPhotoData = data
                         }
                     }
-                
             })
             Spacer(minLength: 0)
             Button(action: {
@@ -111,10 +105,8 @@ struct AddPhotoView: View {
                     .padding(.vertical, 12)
                     .background(Color(.systemIndigo), in: .rect(cornerRadius: 10))
             })
-    
         })
         .padding(15)
-       
     }
 }
 

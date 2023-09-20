@@ -20,8 +20,7 @@ class Meal {
         var creationDate: Date
         var tint: String
                 
-        init(id: UUID = .init(), title: String, calories: Int
-             , carbs: Int, fat: Int, protein: Int, creationDate: Date = .init(), tint: String) {
+        init(id: UUID = .init(), title: String, calories: Int, carbs: Int, fat: Int, protein: Int, creationDate: Date = .init(), tint: String) {
             self.id = id
             self.title = title
             self.calories = calories
@@ -40,7 +39,6 @@ class Meal {
             default: return .white
             }
         }
-        
     }
 
 extension Date {

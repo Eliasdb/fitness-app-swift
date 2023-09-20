@@ -182,20 +182,15 @@ struct ExercisesPastWeekView: View {
 
                     }
                 }
-             
-
             } label: {
                 ExerciseDetailView()
             }
-
         }
     }
 }
 
+//@available(iOS 17.0, *)
 //#Preview {
-//    if #available(iOS 17.0, *) {
-//        CaloriesPastWeekView()
-//    } else {
-//        // Fallback on earlier versions
-//    }
+//   ExercisesPastWeekView()
 //}
+
