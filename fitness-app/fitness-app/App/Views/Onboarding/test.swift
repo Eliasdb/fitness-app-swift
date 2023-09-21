@@ -26,9 +26,13 @@ struct test: View {
     
     var body: some View {
         VStack {
-            Spacer()
+           
             Form {
+                Spacer().listRowSeparator(.hidden)
+                Spacer().listRowSeparator(.hidden)
+                Spacer().listRowSeparator(.hidden)
                 HStack {
+                  
                     VStack(alignment: .leading, content: {
                         Text("Name")
         //                        .font(.caption)
@@ -114,11 +118,25 @@ struct test: View {
                             
                     })  .listRowSeparator(.hidden)
               
-
+                Button(action: {
+                    // saving meal
+                   
+                  
+                    
+                }, label: {
+                    Text("Calculate goals")
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                    //                    .textScale(.secondary)
+                        .foregroundStyle(.black)
+                        .hSpacing(.center)
+                        .padding(.vertical, 12)
+                        .background(Color.mint, in: .rect(cornerRadius: 10))
+                }).padding(.top, 25)
               
         
-            }.scrollContentBackground(.hidden).background(.white).padding(10)
-            Spacer()
+            }.scrollContentBackground(.hidden).background(.white).padding(40)
+            
         }
       
 
