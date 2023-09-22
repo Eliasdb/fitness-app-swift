@@ -41,7 +41,7 @@ struct ExerciseRowView: View {
             .offset(y: -8)
             .sheet(item: $exerciseToEdit) {
                 exerciseToEdit = nil
-            } content: { meal in
+            } content: { exercise in
                 UpdateExerciseView(exercise: exercise, currentDate: $currentDate, categories: $categories)
                     .presentationDetents([.height(520)])
                     .interactiveDismissDisabled()

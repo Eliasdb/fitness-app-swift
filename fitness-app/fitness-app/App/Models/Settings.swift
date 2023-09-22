@@ -10,7 +10,7 @@ import SwiftData
 
 @available(iOS 17.0, *)
 @Model
-class Settings {
+class Settings: ObservableObject {
         var name: String
         var age: Int
         var weight: Double

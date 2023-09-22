@@ -12,12 +12,14 @@ struct OnboardingView: View {
     @State private var selection: Int = 0
     @Binding var showOnboarding: Bool
 
-    @State  var firstName: String = ""
-    @State  var age: Int = 0
-    @State  var weight: Double = 0.0
-    @State  var height: Double = 0.0
-    @State  var sex: String = ""
-    @State  var activityLevel: String = ""
+    @Binding  var firstName: String
+    @Binding  var age: Int
+    @Binding  var weight: Double
+    @Binding  var height: Double
+    @Binding  var sex: String
+    @Binding  var activityLevel: String
+    
+    
     @State private var calcPlans: Bool = false
 
 
