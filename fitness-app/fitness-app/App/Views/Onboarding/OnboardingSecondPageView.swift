@@ -15,6 +15,8 @@ struct OnboardingSecondPageView: View {
     @Binding var height: Double
     @Binding var sex: String
     @Binding var activityLevel: String
+    @Binding var calcPlans: Bool
+
 
     let formatter: NumberFormatter = {
            let formatter = NumberFormatter()
@@ -23,7 +25,7 @@ struct OnboardingSecondPageView: View {
        }()
     
     var sexes: [String] = ["Male", "Female"]
-    var levels: [String] = ["No to a bit", "Light", "Normal", "Heavy exercise", "Very heavy"]
+    var levels: [String] = ["No to a bit", "Light", "Normal", "Heavy", "Very heavy"]
     var body: some View {
         VStack(spacing: 20) {
             
@@ -121,7 +123,8 @@ struct OnboardingSecondPageView: View {
                     Button(action: {
                         // saving meal
                        
-                      
+                        nextAction()
+                        calcPlans.toggle()
                         
                     }, label: {
                         Text("Calculate goals")

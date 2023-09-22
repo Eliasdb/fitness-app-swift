@@ -11,21 +11,25 @@ import SwiftUI
 struct OnboardingView: View {
     @State private var selection: Int = 0
     @Binding var showOnboarding: Bool
-    
-    @Binding var firstName: String
-    @Binding var age: Int
-    @Binding var weight: Double
-    @Binding var height: Double
-    @Binding var sex: String
-    @Binding var activityLevel: String
+
+    @State  var firstName: String = ""
+    @State  var age: Int = 0
+    @State  var weight: Double = 0.0
+    @State  var height: Double = 0.0
+    @State  var sex: String = ""
+    @State  var activityLevel: String = ""
+    @State private var calcPlans: Bool = false
+
+
+    @State  var pGoal: Int = 0
     
     var body: some View {
         TabView(selection: $selection) {
             OnboardingFirstPageView(nextAction: goNext)
                 .tag(0)
-            OnboardingSecondPageView(nextAction: goNext, firstName: $firstName, age: $age, weight: $weight, height: $height, sex: $sex, activityLevel: $activityLevel)
+            OnboardingSecondPageView(nextAction: goNext, firstName: $firstName, age: $age, weight: $weight, height: $height, sex: $sex, activityLevel: $activityLevel, calcPlans: $calcPlans)
                 .tag(1)
-            OnboardingThirdPageView(firstName: $firstName, age: $age, weight: $weight, height: $height, sex: $sex, activityLevel: $activityLevel)
+            OnboardingThirdPageView(nextAction: goNext, firstName: $firstName, age: $age, weight: $weight, height: $height, sex: $sex, activityLevel: $activityLevel, calcPlans: $calcPlans)
                 .tag(2)
             
         }
@@ -34,7 +38,7 @@ struct OnboardingView: View {
     }
     func goNext() {
         withAnimation {
-            if selection < 1 {
+            if selection < 2 {
                
                     selection += 1
                 

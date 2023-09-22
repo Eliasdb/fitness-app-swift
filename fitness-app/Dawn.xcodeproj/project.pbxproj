@@ -24,6 +24,8 @@
 		643A38212ABB4F9A00C15F30 /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643A38202ABB4F9A00C15F30 /* test.swift */; };
 		643A38232ABC53B600C15F30 /* OnboardingThirdPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643A38222ABC53B600C15F30 /* OnboardingThirdPageView.swift */; };
 		643A38252ABC72C200C15F30 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643A38242ABC72C200C15F30 /* OnboardingViewModel.swift */; };
+		643A38272ABD9F6F00C15F30 /* SelectPlanButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643A38262ABD9F6F00C15F30 /* SelectPlanButtonView.swift */; };
+		643A38292ABDC0DC00C15F30 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643A38282ABDC0DC00C15F30 /* Settings.swift */; };
 		6445BD0A2A697A3A00833E65 /* LaunchScreenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6445BD092A697A3A00833E65 /* LaunchScreenManager.swift */; };
 		645866202A71537A00D88176 /* MealsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6458661F2A71537A00D88176 /* MealsView.swift */; };
 		6467CA592A6FEFB5003F6387 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6467CA582A6FEFB5003F6387 /* Meal.swift */; };
@@ -88,6 +90,8 @@
 		643A38202ABB4F9A00C15F30 /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
 		643A38222ABC53B600C15F30 /* OnboardingThirdPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingThirdPageView.swift; sourceTree = "<group>"; };
 		643A38242ABC72C200C15F30 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
+		643A38262ABD9F6F00C15F30 /* SelectPlanButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPlanButtonView.swift; sourceTree = "<group>"; };
+		643A38282ABDC0DC00C15F30 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		6445BD092A697A3A00833E65 /* LaunchScreenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenManager.swift; sourceTree = "<group>"; };
 		6458661F2A71537A00D88176 /* MealsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealsView.swift; sourceTree = "<group>"; };
 		6467CA582A6FEFB5003F6387 /* Meal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
@@ -170,6 +174,7 @@
 				643A38222ABC53B600C15F30 /* OnboardingThirdPageView.swift */,
 				643A381C2ABB42BF00C15F30 /* OnboardingView.swift */,
 				643A38202ABB4F9A00C15F30 /* test.swift */,
+				643A38262ABD9F6F00C15F30 /* SelectPlanButtonView.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -181,6 +186,7 @@
 				648AE2052AB062C000DB254A /* Exercise.swift */,
 				64877BC72AB866F50000A5C0 /* Weight.swift */,
 				64877BCE2AB9CCCB0000A5C0 /* Photo.swift */,
+				643A38282ABDC0DC00C15F30 /* Settings.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -481,6 +487,7 @@
 				648AE1FC2AADD5DA00DB254A /* AddExerciseView.swift in Sources */,
 				6467CA5C2A6FF52F003F6387 /* View+Extensions.swift in Sources */,
 				643A38212ABB4F9A00C15F30 /* test.swift in Sources */,
+				643A38272ABD9F6F00C15F30 /* SelectPlanButtonView.swift in Sources */,
 				64D955F82A682548003D679E /* ContentView.swift in Sources */,
 				642C599B2A7046F000A88029 /* MealRowView.swift in Sources */,
 				64877BCA2AB9A38A0000A5C0 /* PhotoGalleryDetailView.swift in Sources */,
@@ -500,6 +507,7 @@
 				643A38232ABC53B600C15F30 /* OnboardingThirdPageView.swift in Sources */,
 				64877BC62AB8637F0000A5C0 /* WeightTrackerDetailView.swift in Sources */,
 				648AE1F62AAB7A9A00DB254A /* CaloriesPastWeekView.swift in Sources */,
+				643A38292ABDC0DC00C15F30 /* Settings.swift in Sources */,
 				6467CA592A6FEFB5003F6387 /* Meal.swift in Sources */,
 				648AE20F2AB3605700DB254A /* CaloriesDetailView.swift in Sources */,
 				648AE2112AB364A300DB254A /* MacrosDetailView.swift in Sources */,

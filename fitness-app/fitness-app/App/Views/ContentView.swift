@@ -11,13 +11,7 @@ import SwiftUI
 struct ContentView: View {
     
     @AppStorage("showOnboarding") var showOnboarding: Bool = true
-    
-    @State private var firstName: String = ""
-    @State private var age: Int = 0
-    @State private var weight: Double = 0.0
-    @State private var height: Double = 0.0
-    @State private var sex: String = ""
-    @State private var activityLevel: String = ""
+
     
     @EnvironmentObject var launchScreenManager: LaunchScreenManager
     @State private var selection = 3
@@ -88,7 +82,7 @@ struct ContentView: View {
 //        }
         ZStack {
             if showOnboarding {
-                OnboardingView(showOnboarding: $showOnboarding, firstName: $firstName, age: $age, weight: $weight, height: $height, sex: $sex, activityLevel: $activityLevel)
+                OnboardingView(showOnboarding: $showOnboarding)
                     .background(Color.white)
                     .transition(.move(edge: .bottom))
                     .onAppear {

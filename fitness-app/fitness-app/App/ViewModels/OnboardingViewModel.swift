@@ -429,6 +429,84 @@ class OnboardingViewModel: ObservableObject {
         return GainWeight(kcalGoal: 0, proteinGoal: [0])
     }
 
+    func calculateMaintenance(age: Int, weight: Double, height: Double, sex: String, activityLevel: String ) -> Int {
+        let weightMen = (13.397 * weight)
+        let heightMen = (4.799 * height)
+        let ageMen = (5.677 * Double(age))
+        
+        if sex == "Male" {
+            switch activityLevel {
+            case "No to a bit":
+                let factor = 1.2
+                let maintenanceKcal: Double = (88.362 + weightMen + heightMen - ageMen) * factor
+                return Int(maintenanceKcal)
+            case "Light":
+                let factor = 1.375
+                let maintenanceKcal: Double = (88.362 + weightMen + heightMen - ageMen) * factor
+                return Int(maintenanceKcal)
+            case "Normal":
+                let factor = 1.55
+                let maintenanceKcal: Double = (88.362 + weightMen + heightMen - ageMen) * factor
+                return Int(maintenanceKcal)
+            case "Heavy":
+                let factor = 1.725
+                let maintenanceKcal: Double = (88.362 + weightMen + heightMen - ageMen) * factor
+                return Int(maintenanceKcal)
+            case "Very heavy":
+                let factor = 1.9
+                let maintenanceKcal: Double = (88.362 + weightMen + heightMen - ageMen) * factor
+                return Int(maintenanceKcal)
+            default:
+                let factor = 0.0
+                let maintenanceKcal: Double = (88.362 + weightMen + heightMen - ageMen) * factor
+                return Int(maintenanceKcal)
+            }
+           
+        }
+        
+        let weightWomen = (9.247 * weight)
+        let heightWomen = (3.098 * height)
+        let ageWomen = (4.330 * Double(age))
+        
+        if sex == "Female" {
+            switch activityLevel {
+            case "No to a bit":
+                let factor = 1.2
+                let maintenanceKcal: Double = (447.593 + weightWomen + heightWomen - ageWomen) * factor
+                return Int(maintenanceKcal)
+            case "Light":
+                let factor = 1.375
+                let maintenanceKcal: Double = (447.593 + weightWomen + heightWomen - ageWomen) * factor
+ 
+                return Int(maintenanceKcal)
+            case "Normal":
+                let factor = 1.55
+                let maintenanceKcal: Double = (447.593 + weightWomen + heightWomen - ageWomen) * factor
+
+                return Int(maintenanceKcal)
+            case "Heavy":
+                let factor = 1.725
+                let maintenanceKcal: Double = (447.593 + weightWomen + heightWomen - ageWomen) * factor
+                return Int(maintenanceKcal)
+            case "Very heavy":
+                let factor = 1.9
+                let maintenanceKcal: Double = (447.593 + weightWomen + heightWomen - ageWomen) * factor
+                return Int(maintenanceKcal)
+            default:
+                let factor = 0.0
+                let maintenanceKcal: Double = (447.593 + weightWomen + heightWomen - ageWomen) * factor
+                return Int(maintenanceKcal)
+            }
+
+        }
+   
+  
+        return 0
+        
+        
+
+
+    }
 
 }
 

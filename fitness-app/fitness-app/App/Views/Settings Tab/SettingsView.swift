@@ -6,16 +6,20 @@
 //
 
 import SwiftUI
+import SwiftData
 
+@available(iOS 17.0, *)
 struct SettingsView: View {
-    
+    @Query private var settings: [Settings]
+
     var body: some View {
+        printv("settings: \(settings)")
         NavigationStack {
             List {
                 Section {
-//
+
                 } header : {
-                    Text("Goals")
+                    Text("Biometrics")
                 }
             }
             .navigationTitle("Settings")
@@ -26,8 +30,8 @@ struct SettingsView: View {
 }
 
 
-//@available(iOS 17.0, *)
-//#Preview {
-//   SettingsView()
-//}
+@available(iOS 17.0, *)
+#Preview {
+   SettingsView()
+}
 
