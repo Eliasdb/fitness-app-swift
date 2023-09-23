@@ -268,7 +268,7 @@ struct OnboardingThirdPageView: View {
                     do {
                         context.insert(settings)
                         try context.save()
-                        dismiss()
+//                        dismiss()
                     } catch {
                         print(error.localizedDescription)
                     }
@@ -279,7 +279,7 @@ struct OnboardingThirdPageView: View {
                     do {
                         context.insert(settings)
                         try context.save()
-                        dismiss()
+//                        dismiss()
                     } catch {
                         print(error.localizedDescription)
                     }
@@ -290,7 +290,7 @@ struct OnboardingThirdPageView: View {
                     do {
                         context.insert(settings)
                         try context.save()
-                        dismiss()
+//                        dismiss()
                     } catch {
                         print(error.localizedDescription)
                     }
@@ -301,7 +301,7 @@ struct OnboardingThirdPageView: View {
                     do {
                         context.insert(settings)
                         try context.save()
-                        dismiss()
+//                        dismiss()
                     } catch {
                         print(error.localizedDescription)
                     }
@@ -312,7 +312,7 @@ struct OnboardingThirdPageView: View {
                     do {
                         context.insert(settings)
                         try context.save()
-                        dismiss()
+//                        dismiss()
                     } catch {
                         print(error.localizedDescription)
                     }

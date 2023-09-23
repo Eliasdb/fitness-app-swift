@@ -21,7 +21,8 @@ struct CaloriesDetailView: View {
             if vm.mealChartData(meals: mealsPastWeek).isEmpty {
                 Text("Track your calories here.")
             } else {
-                Text("Your calorie intake has ") + Text("\(vm.caloriesProgressString()!)").bold() + Text(" compared to last week!")
+//                Text("Your calorie intake has ") + Text("\(vm.caloriesProgressString()!)").bold() + Text(" compared to last week!")
+                Text("Track your calories here.")
             }
             
 //            if vm.mealChartData(meals: mealsPastWeek).isEmpty {

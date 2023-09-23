@@ -14,7 +14,8 @@ struct CaloriesAndMacrosCounterView: View {
     @Binding var currentDate: Date
     @State var progressValue: Float = 0.0
     @Query private var meals: [Meal]
-
+    @Query private var settings: [Settings]
+    @State private var switchDonut: Bool = false
     
     init(currentDate: Binding<Date>) {
         self._currentDate = currentDate
@@ -35,7 +36,7 @@ struct CaloriesAndMacrosCounterView: View {
     
     var donutData: [(type: String, amount: Int)] {
         [(type: "Calories eaten", amount: meals.map {$0.calories}.reduce(0, +)),
-         (type: "Calories not eaten yet", amount: 3000 - meals.map {$0.calories}.reduce(0, +))
+         (type: "Calories not eaten yet", amount: (settings.last?.kcalGoal ?? 3000) - meals.map {$0.calories}.reduce(0, +))
           ]
     }
     
@@ -60,17 +61,32 @@ struct CaloriesAndMacrosCounterView: View {
                   GeometryReader { geometry in
                       let frame = geometry[chartProxy.plotFrame!]
                     VStack {
-                        Text("\(String(describing: max(3000 - meals.map {$0.calories}.reduce(0, +), 0))) kcal")
+                        if switchDonut == false {
+                            Text("\(String(describing: max((settings.last?.kcalGoal ?? 3000) - meals.map {$0.calories}.reduce(0, +), 0))) kcal")
+                                .foregroundColor(.white)
+                                .font(.callout.bold())
+                            Text("to go")
+                                .foregroundColor(.white)
+                                .font(.callout.bold())
+                        } else {
+                            Text("\(String(describing: meals.map {$0.calories}.reduce(0, +))) kcal")
+                                .foregroundColor(.white)
+                                .font(.callout.bold())
+                            Text("eaten")
+                                .foregroundColor(.white)
+                                .font(.callout.bold())
+                        }
 
 //                        Text("\(String(describing: " kcal")
-                            .foregroundColor(.white)
-                        .font(.callout
-                            .bold())
+                            
 //                        .foregroundStyle(.secondary)
                     }
                     .position(x: frame.midX, y: frame.midY)
                   }
                 }
+                .onTapGesture(perform: {
+                    switchDonut.toggle()
+                })
                 .padding(15)
             
                 Chart(barChartData, id: \.type) { dataPoint in

@@ -22,7 +22,9 @@ struct MacrosDetailView: View {
         if vm.mealDonutChartData(meals: mealsPastWeek, macro: macro).isEmpty {
             Text("Track your macros here.")
         } else {
-            Text("Your protein intake ") + Text("\(vm.macrosProgressString()!)").bold() + Text(" compared to last week!")
+//            Text("Your protein intake ") + Text("\(vm.macrosProgressString()!)").bold() + Text(" compared to last week!")
+            Text("Track your macros here.")
+
         }
     
         VStack(content: {

@@ -13,6 +13,7 @@ import _SwiftData_SwiftUI
 struct CaloriesPastWeekView: View {
     @ObservedObject var vm = NutritionViewModel()
     @Query private var mealsPastWeek: [Meal]
+    @Query private var settings: [Settings]
     @State private var today: Date = .init()
     @State private var weekIndex: Int = 0
     @Binding var weekIndexCalories: Int
@@ -72,7 +73,7 @@ struct CaloriesPastWeekView: View {
                                     
                                 })
                                     Chart {
-                                        RuleMark(y: .value("Goal", 3000))
+                                        RuleMark(y: .value("Goal", settings.first?.kcalGoal ?? 3000))
                                             .foregroundStyle(Color.mint)
                                             .lineStyle(StrokeStyle(lineWidth: 1, dash: [5]))
                                             .annotation(alignment: .trailing) {

@@ -19,6 +19,41 @@ class OnboardingViewModel: ObservableObject {
         let proteinGoal: [Int]
     }
     
+    struct Payload  {
+        let age: Int
+        let weight: Double
+        let height: Double
+        let sex: String
+        let activityLevel: String
+        let workingOut: Bool
+    }
+    
+    func someting(factor:Double, payload:Payload, gender: String) -> LoseWeight {
+        if gender == "Male" {
+            let weightMen = (13.397 * payload.weight)
+            let heightMen = (4.799 * payload.height)
+            let ageMen = (5.677 * Double(payload.age))
+            let maintenanceKcal: Double = (88.362 + weightMen + heightMen - ageMen) * factor
+            let tenPercentOfMaintenance: Double = maintenanceKcal * 0.1
+            let proteinGoal: [Int] = [Int((1.2 * payload.weight)), Int((2 * payload.weight))]
+            let finalKcal = LoseWeight(kcalGoal: Int(maintenanceKcal - tenPercentOfMaintenance), proteinGoal: proteinGoal)
+            return finalKcal
+        }
+        
+        if gender == "Female" {
+            let weightWomen = (9.247 * payload.weight)
+            let heightWomen = (3.098 * payload.height)
+            let ageWomen = (4.330 * Double(payload.age))
+            let maintenanceKcal: Double = (447.593 + weightWomen + heightWomen - ageWomen) * factor
+            let tenPercentOfMaintenance: Double = maintenanceKcal * 0.1
+            let proteinGoal: [Int] = [Int((1.2 * payload.weight)), Int((2 * payload.weight))]
+            let finalKcal = LoseWeight(kcalGoal: Int(maintenanceKcal - tenPercentOfMaintenance), proteinGoal: proteinGoal)
+            return finalKcal
+        }
+       
+        return LoseWeight(kcalGoal: 0, proteinGoal: [0])
+    }
+    
     func calculateLoseWeight(age: Int, weight: Double, height: Double, sex: String, activityLevel: String, workingOut: Bool ) -> LoseWeight {
 //        Losing weight = maintenance - 10%
 //        Men  -> 88,362 + (13,397 x gewicht) + (4,799 x lichaamslengte in cm) – (5,677 x leeftijd in jaren)
@@ -31,105 +66,45 @@ class OnboardingViewModel: ObservableObject {
         let weightWomen = (9.247 * weight)
         let heightWomen = (3.098 * height)
         let ageWomen = (4.330 * Double(age))
+        
+        let params = Payload(age:age, weight:weight, height:height, sex:sex,activityLevel:activityLevel, workingOut:workingOut)
+
+        
         if workingOut == true {
             if sex == "Male" {
                 switch activityLevel {
                 case "No to a bit":
-                    let factor = 1.2
-                    let maintenanceKcal: Double = (88.362 + weightMen + heightMen - ageMen) * factor
-                    let tenPercentOfMaintenance: Double = maintenanceKcal * 0.1
-                    let proteinGoal: [Int] = [Int((1.2*weight)), Int((2*weight))]
-                    let finalKcal = LoseWeight(kcalGoal: Int(maintenanceKcal - tenPercentOfMaintenance), proteinGoal: proteinGoal)
-                    return finalKcal
+                    return self.someting(factor: 1.2, payload: params, gender: "Male")
                 case "Light":
-                    let factor = 1.375
-                    let maintenanceKcal: Double = (88.362 + weightMen + heightMen - ageMen) * factor
-                    let tenPercentOfMaintenance: Double = maintenanceKcal * 0.1
-                    let proteinGoal: [Int] = [Int((1.2*weight)), Int((2*weight))]
-                    let finalKcal = LoseWeight(kcalGoal: Int(maintenanceKcal - tenPercentOfMaintenance), proteinGoal: proteinGoal)
-                    return finalKcal
+                    return self.someting(factor: 1.375, payload: params, gender: "Male")
                 case "Normal":
-                    let factor = 1.55
-                    let maintenanceKcal: Double = (88.362 + weightMen + heightMen - ageMen) * factor
-                    let tenPercentOfMaintenance: Double = maintenanceKcal * 0.1
-                    let proteinGoal: [Int] = [Int((1.2*weight)), Int((2*weight))]
-                    let finalKcal = LoseWeight(kcalGoal: Int(maintenanceKcal - tenPercentOfMaintenance), proteinGoal: proteinGoal)
-                    return finalKcal
+                    return self.someting(factor: 1.55, payload: params, gender: "Male")
                 case "Heavy":
-                    let factor = 1.725
-                    let maintenanceKcal: Double = (88.362 + weightMen + heightMen - ageMen) * factor
-                    let tenPercentOfMaintenance: Double = maintenanceKcal * 0.1
-                    let proteinGoal: [Int] = [Int((1.2*weight)), Int((2*weight))]
-                    let finalKcal = LoseWeight(kcalGoal: Int(maintenanceKcal - tenPercentOfMaintenance), proteinGoal: proteinGoal)
-                    return finalKcal
+                    return self.someting(factor: 1.725, payload: params, gender: "Male")
                 case "Very heavy":
-                    let factor = 1.9
-                    let maintenanceKcal: Double = (88.362 + weightMen + heightMen - ageMen) * factor
-                    let tenPercentOfMaintenance: Double = maintenanceKcal * 0.1
-                    print(maintenanceKcal)
-                    print(tenPercentOfMaintenance)
-                    let proteinGoal: [Int] = [Int((1.2*weight)), Int((2*weight))]
-
-                    let finalKcal = LoseWeight(kcalGoal: Int(maintenanceKcal - tenPercentOfMaintenance), proteinGoal: proteinGoal)
-                    return finalKcal
+                    return self.someting(factor: 1.9, payload: params, gender: "Male")
                 default:
-                    let factor = 0.0
-                    let maintenanceKcal: Double = (88.362 + weightMen + heightMen - ageMen) * factor
-                    let tenPercentOfMaintenance: Double = maintenanceKcal * 0.1
-                    let proteinGoal: [Int] = [Int((1.2*weight)), Int((2*weight))]
-                    let finalKcal = LoseWeight(kcalGoal: Int(maintenanceKcal - tenPercentOfMaintenance), proteinGoal: proteinGoal)
-                    return finalKcal
+                    return self.someting(factor: 0.0, payload: params, gender: "Male")
                 }
+            }
+        
+            if sex == "Female" {
+               switch activityLevel {
+               case "No to a bit":
+                   return self.someting(factor: 1.2, payload: params, gender: "Female" )
+               case "Light":
+                   return self.someting(factor: 1.375, payload: params, gender: "Female" )
+               case "Normal":
+                   return self.someting(factor: 1.55, payload: params, gender: "Female" )
+               case "Heavy":
+                   return self.someting(factor: 1.725, payload: params, gender: "Female" )
+               case "Very heavy":
+                   return self.someting(factor: 1.9, payload: params, gender: "Female" )
+               default:
+                   return self.someting(factor: 0.0, payload: params, gender: "Female" )
+               }
             }
             
-            if sex == "Female" {
-                switch activityLevel {
-                case "No to a bit":
-                    let factor = 1.2
-                    let maintenanceKcal: Double = (447.593 + weightWomen + heightWomen - ageWomen) * factor
-                    let tenPercentOfMaintenance: Double = maintenanceKcal * 0.1
-                    let proteinGoal: [Int] = [Int((1.2*weight)), Int((2*weight))]
-                    let finalKcal = LoseWeight(kcalGoal: Int(maintenanceKcal - tenPercentOfMaintenance), proteinGoal: proteinGoal)
-                    return finalKcal
-                case "Light":
-                    let factor = 1.375
-                    let maintenanceKcal: Double = (447.593 + weightWomen + heightWomen - ageWomen) * factor
-                    let tenPercentOfMaintenance: Double = maintenanceKcal * 0.1
-                    let proteinGoal: [Int] = [Int((1.2*weight)), Int((2*weight))]
-                    let finalKcal = LoseWeight(kcalGoal: Int(maintenanceKcal - tenPercentOfMaintenance), proteinGoal: proteinGoal)
-                    return finalKcal
-                case "Normal":
-                    let factor = 1.55
-                    let maintenanceKcal: Double = (447.593 + weightWomen + heightWomen - ageWomen) * factor
-                    let tenPercentOfMaintenance: Double = maintenanceKcal * 0.1
-                    let proteinGoal: [Int] = [Int((1.2*weight)), Int((2*weight))]
-                    let finalKcal = LoseWeight(kcalGoal: Int(maintenanceKcal - tenPercentOfMaintenance), proteinGoal: proteinGoal)
-                    return finalKcal
-                case "Heavy":
-                    let factor = 1.725
-                    let maintenanceKcal: Double = (447.593 + weightWomen + heightWomen - ageWomen) * factor
-                    let tenPercentOfMaintenance: Double = maintenanceKcal * 0.1
-                    let proteinGoal: [Int] = [Int((1.2*weight)), Int((2*weight))]
-                    let finalKcal = LoseWeight(kcalGoal: Int(maintenanceKcal - tenPercentOfMaintenance), proteinGoal: proteinGoal)
-                    return finalKcal
-                case "Very heavy":
-                    let factor = 1.9
-                    let maintenanceKcal: Double = (447.593 + weightWomen + heightWomen - ageWomen) * factor
-                    let tenPercentOfMaintenance: Double = maintenanceKcal * 0.1
-                    print(maintenanceKcal)
-                    print(tenPercentOfMaintenance)
-                    let proteinGoal: [Int] = [Int((1.2*weight)), Int((2*weight))]
-                    let finalKcal = LoseWeight(kcalGoal: Int(maintenanceKcal - tenPercentOfMaintenance), proteinGoal: proteinGoal)
-                    return finalKcal
-                default:
-                    let factor = 0.0
-                    let maintenanceKcal: Double = (447.593 + weightWomen + heightWomen - ageWomen) * factor
-                    let tenPercentOfMaintenance: Double = maintenanceKcal * 0.1
-                    let proteinGoal: [Int] = [Int((1.2*weight)), Int((2*weight))]
-                    let finalKcal = LoseWeight(kcalGoal: Int(maintenanceKcal - tenPercentOfMaintenance), proteinGoal: proteinGoal)
-                    return finalKcal
-                }
-            }
             return LoseWeight(kcalGoal: 0, proteinGoal: [0])
         }
         
@@ -509,5 +484,3 @@ class OnboardingViewModel: ObservableObject {
     }
 
 }
-
-

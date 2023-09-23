@@ -20,6 +20,7 @@ import _SwiftData_SwiftUI
 struct MacrosPastWeekView: View {
     @ObservedObject var vm = NutritionViewModel()
     @Query private var mealsPastWeek: [Meal]
+    @Query private var settings: [Settings]
     @Binding var weekIndexMacros: Int
     @State private var today: Date = .init()
     @State private var weekIndex: Int = 0
@@ -130,6 +131,14 @@ struct MacrosPastWeekView: View {
                                                 .foregroundStyle(Color.yellow.gradient)
                                         }
                                     case "Protein":
+                                        RuleMark(y: .value("Goal", settings.first?.pGoal ?? 0))
+                                            .foregroundStyle(Color.mint)
+                                            .lineStyle(StrokeStyle(lineWidth: 1, dash: [5]))
+                                            .annotation(alignment: .trailing) {
+                                                Text("Goal")
+                                                    .font(.caption)
+                                                    .foregroundStyle(.secondary)
+                                            }
                                         ForEach(vm.mealDonutChartData(meals: mealsPastWeek, macro: macro)[weekIndexMacros].sorted(by: { $0.dateasDate < ($1.dateasDate)}) , id: \.self) { item in
                                             AreaMark(x: .value("day", item.date), y: .value("amount", item.amount))
                                                 .foregroundStyle(Color.indigo.gradient)
