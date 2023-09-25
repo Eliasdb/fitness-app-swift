@@ -11,6 +11,7 @@ import SwiftUI
 struct OnboardingThirdPageView: View {
     var nextAction: () -> Void
 
+    @ObservedObject var vm = OnboardingViewModel()
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var context
     
@@ -20,16 +21,13 @@ struct OnboardingThirdPageView: View {
     @Binding var height: Double
     @Binding var sex: String
     @Binding var activityLevel: String
-    
-    @ObservedObject var vm = OnboardingViewModel()
-    
+    @Binding var calcPlans: Bool
+
     @State private var isSelected: Bool = false
     @State private var isSelected2: Bool = false
     @State private var isSelected3: Bool = false
     @State private var isSelected4: Bool = false
     @State private var isSelected5: Bool = false
-    
-
     
     @State private var LoseWeightBuildMusclekcalGoal: Int = 0
     @State private var LoseWeightkcalGoal: Int = 0
@@ -42,22 +40,13 @@ struct OnboardingThirdPageView: View {
     @State private var MaintenancepGoal: Int = 0
     @State private var GainWeightpGoal: Int = 0
     @State private var GainWeightBuildMusclepGoal: Int = 0
-    @Binding var calcPlans: Bool
-
-    
-//    @Binding var pGoal: Int
 
 
     var body: some View {
-//        printv(vm.calculateGainWeight(age: 26, weight: 70, height: 180, sex: "Male", activityLevel: "Very heavy", workingOut: true))
-        
-        
         let kcalGoalLoseWeightBuildMuscle = vm.calculateLoseWeight(age: age, weight: weight, height: height, sex: sex, activityLevel: activityLevel, workingOut: true).kcalGoal
-        
         
         let pGoalLoseWeightBuildMuscle = (vm.calculateLoseWeight(age: age, weight: weight, height: height, sex: sex, activityLevel: activityLevel, workingOut: true).proteinGoal.last! +
                                           vm.calculateLoseWeight(age: age, weight: weight, height: height, sex: sex, activityLevel: activityLevel, workingOut: true).proteinGoal.first!) / 2
-        
         
         let kcalGoalLoseWeight = vm.calculateLoseWeight(age: age, weight: weight, height: height, sex: sex, activityLevel: activityLevel, workingOut: false).kcalGoal
         
@@ -69,11 +58,9 @@ struct OnboardingThirdPageView: View {
         
         let pGoalGainWeightBuildMuscle = (vm.calculateGainWeight(age: age, weight: weight, height: height, sex: sex, activityLevel: activityLevel, workingOut: true).proteinGoal.last! +
                                           vm.calculateGainWeight(age: age, weight: weight, height: height, sex: sex, activityLevel: activityLevel, workingOut: true).proteinGoal.first!) / 2
-
         
         VStack {
-            Text("Hello, \(LoseWeightBuildMusclekcalGoal)")
-            
+            Text("Hello, \(firstName)")
             ZStack(content: {
                 Capsule()
                     .frame(height: 80)
@@ -82,16 +69,13 @@ struct OnboardingThirdPageView: View {
                     Text("Lose weight + build muscle")
                         .textCase(.uppercase)
                         .foregroundStyle(.white)
-                        
+                    
                     Text("kcal goal: \(LoseWeightBuildMusclekcalGoal)")
                         .foregroundStyle(.green)
                     
                     Text("protein goal: \(pGoalLoseWeightBuildMuscle)")
-                            .foregroundStyle(.red)
-           
-                   
+                        .foregroundStyle(.red)
                 }
-
             })
             .onTapGesture {
                 isSelected.toggle()
@@ -105,7 +89,6 @@ struct OnboardingThirdPageView: View {
             .onAppear {
                 LoseWeightBuildMusclekcalGoal = kcalGoalLoseWeightBuildMuscle
                 LoseWeightBuildMusclepGoal = pGoalLoseWeightBuildMuscle
-
             }
             
             ZStack(content: {
@@ -116,14 +99,8 @@ struct OnboardingThirdPageView: View {
                     Text("Lose weight")
                         .textCase(.uppercase)
                         .foregroundStyle(.white)
-                        
                     Text("kcal goal: \(LoseWeightkcalGoal)")
                         .foregroundStyle(.green)
-//                    
-//                    Text("protein goal: \(LoseWeightpGoal)")
-//                            .foregroundStyle(.red)
-           
-                   
                 }
 
             })
@@ -140,8 +117,7 @@ struct OnboardingThirdPageView: View {
                 LoseWeightkcalGoal = kcalGoalLoseWeight
                 LoseWeightpGoal = 0
             }
-//            SelectPlanButton(isSelected: $isSelected, color: .blue, kcalGoal: LoseWeightBuildMusclekcalGoal, pGoal: true , pGoalInt: 0, title: "Lose weight + build muscle")
-              
+            
             ZStack(content: {
                 Capsule()
                     .frame(height: 80)
@@ -153,13 +129,7 @@ struct OnboardingThirdPageView: View {
                         
                     Text("kcal goal: \(MaintenancekcalGoal)")
                         .foregroundStyle(.green)
-//
-//                    Text("protein goal: \(LoseWeightpGoal)")
-//                            .foregroundStyle(.red)
-           
-                   
                 }
-
             })
             .task(id: calcPlans, {
                 MaintenancekcalGoal = kcalGoalMaintenance
@@ -174,10 +144,6 @@ struct OnboardingThirdPageView: View {
                     isSelected5 = false
                 }
             }
-//            .onAppear {
-//          
-//            }
-               
             
             ZStack(content: {
                 Capsule()
@@ -190,13 +156,7 @@ struct OnboardingThirdPageView: View {
                         
                     Text("kcal goal: \(GainWeightkcalGoal)")
                         .foregroundStyle(.green)
-//
-//                    Text("protein goal: \(LoseWeightpGoal)")
-//                            .foregroundStyle(.red)
-           
-                   
                 }
-
             })
             .onTapGesture {
                 isSelected4.toggle()
@@ -225,11 +185,8 @@ struct OnboardingThirdPageView: View {
                         .foregroundStyle(.green)
 
                     Text("protein goal: \(GainWeightBuildMusclepGoal)")
-                            .foregroundStyle(.red)
-           
-                   
+                        .foregroundStyle(.red)
                 }
-
             })
             .onTapGesture {
                 isSelected5.toggle()
@@ -245,85 +202,59 @@ struct OnboardingThirdPageView: View {
                 GainWeightBuildMusclepGoal = pGoalGainWeightBuildMuscle
             }
 
-        
-//            
-//            SelectPlanButton(isSelected: $isSelected5, color: .blue, kcalGoal: GainWeightBuildMusclekcalGoal, pGoal: true, pGoalInt: pGoalGainWeightBuildMuscle, title: "Gain weight + build muscle")
-//                .onTapGesture {
-//                    GainWeightBuildMusclekcalGoal = kcalGoalGainWeightBuildMuscle
-////                    pGoal = pGoalGainWeightBuildMuscle
-//                    isSelected5.toggle()
-//                    
-//                    if isSelected5 {
-//                        isSelected2 = false
-//                        isSelected3 = false
-//                        isSelected4 = false
-//                        isSelected = false
-//                    }
-//                }
-            
             Button(action: {
-                
                 if isSelected == true {
                     let settings = Settings(name: firstName, age: age, weight: weight, height: Int(height), sex: sex, kcalGoal: LoseWeightBuildMusclekcalGoal, pGoal: LoseWeightBuildMusclepGoal)
                     do {
                         context.insert(settings)
                         try context.save()
-//                        dismiss()
                     } catch {
                         print(error.localizedDescription)
                     }
                 }
-                
                 if isSelected2 == true {
                     let settings = Settings(name: firstName, age: age, weight: weight, height: Int(height), sex: sex, kcalGoal: LoseWeightkcalGoal, pGoal: LoseWeightpGoal)
                     do {
                         context.insert(settings)
                         try context.save()
-//                        dismiss()
                     } catch {
                         print(error.localizedDescription)
                     }
                 }
-                
                 if isSelected3 == true {
                     let settings = Settings(name: firstName, age: age, weight: weight, height: Int(height), sex: sex, kcalGoal: MaintenancekcalGoal, pGoal: MaintenancepGoal)
                     do {
                         context.insert(settings)
                         try context.save()
-//                        dismiss()
                     } catch {
                         print(error.localizedDescription)
                     }
                 }
-                
                 if isSelected4 == true {
                     let settings = Settings(name: firstName, age: age, weight: weight, height: Int(height), sex: sex, kcalGoal: GainWeightkcalGoal, pGoal: GainWeightpGoal)
                     do {
                         context.insert(settings)
                         try context.save()
-//                        dismiss()
                     } catch {
                         print(error.localizedDescription)
                     }
                 }
-                
                 if isSelected5 == true {
                     let settings = Settings(name: firstName, age: age, weight: weight, height: Int(height), sex: sex, kcalGoal: GainWeightBuildMusclekcalGoal, pGoal: GainWeightBuildMusclepGoal)
                     do {
                         context.insert(settings)
                         try context.save()
-//                        dismiss()
                     } catch {
                         print(error.localizedDescription)
                     }
                 }
+                
                 nextAction()
                
             }, label: {
                 Text("Set goals")
                     .font(.title3)
                     .fontWeight(.semibold)
-                //                    .textScale(.secondary)
                     .foregroundStyle(.black)
                     .hSpacing(.center)
                     .padding(.vertical, 12)

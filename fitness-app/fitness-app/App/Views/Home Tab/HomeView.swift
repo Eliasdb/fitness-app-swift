@@ -174,20 +174,20 @@ struct HomeView: View {
                         .frame(width: 35, height: 35)
                         .background(content: {
                             if isSameDate(day.date, currentDate) {
-                                Circle()
+                                Rectangle()
                                     .fill(.blue)
                                     .matchedGeometryEffect(id: "TABINDICATOR", in: animation)
                             }
                             
                             if day.date.isToday {
-                                Circle()
+                                Rectangle()
                                     .fill(.cyan)
                                     .frame(width: 5, height: 5)
                                     .vSpacing(.bottom)
                                     .offset(y: 12)
                             }
                         })
-                        .background(.white.shadow(.drop(radius: 1)), in: .circle)
+                        .background(.white.shadow(.drop(radius: 1)), in: .rect)
 
                 }
                 .hSpacing(.center)

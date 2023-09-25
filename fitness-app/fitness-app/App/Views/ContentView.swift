@@ -11,17 +11,16 @@ import SwiftData
 @available(iOS 17.0, *)
 struct ContentView: View {
     
+    @EnvironmentObject var launchScreenManager: LaunchScreenManager
     @AppStorage("showOnboarding") var showOnboarding: Bool = true
     @Query var settings: [Settings]
 
-    @State  var firstName: String = ""
-    @State  var age: Int = 0
-    @State  var weight: Double = 0.0
-    @State  var height: Double = 0.0
-    @State  var sex: String = ""
-    @State  var activityLevel: String = ""
-    
-    @EnvironmentObject var launchScreenManager: LaunchScreenManager
+    @State var firstName: String = ""
+    @State var age: Int = 0
+    @State var weight: Double = 0.0
+    @State var height: Double = 0.0
+    @State var sex: String = "Male"
+    @State var activityLevel: String = "No to a bit"
     @State private var selection = 3
     @State private var categories: [String : [(name: String, sets: Int, reps: Int)]] =
     ["Abs":
@@ -47,7 +46,6 @@ struct ContentView: View {
             [(name: "Deadlift", sets: 0, reps: 0),
             (name: "Bodyweight Squat", sets: 0, reps: 0)]
     ]
-    
     @State private var selectedIndex: Int = 2
     
     let icons = ["fork.knife", "dumbbell", "house", "waveform.path.ecg", "gearshape" ]
@@ -108,8 +106,8 @@ struct ContentView: View {
                         case 3:  HealthView()
                         case 4:  SettingsView()
                         default: HomeView(categories: $categories)
-                                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                .background(.green)
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                    .background(.green)
                         }
                     }
                     Spacer()
@@ -126,7 +124,8 @@ struct ContentView: View {
                             })
                         }
                     }
-                }.onAppear {
+                }
+                .onAppear {
                     DispatchQueue
                         .main
                         .asyncAfter(deadline: .now() + 5) {
@@ -135,8 +134,6 @@ struct ContentView: View {
                 }
             }
         }
-
-
     }
 }
 

@@ -11,19 +11,14 @@ import SwiftUI
 struct OnboardingView: View {
     @State private var selection: Int = 0
     @Binding var showOnboarding: Bool
-
-    @Binding  var firstName: String
-    @Binding  var age: Int
-    @Binding  var weight: Double
-    @Binding  var height: Double
-    @Binding  var sex: String
-    @Binding  var activityLevel: String
-    
-    
-    @State private var calcPlans: Bool = false
-
-
-    @State  var pGoal: Int = 0
+    @Binding var firstName: String
+    @Binding var age: Int
+    @Binding var weight: Double
+    @Binding var height: Double
+    @Binding var sex: String
+    @Binding var activityLevel: String
+    @State var calcPlans: Bool = false
+    @State var pGoal: Int = 0
     
     var body: some View {
         TabView(selection: $selection) {
@@ -38,20 +33,17 @@ struct OnboardingView: View {
         .tabViewStyle(.page(indexDisplayMode: .always))
         .indexViewStyle(.page(backgroundDisplayMode: .always))
     }
+    
     func goNext() {
         withAnimation {
             if selection < 2 {
-               
                     selection += 1
-                
             } else {
                 showOnboarding = false
-        }
+            }
         }
     }
-    
 }
-
 
 //#Preview {
 //    OnboardingView()

@@ -22,14 +22,16 @@ struct PhotoGalleryView: View {
                 VStack(spacing: 0, content: {
                     VStack(alignment: .center, spacing: 0, content: {
                         Form {
-                                Section {
-                                           Picker("Select a category", selection: $selectedPhotoCategory){
-                                               ForEach(categoriesString, id: \.self) { item in
-                                                   Text(item)
-                                               }
-                                           }.pickerStyle(.navigationLink)
-                                       }
-                        }.frame(height:100)
+                            Section {
+                               Picker("Select a category", selection: $selectedPhotoCategory){
+                                   ForEach(categoriesString, id: \.self) { item in
+                                       Text(item)
+                                   }
+                               }
+                               .pickerStyle(.navigationLink)
+                            }
+                        }
+                        .frame(height:100)
                         Section {
                             ScrollView(.horizontal) {
                                 HStack {
@@ -67,12 +69,13 @@ struct PhotoGalleryView: View {
                                         .containerRelativeFrame(.horizontal)
                                     }
                                 }
-                                    .scrollTargetLayout()
+                                .scrollTargetLayout()
                                 
-                            }.scrollIndicators(.hidden)
-                                .scrollTargetBehavior(.viewAligned)
-                                .contentMargins(20, for: .scrollContent)
-                                .listRowInsets(EdgeInsets())
+                            }
+                            .scrollIndicators(.hidden)
+                            .scrollTargetBehavior(.viewAligned)
+                            .contentMargins(20, for: .scrollContent)
+                            .listRowInsets(EdgeInsets())
                         }
                         Spacer()
                     })

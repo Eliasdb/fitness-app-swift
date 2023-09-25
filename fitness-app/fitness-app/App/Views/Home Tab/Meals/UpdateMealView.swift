@@ -107,10 +107,9 @@ struct UpdateMealView: View {
                                     }
                                 }
                                 .pickerStyle(.wheel)
-                                //                                   .padding(.top, 5)
-                                
                                 .frame(width: 170, height: 40)
                                 .clipped()
+                                
                                 Image(systemName: "arrowtriangle.left.fill.and.line.vertical.and.arrowtriangle.right.fill")
                                     .resizable()
                                     .rotationEffect(.degrees(-90))
@@ -135,11 +134,6 @@ struct UpdateMealView: View {
                             .onAppear() {
                                 creationDate = currentDate
                             }
-                        //                        .id(calendarId)
-                        //                        .onChange(of: creationDate, perform: { _ in
-                        //                          calendarId += 1
-                        //                        })
-                        
                     })
                     .padding(.trailing, -15)
                     
@@ -190,7 +184,6 @@ struct UpdateMealView: View {
                     Text("Update Meal")
                         .font(.title3)
                         .fontWeight(.semibold)
-                    //                    .textScale(.secondary)
                         .foregroundStyle(.black)
                         .hSpacing(.center)
                         .padding(.vertical, 12)

@@ -17,11 +17,10 @@ struct SettingsView: View {
     @State var age: Int = 0
     @State var weight: Double = 0.0
     @State var height: Int = 0
-    @State var sex: String = ""
+    @State var sex: String = "Male"
     @State var kcalGoal: Int = 0
     @State var pGoal: Int = 0
 
-    
     let formatter: NumberFormatter = {
            let formatter = NumberFormatter()
            formatter.numberStyle = .decimal
@@ -111,7 +110,6 @@ struct SettingsView: View {
                 } header: {
                     Text("Biometrics")
                 }
-                
                 Section {
                     LabeledContent {
                         TextField("kcal goal", value: $kcalGoal, formatter: formatter)
@@ -123,13 +121,11 @@ struct SettingsView: View {
                                     kcalGoal = settings.last!.kcalGoal
                                 }
                             })
-                          
                     } label: {
                         Text("Kcal goal")
                             .font(.caption)
                             .foregroundStyle(.gray)
                     }
-                    
                     LabeledContent {
                         TextField("lkjhjgvhkj", value: $pGoal, formatter: formatter)
                             .listRowSeparator(.hidden)
@@ -141,13 +137,9 @@ struct SettingsView: View {
                             .font(.caption)
                             .foregroundStyle(.gray)
                     }
-                    
-                    
                 } header: {
                     Text("Goals")
                 }
-        
-        
                 Button(action: {
                     settings.last!.name = fname
                     settings.last!.age = age
@@ -165,26 +157,12 @@ struct SettingsView: View {
                     Text("Edit profile")
                 })
             }
-//                LabeledContent {
-//                    TextField("60kg", value: $weight, format: .number)
-//                        .listRowSeparator(.hidden)
-//                } label: {
-//                    Text("Your weight")
-//                        .font(.caption)
-//                        .foregroundStyle(.gray)
-//                }
-//                header : {
-//
-//                }
-           
-
             .navigationTitle("Settings")
             .toolbarBackground(.teal, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
         }
     }
 }
-
 
 //@available(iOS 17.0, *)
 //#Preview {

@@ -13,8 +13,6 @@ struct SelectPlanButton: View {
     @State var kcalGoal: Int
     @State var pGoal: Bool
     @State var pGoalInt: Int
-
-
     @State var title: String
     
     var body: some View {
@@ -33,11 +31,8 @@ struct SelectPlanButton: View {
                 if pGoal {
                     Text("protein goal: \(pGoalInt)")
                         .foregroundStyle(.red)
-                    
                 }
-               
             }
-
         }
     }
 }

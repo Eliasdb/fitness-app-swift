@@ -48,9 +48,9 @@ struct CaloriesAndMacrosCounterView: View {
     }
     
     var body: some View {
-            HStack{
+            VStack{
                 Chart(donutData, id: \.type) { dataItem in
-                    SectorMark(angle: .value("Type", dataItem.amount), innerRadius: .ratio(0.618), angularInset: 1.5)
+                    SectorMark(angle: .value("Type", dataItem.amount), innerRadius: .ratio(0.85), angularInset: 1.5)
                         .cornerRadius(5)
                         .foregroundStyle(by: .value("Name", dataItem.amount))
 //                        .opacity(dataItem.type == "Calories eaten" ? 1 : 0.5 )
@@ -65,7 +65,7 @@ struct CaloriesAndMacrosCounterView: View {
                             Text("\(String(describing: max((settings.last?.kcalGoal ?? 3000) - meals.map {$0.calories}.reduce(0, +), 0))) kcal")
                                 .foregroundColor(.white)
                                 .font(.callout.bold())
-                            Text("to go")
+                            Text("left")
                                 .foregroundColor(.white)
                                 .font(.callout.bold())
                         } else {
@@ -87,26 +87,26 @@ struct CaloriesAndMacrosCounterView: View {
                 .onTapGesture(perform: {
                     switchDonut.toggle()
                 })
-                .padding(15)
+                .padding(50)
             
-                Chart(barChartData, id: \.type) { dataPoint in
-                
-                BarMark(x: .value("Type", dataPoint.type),
-                        y: .value("Population", dataPoint.amount), width: 40)
-                .foregroundStyle(by: .value("Type", dataPoint.type))
-                
-                .annotation(position: .overlay) {
-                    Text("\(dataPoint.amount)")
-                        .foregroundColor(.white)
-                }
-            }
-                .frame(width: 150, height: 150)
-//              .chartLegend(.hidden)
-                .chartXAxis(.hidden)
-                .chartYAxis(.hidden)
-                .foregroundColor(.white)
-                .aspectRatio(1, contentMode: .fit)
-                .padding()
+//                Chart(barChartData, id: \.type) { dataPoint in
+//                
+//                BarMark(x: .value("Type", dataPoint.type),
+//                        y: .value("Population", dataPoint.amount), width: 40)
+//                .foregroundStyle(by: .value("Type", dataPoint.type))
+//                
+//                .annotation(position: .overlay) {
+//                    Text("\(dataPoint.amount)")
+//                        .foregroundColor(.white)
+//                }
+//            }
+//                .frame(width: 150, height: 150)
+////              .chartLegend(.hidden)
+//                .chartXAxis(.hidden)
+//                .chartYAxis(.hidden)
+//                .foregroundColor(.white)
+//                .aspectRatio(1, contentMode: .fit)
+//                .padding()
             }
     }
 }

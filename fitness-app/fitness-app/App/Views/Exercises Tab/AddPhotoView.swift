@@ -76,7 +76,8 @@ struct AddPhotoView: View {
                                 .scaledToFit()
                                 .frame(maxWidth: .infinity, maxHeight: 300)
                         }
-                    }.task(id: selectedPhoto) {
+                    }
+                    .task(id: selectedPhoto) {
                         if let data = try? await selectedPhoto?.loadTransferable(type: Data.self) {
                             selectedPhotoData = data
                         }
@@ -88,18 +89,17 @@ struct AddPhotoView: View {
                 dateFormatter.dateStyle = .long
                 let formattedPhotoDate = dateFormatter.string(from: selectedPhotoDate)
                 let photo = Photo(imageCategory: selectedPhotoCategory, image: selectedPhotoData, dateAsString: formattedPhotoDate)
-                        do {
-                            context.insert(photo)
-                            try context.save()
-                            dismiss()
-                        } catch {
-                            print(error.localizedDescription)
-                        }
+                    do {
+                        context.insert(photo)
+                        try context.save()
+                        dismiss()
+                    } catch {
+                        print(error.localizedDescription)
+                    }
             }, label: {
                 Text("Add photo")
                     .font(.callout)
                     .fontWeight(.semibold)
-//                                            .textScale(.secondary)
                     .foregroundStyle(.white)
                     .hSpacing(.center)
                     .padding(.vertical, 12)
